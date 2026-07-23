@@ -120,12 +120,25 @@ MW.progress = (function () {
     return get().drills[new Date().toISOString().slice(0, 10)] || 0;
   }
 
+  /* ---- 进度导出/导入码（无服务器跨设备转移） ---- */
+  function exportCode() {
+    return btoa(unescape(encodeURIComponent(JSON.stringify(get()))));
+  }
+  function importCode(code) {
+    var d = JSON.parse(decodeURIComponent(escape(atob(String(code).trim()))));
+    if (!d || typeof d !== "object") throw new Error("invalid");
+    d.stars = d.stars || {}; d.lab = d.lab || {};
+    d.mistakes = d.mistakes || []; d.drills = d.drills || {};
+    save(d);
+  }
+
   return {
     get: get, addStar: addStar, hasStar: hasStar,
     gradeStars: gradeStars, totalStars: totalStars, thinkStars: thinkStars,
     visitLab: visitLab, labCount: labCount,
     addMistake: addMistake, removeMistake: removeMistake, mistakes: mistakes,
     markDrill: markDrill, drillToday: drillToday,
+    exportCode: exportCode, importCode: importCode,
     quiet: quiet, setQuiet: setQuiet, badges: badges
   };
 })();

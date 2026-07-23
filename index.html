@@ -4,6 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>数学奇境 · 让每个孩子爱上数学</title>
+<meta name="description" content="数学奇境——让二到六年级孩子在故事、动画和游戏中爱上数学的免费公益学习网站，陪伴孩子快乐成长">
+<meta property="og:type" content="website">
+<meta property="og:title" content="数学奇境 · 让每个孩子爱上数学">
+<meta property="og:description" content="数学奇境——让二到六年级孩子在故事、动画和游戏中爱上数学的免费公益学习网站，陪伴孩子快乐成长">
+<meta property="og:image" content="https://math.liaomagic.com/assets/img/og.png">
+<meta property="og:url" content="https://math.liaomagic.com/">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/css/base.css">
 <link rel="stylesheet" href="assets/css/components.css">
 </head>
@@ -53,6 +60,17 @@
   <section class="badgewall rise d3" id="badgewall">
     <h2>🏅 我的徽章墙</h2>
     <div class="badge-grid" id="badgeGrid"></div>
+    <div style="text-align:center;margin-top:18px">
+      <button class="btn ghost small" id="expBtn" style="color:#fff;border-color:rgba(255,255,255,.4)">📤 导出进度码</button>
+      <button class="btn ghost small" id="impBtn" style="color:#fff;border-color:rgba(255,255,255,.4);margin-left:10px">📥 导入进度码</button>
+    </div>
+    <div id="codeBox" style="display:none;margin-top:14px">
+      <textarea id="codeText" rows="3" style="width:100%;border-radius:12px;padding:10px;font-size:.8rem" placeholder="进度码会显示在这里；也可以把别的设备上的进度码粘贴进来"></textarea>
+      <div style="text-align:center;margin-top:8px">
+        <button class="btn small" id="codeOk">确认导入</button>
+        <span id="codeMsg" style="margin-left:10px;font-size:.85rem"></span>
+      </div>
+    </div>
   </section>
 </div>
 
@@ -122,6 +140,36 @@
   function paintQuiet() { qb.textContent = MW.progress.quiet() ? "🔇 安静模式" : "🔊 有声模式"; qb.style.color = "#c9c9ee"; }
   qb.onclick = function () { MW.progress.setQuiet(!MW.progress.quiet()); paintQuiet(); };
   paintQuiet();
+
+  // 进度导出/导入码
+  var codeBox = document.getElementById("codeBox");
+  var codeText = document.getElementById("codeText");
+  var codeMsg = document.getElementById("codeMsg");
+  document.getElementById("expBtn").onclick = function () {
+    codeBox.style.display = "block";
+    codeText.value = MW.progress.exportCode();
+    codeText.select();
+    codeMsg.textContent = "👆 全选复制，粘贴到另一台设备即可转移进度";
+    codeMsg.style.color = "#a9e6b1";
+  };
+  document.getElementById("impBtn").onclick = function () {
+    codeBox.style.display = "block";
+    codeText.value = "";
+    codeText.placeholder = "把另一台设备上的进度码粘贴到这里，再点「确认导入」";
+    codeText.focus();
+    codeMsg.textContent = "";
+  };
+  document.getElementById("codeOk").onclick = function () {
+    try {
+      MW.progress.importCode(codeText.value);
+      codeMsg.textContent = "🎉 导入成功！页面即将刷新……";
+      codeMsg.style.color = "#a9e6b1";
+      setTimeout(function () { location.reload(); }, 1200);
+    } catch (e) {
+      codeMsg.textContent = "这段码好像不对，检查一下再试？";
+      codeMsg.style.color = "#ffb3b3";
+    }
+  };
 })();
 </script>
 </body>

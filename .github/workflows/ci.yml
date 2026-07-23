@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: JS 语法检查
+        run: |
+          fail=0
+          for f in $(find . -name "*.js" -not -path "./node_modules/*"); do
+            node --check "$f" || { echo "语法错误: $f"; fail=1; }
+          done
+          exit $fail
+
+      - name: 课程内容结构校验
+        run: node tools/validate.js
+
+      - name: 内部链接检查（引用的本地文件都存在）
+        run: |
+          fail=0
+          for f in *.html; do
+            grep -oE '(src|href)="[^"#:]+\.(js|css|html|svg|png)"' "$f" | sed -E 's/(src|href)="([^"]+)"/\2/' | while read -r p; do
+              case "$p" in http*|//*) continue;; esac
+              [ -f "$p" ] || { echo "$f 引用了不存在的文件: $p"; }
+            done
+          done

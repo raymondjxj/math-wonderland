@@ -1,0 +1,10 @@
+数学奇境（Math Wonderland）采用双许可证：
+
+1. 代码（assets/ 下的全部 JavaScript 与 CSS、各 HTML 页面、tools/ 下的工具）
+   → MIT License，见 LICENSE-CODE
+
+2. 课程内容（content/ 下的全部课程数据、文案、内联 SVG 插图，以及文档）
+   → CC BY-SA 4.0（知识共享 署名-相同方式共享），见 LICENSE-CONTENT
+   你可以自由使用、改编，包括用于商业用途，但必须署名并以相同许可共享。
+
+「数学奇境」名称与星球角色形象为项目标识，不随上述许可授权商标使用。
