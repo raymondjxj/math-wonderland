@@ -226,6 +226,37 @@ input[type="range"].slider { width: 240px; accent-color: var(--theme); height: 3
 }
 .next-link:hover { transform: translateY(-2px); }
 
+/* ---------- v3.6：分镜动画 ---------- */
+.comic-viewport {
+  position: relative; width: 100%; aspect-ratio: 16 / 10; max-height: 420px;
+  border-radius: var(--r-md); overflow: hidden; background: var(--cream);
+  box-shadow: inset 0 0 0 3px rgba(43, 45, 66, .06);
+}
+.comic-inner {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  transform-origin: center center;
+}
+.comic-inner svg { width: 100%; height: 100%; }
+.comic-move { transition: transform 1.1s cubic-bezier(.33, 1, .68, 1); }
+.comic-focus {
+  filter: drop-shadow(0 0 8px rgba(255, 194, 51, .95)) drop-shadow(0 0 3px rgba(255, 194, 51, .8));
+}
+.comic-subtitle {
+  background: rgba(43, 45, 66, .88); color: #fff; border-radius: var(--r-md);
+  padding: 14px 22px; font-size: 1.05rem; font-weight: 700; text-align: center;
+  min-height: 56px; display: flex; align-items: center; justify-content: center;
+}
+.comic-subtitle.fade { animation: capfade .4s ease; }
+.comic-controls {
+  display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap;
+}
+.comic-dots { display: flex; gap: 8px; }
+.comic-dot {
+  width: 14px; height: 14px; border-radius: 50%; background: #e0e0ee;
+  transition: all .25s ease;
+}
+.comic-dot.on { background: var(--theme); transform: scale(1.25); }
+
 /* ---------- v2：符号表达幕 ---------- */
 .formula-card {
   background: var(--theme-soft); border-radius: var(--r-md);

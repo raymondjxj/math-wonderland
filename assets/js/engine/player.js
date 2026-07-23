@@ -56,6 +56,7 @@ MW.player = (function () {
       quizPassed = s.type !== "quiz";
       if (widgetHandle && widgetHandle.destroy) widgetHandle.destroy();
       widgetHandle = null;
+      if (comicStop) { comicStop(); comicStop = null; }
       card.innerHTML = "";
       card.classList.remove("rise"); void card.offsetWidth; card.classList.add("rise");
 
@@ -86,6 +87,7 @@ MW.player = (function () {
 
     /* ---- 各幕渲染 ---- */
     function renderStory(s) {
+      if (s.shots && s.shots.length) return renderComic(s);
       var body = MW.util.el("div", "scene-body");
       (s.paragraphs || []).forEach(function (p) { body.appendChild(MW.util.el("p", null, p)); });
       if (s.art) {
@@ -94,6 +96,115 @@ MW.player = (function () {
         card.appendChild(art);
       }
       card.appendChild(body);
+    }
+
+    /* ---- 分镜动画（motion comic）：镜头推拉 + 字幕 + 可选配音 ---- */
+    var comicStop = null;
+
+    function renderComic(s) {
+      var viewport = MW.util.el("div", "comic-viewport");
+      var inner = MW.util.el("div", "comic-inner");
+      viewport.appendChild(inner);
+      card.appendChild(viewport);
+      var subtitle = MW.util.el("div", "comic-subtitle");
+      card.appendChild(subtitle);
+
+      var idx = 0, timer = null, playing = false;
+      var voiceOn = false;
+      try { voiceOn = localStorage.getItem("mw_voice") === "1"; } catch (e) {}
+      var reduced = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      function speak(text) {
+        if (!voiceOn || !window.speechSynthesis) return;
+        try {
+          speechSynthesis.cancel();
+          var u = new SpeechSynthesisUtterance(text);
+          u.lang = "zh-CN"; u.rate = 0.95; u.pitch = 1.05;
+          speechSynthesis.speak(u);
+        } catch (e) {}
+      }
+
+      function show(i) {
+        idx = Math.max(0, Math.min(s.shots.length - 1, i));
+        var shot = s.shots[idx];
+        inner.classList.remove("comic-move");
+        inner.innerHTML = shot.art;
+        if (!reduced && shot.pan) {
+          void inner.offsetWidth;
+          inner.classList.add("comic-move");
+          var p = shot.pan;
+          inner.style.transform =
+            "translate(" + (p.x || 0) + "%," + (p.y || 0) + "%) scale(" + (p.scale || 1) + ")";
+        } else {
+          inner.style.transform = "none";
+        }
+        // 高亮元素
+        if (shot.focus) {
+          try {
+            var el = inner.querySelector(shot.focus);
+            if (el) el.classList.add("comic-focus");
+          } catch (e) {}
+        }
+        subtitle.classList.remove("fade"); void subtitle.offsetWidth; subtitle.classList.add("fade");
+        subtitle.textContent = shot.caption || shot.narration || "";
+        speak(shot.narration || "");
+        dots.forEach(function (d, di) { d.className = "comic-dot" + (di === idx ? " on" : ""); });
+        clearTimeout(timer);
+        if (playing && idx < s.shots.length - 1) {
+          timer = setTimeout(function () { show(idx + 1); }, shot.ms || 4200);
+        } else if (playing && idx === s.shots.length - 1) {
+          playing = false;
+          playBtn.textContent = "▶ 再播一次";
+        }
+      }
+
+      // 控制条
+      var ctr = MW.util.el("div", "comic-controls");
+      var dots = s.shots.map(function (_, di) {
+        var d = MW.util.el("button", "comic-dot");
+        d.onclick = function () { playing = false; playBtn.textContent = "▶ 播放"; show(di); };
+        return d;
+      });
+      var dotWrap = MW.util.el("div", "comic-dots");
+      dots.forEach(function (d) { dotWrap.appendChild(d); });
+
+      var playBtn = MW.util.el("button", "btn small", "▶ 播放");
+      playBtn.onclick = function () {
+        playing = !playing;
+        if (playing) {
+          playBtn.textContent = "⏸ 暂停";
+          if (idx >= s.shots.length - 1) show(0);
+          else show(idx);
+        } else {
+          playBtn.textContent = "▶ 播放";
+          clearTimeout(timer);
+          if (window.speechSynthesis) try { speechSynthesis.cancel(); } catch (e) {}
+        }
+      };
+      var prevB = MW.util.el("button", "btn ghost small", "‹");
+      var nextB = MW.util.el("button", "btn ghost small", "›");
+      prevB.onclick = function () { playing = false; playBtn.textContent = "▶ 播放"; show(idx - 1); };
+      nextB.onclick = function () { playing = false; playBtn.textContent = "▶ 播放"; show(idx + 1); };
+      var voiceBtn = MW.util.el("button", "btn ghost small", voiceOn ? "🔊 配音开" : "🔇 配音关");
+      voiceBtn.onclick = function () {
+        voiceOn = !voiceOn;
+        try { localStorage.setItem("mw_voice", voiceOn ? "1" : "0"); } catch (e) {}
+        voiceBtn.textContent = voiceOn ? "🔊 配音开" : "🔇 配音关";
+        if (!voiceOn && window.speechSynthesis) try { speechSynthesis.cancel(); } catch (e) {}
+        else if (voiceOn) speak(s.shots[idx].narration || "");
+      };
+      ctr.appendChild(prevB); ctr.appendChild(dotWrap); ctr.appendChild(nextB);
+      ctr.appendChild(playBtn); ctr.appendChild(voiceBtn);
+      card.appendChild(ctr);
+
+      comicStop = function () {
+        clearTimeout(timer);
+        if (window.speechSynthesis) try { speechSynthesis.cancel(); } catch (e) {}
+      };
+
+      show(0);
+      // 默认自动播放一次（减少动画偏好用户除外）
+      if (!reduced) { playing = true; playBtn.textContent = "⏸ 暂停"; show(0); }
     }
 
     function renderAnim(s) {

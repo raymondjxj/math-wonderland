@@ -45,7 +45,15 @@ units.forEach(function (u, i) {
   u.scenes.forEach(function (s, si) {
     const sid = uid + " 第" + (si + 1) + "幕";
     if (s.type !== ORDER[si]) err(sid + " 应为 " + ORDER[si] + "，实际 " + s.type);
-    if (s.type === "story" && (!s.paragraphs || !s.paragraphs.length)) err(sid + " 缺 paragraphs");
+    if (s.type === "story") {
+      if (s.shots) {
+        if (!Array.isArray(s.shots) || s.shots.length < 2) err(sid + " shots 至少 2 个镜头");
+        (s.shots || []).forEach(function (sh, i) {
+          if (!sh.art) err(sid + " 镜头" + (i + 1) + " 缺 art");
+          if (!sh.narration && !sh.caption) err(sid + " 镜头" + (i + 1) + " 缺 narration/caption");
+        });
+      } else if (!s.paragraphs || !s.paragraphs.length) err(sid + " 缺 paragraphs 或 shots");
+    }
     if (s.type === "anim") {
       if (!WIDGETS[s.widget]) err(sid + " 未知教具 " + s.widget);
       if (!Array.isArray(s.steps) || s.steps.length < 2) err(sid + " 至少 2 步");

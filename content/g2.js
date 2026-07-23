@@ -22,20 +22,71 @@ MW.content[2] = {
         {
           type: "story",
           title: "太空农场的数数难题",
-          art: `<svg viewBox="0 0 400 240" width="400" height="240">
-            <rect width="400" height="240" rx="20" fill="#fff3e2"/>
-            <circle cx="335" cy="42" r="24" fill="#ffc233"/>
-            <rect x="55" y="80" width="210" height="110" rx="12" fill="#8bd450"/>
-            <g fill="#ff8a3d">
-              <circle cx="90" cy="108" r="11"/><circle cx="128" cy="108" r="11"/><circle cx="166" cy="108" r="11"/><circle cx="204" cy="108" r="11"/>
-              <circle cx="90" cy="146" r="11"/><circle cx="128" cy="146" r="11"/><circle cx="166" cy="146" r="11"/><circle cx="204" cy="146" r="11"/>
-            </g>
-            <text x="285" y="215" font-size="17" fill="#b25e14" font-weight="bold">🥕 橙光农场</text>
-          </svg>`,
-          paragraphs: [
-            "橙光星球上，小农夫奇奇的太空胡萝卜大丰收！它们排着整整齐齐的队伍：每行 4 棵，有 2 行。",
-            "奇奇一棵一棵数：4 + 4 = 8 棵，数完了，真轻松。",
-            "可农场主忽然说：「明天菜地要扩大到 100 行！」奇奇傻了眼：100 个 4 相加，要加到什么时候呀？<b>一定有个更快的办法……</b>"
+          shots: [
+            {
+              art: `<svg viewBox="0 0 400 240" width="400" height="240">
+                <rect width="400" height="240" rx="20" fill="#fff3e2"/>
+                <circle id="sun" cx="335" cy="42" r="24" fill="#ffc233"/>
+                <rect x="55" y="80" width="210" height="110" rx="12" fill="#8bd450"/>
+                <g id="carrots" fill="#ff8a3d">
+                  <circle cx="90" cy="108" r="11"/><circle cx="128" cy="108" r="11"/><circle cx="166" cy="108" r="11"/><circle cx="204" cy="108" r="11"/>
+                  <circle cx="90" cy="146" r="11"/><circle cx="128" cy="146" r="11"/><circle cx="166" cy="146" r="11"/><circle cx="204" cy="146" r="11"/>
+                </g>
+                <text x="285" y="215" font-size="17" fill="#b25e14" font-weight="bold">🥕 橙光农场</text>
+              </svg>`,
+              narration: "橙光星球上，小农夫奇奇的太空胡萝卜大丰收啦！",
+              ms: 3600
+            },
+            {
+              art: `<svg viewBox="0 0 400 240" width="400" height="240">
+                <rect width="400" height="240" rx="20" fill="#fff3e2"/>
+                <circle cx="335" cy="42" r="24" fill="#ffc233"/>
+                <rect x="55" y="80" width="210" height="110" rx="12" fill="#8bd450"/>
+                <g id="carrots" fill="#ff8a3d">
+                  <circle cx="90" cy="108" r="11"/><circle cx="128" cy="108" r="11"/><circle cx="166" cy="108" r="11"/><circle cx="204" cy="108" r="11"/>
+                  <circle cx="90" cy="146" r="11"/><circle cx="128" cy="146" r="11"/><circle cx="166" cy="146" r="11"/><circle cx="204" cy="146" r="11"/>
+                </g>
+                <text x="200" y="215" text-anchor="middle" font-size="20" fill="#b25e14" font-weight="bold">每行 4 棵，有 2 行：4 + 4 = 8</text>
+              </svg>`,
+              pan: { x: -12, y: -8, scale: 1.35 },
+              focus: "#carrots",
+              narration: "它们排着整齐的队伍：每行 4 棵，有 2 行。奇奇一棵一棵数：4 加 4 等于 8 棵，真轻松！",
+              ms: 4800
+            },
+            {
+              art: `<svg viewBox="0 0 400 240" width="400" height="240">
+                <rect width="400" height="240" rx="20" fill="#fff3e2"/>
+                <circle cx="335" cy="42" r="24" fill="#ffc233"/>
+                <rect x="55" y="80" width="210" height="110" rx="12" fill="#8bd450"/>
+                <g fill="#ff8a3d" opacity=".9">
+                  <circle cx="90" cy="108" r="11"/><circle cx="128" cy="108" r="11"/><circle cx="166" cy="108" r="11"/><circle cx="204" cy="108" r="11"/>
+                  <circle cx="90" cy="146" r="11"/><circle cx="128" cy="146" r="11"/><circle cx="166" cy="146" r="11"/><circle cx="204" cy="146" r="11"/>
+                </g>
+                <g id="warning">
+                  <rect x="105" y="30" width="190" height="44" rx="12" fill="#ff6b6b"/>
+                  <text x="200" y="59" text-anchor="middle" font-size="19" fill="#fff" font-weight="bold">明天扩大到 100 行！</text>
+                </g>
+              </svg>`,
+              pan: { x: 8, y: 12, scale: 1.5 },
+              focus: "#warning",
+              narration: "可是农场主忽然说：明天菜地要扩大到 100 行！100 个 4 相加，要加到什么时候呀？",
+              ms: 4800
+            },
+            {
+              art: `<svg viewBox="0 0 400 240" width="400" height="240">
+                <rect width="400" height="240" rx="20" fill="#fff3e2"/>
+                <circle cx="335" cy="42" r="24" fill="#ffc233"/>
+                <rect x="55" y="80" width="210" height="110" rx="12" fill="#8bd450"/>
+                <g fill="#ff8a3d">
+                  <circle cx="90" cy="108" r="11"/><circle cx="128" cy="108" r="11"/><circle cx="166" cy="108" r="11"/><circle cx="204" cy="108" r="11"/>
+                  <circle cx="90" cy="146" r="11"/><circle cx="128" cy="146" r="11"/><circle cx="166" cy="146" r="11"/><circle cx="204" cy="146" r="11"/>
+                </g>
+                <text id="hook" x="200" y="215" text-anchor="middle" font-size="19" fill="#b25e14" font-weight="bold">一定有个更快的办法……</text>
+              </svg>`,
+              focus: "#hook",
+              narration: "一定有个更快的办法！一起去找找吧！",
+              ms: 3400
+            }
           ]
         },
         {
