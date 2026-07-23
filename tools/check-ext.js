@@ -13,7 +13,7 @@ if (!file || !expectIds.length) {
   process.exit(2);
 }
 
-const WIDGETS = { blocks: 1, fraction: 1, grid: 1, angle: 1, circle: 1, guess: 1, binary: 1, coins: 1, sort: 1, sketchpad: 1, vertical: 1, shape: 1 };
+const WIDGETS = { blocks: 1, fraction: 1, grid: 1, angle: 1, circle: 1, guess: 1, binary: 1, coins: 1, sort: 1, sketchpad: 1, vertical: 1, shape: 1, chart: 1 };
 const SCENE_ORDER = ["story", "play", "anim", "symbol", "quiz", "review", "beauty"];
 const SCENE_ORDER_INQUIRY = ["story", "play", "anim", "play", "symbol", "quiz", "review", "beauty"];
 const LEVELS = { "基础": 1, "变式": 1, "挑战": 1, "温故": 1, "开放": 1 };

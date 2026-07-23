@@ -45,6 +45,7 @@
 <script src="assets/js/widgets/sketchpad.js"></script>
 <script src="assets/js/widgets/vertical.js"></script>
 <script src="assets/js/widgets/shape.js"></script>
+<script src="assets/js/widgets/chart.js"></script>
 <script src="content/encouragement.js"></script>
 <script>
 (function () {
@@ -81,7 +82,7 @@
     });
   }
 
-  loadScripts(["content/g" + g + ".js", "content/g" + g + "b.js", "content/g" + g + "c.js"], function () {
+  loadScripts(["content/g" + g + ".js", "content/g" + g + "b.js", "content/g" + g + "c.js", "content/g" + g + "d.js", "content/g" + g + "e.js"], function () {
     var data = MW.content && MW.content[g];
     var unit = data && data.units[u - 1];
     if (!unit) return oops();

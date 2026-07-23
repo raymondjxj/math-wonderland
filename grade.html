@@ -38,8 +38,8 @@
   var g = parseInt(MW.util.param("g", "2"), 10);
   document.body.setAttribute("data-grade", g);
 
-  // 依次装载 g{N}.js（基础单元）+ g{N}b.js / g{N}c.js（扩展单元，可缺省）
-  var files = ["content/g" + g + ".js", "content/g" + g + "b.js", "content/g" + g + "c.js"];
+  // 依次装载 g{N}.js（基础单元）+ g{N}b/c/d/e.js（扩展单元，可缺省）
+  var files = ["content/g" + g + ".js", "content/g" + g + "b.js", "content/g" + g + "c.js", "content/g" + g + "d.js", "content/g" + g + "e.js"];
   var left = files.length, baseOk = false;
   files.forEach(function (src, fi) {
     var s = document.createElement("script");

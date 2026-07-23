@@ -17,7 +17,7 @@ if (!files.length) {
     .map((f) => path.join(root, "content", f));
 }
 
-const WIDGETS = { blocks: 1, fraction: 1, grid: 1, angle: 1, circle: 1, guess: 1, binary: 1, coins: 1, sort: 1, sketchpad: 1, vertical: 1, shape: 1 };
+const WIDGETS = { blocks: 1, fraction: 1, grid: 1, angle: 1, circle: 1, guess: 1, binary: 1, coins: 1, sort: 1, sketchpad: 1, vertical: 1, shape: 1, chart: 1 };
 const SCENE_ORDER = ["story", "play", "anim", "symbol", "quiz", "review", "beauty"];
 const SCENE_ORDER_INQUIRY = ["story", "play", "anim", "play", "symbol", "quiz", "review", "beauty"];
 const LABS = { "fractal-tree": 1, fibonacci: 1, kaleidoscope: 1, tessellation: 1, "prime-spiral": 1, "magic-square": 1 };
@@ -44,7 +44,7 @@ for (const file of files) {
   const data = content[g];
   if (!data) { err(file, "未注册 MW.content[" + g + "]"); continue; }
   if (typeof data.name !== "string" || !data.name) err(file, "缺少 name");
-  if (!Array.isArray(data.units) || data.units.length !== 8) err(file, "units 必须恰好 8 个（v3），当前 " + (data.units ? data.units.length : 0));
+  if (!Array.isArray(data.units) || data.units.length < 8 || data.units.length > 15) err(file, "units 须在 8~15 个之间，当前 " + (data.units ? data.units.length : 0));
   (data.units || []).forEach(function (u, ui) {
     const uid = "单元" + (ui + 1) + "(" + (u.id || "?") + ")";
     if (u.id !== "g" + g + "u" + (ui + 1)) err(file, uid + " id 应为 g" + g + "u" + (ui + 1));

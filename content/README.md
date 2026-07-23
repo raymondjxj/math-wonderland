@@ -84,6 +84,7 @@ MW.content[3] = { grade: 3, name: "三年级 · 青绿星球", units: [ /* 3 个
 | `sketchpad` 画板（仅交互） | — | `{interactive:true, grid:true, straightEdge:false}` 先画一画再验证（无标准答案） |
 | `vertical` 竖式动画 | `{op:"add"\|"sub"\|"mul"\|"div", a, b, step}` | `{interactive:true, op, a, b}` 点「下一步」走完竖式 |
 | `shape` 图形剪拼 | `{mode:"parallelogram"\|"triangle"\|"trapezoid", step:0~2}` | `{interactive:true, mode}` 剪拼发现面积公式 |
+| `chart` 数据图表 | `{mode:"bar"\|"line"\|"pie", data:[{label,value}], title, highlight, showValues}` | `{interactive:true, mode:"bar", data, targets:[…], targetsText}` 对照表格调条形高度 |
 | `guess` 二分猜数 | `{interactive:false, min, max, lo, hi, guess, steps, info}`（数轴演示） | `{interactive:true, min:1, max:100}` 机器人二分猜孩子想的数 |
 | `binary` 二进制卡牌 | `{cards:5, bits:[0,1,1,0,1], showValues:true}` | `{interactive:true, cards:5, target:19}` 翻牌凑目标数 |
 | `coins` 抛硬币（仅交互） | — | `{interactive:true, goal:100}` 按钮抛 1/10/100 次，画频率曲线 |
