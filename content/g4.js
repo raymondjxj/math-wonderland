@@ -261,8 +261,8 @@ MW.content[4] = {
                 <rect width="400" height="240" rx="20" fill="#eaf4ff"/>
                 <rect x="30" y="30" width="220" height="180" rx="14" fill="#ffffff"/>
                 <g id="banner">
-                  <rect x="86" y="10" width="228" height="32" rx="16" fill="#4d96ff"/>
-                  <text x="200" y="32" text-anchor="middle" font-size="17" fill="#ffffff" font-weight="bold">🌊 海洋运动会入场式</text>
+                  <rect x="86" y="18" width="228" height="32" rx="16" fill="#4d96ff"/>
+                  <text x="200" y="40" text-anchor="middle" font-size="17" fill="#ffffff" font-weight="bold">🌊 海洋运动会入场式</text>
                 </g>
                 <g id="dolphins" fill="#4d96ff">
                   <g transform="translate(66,62)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
@@ -289,8 +289,8 @@ MW.content[4] = {
                 <rect width="400" height="240" rx="20" fill="#eaf4ff"/>
                 <rect x="30" y="30" width="220" height="180" rx="14" fill="#ffffff"/>
                 <g id="banner">
-                  <rect x="86" y="10" width="228" height="32" rx="16" fill="#4d96ff"/>
-                  <text x="200" y="32" text-anchor="middle" font-size="17" fill="#ffffff" font-weight="bold">🌊 海洋运动会入场式</text>
+                  <rect x="86" y="18" width="228" height="32" rx="16" fill="#4d96ff"/>
+                  <text x="200" y="40" text-anchor="middle" font-size="17" fill="#ffffff" font-weight="bold">🌊 海洋运动会入场式</text>
                 </g>
                 <g id="dolphins" fill="#4d96ff">
                   <g transform="translate(66,62)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
@@ -345,20 +345,19 @@ MW.content[4] = {
                   <path transform="translate(162,196)" d="M0 -10 L2.9 -3.1 L10 -3.1 L4.5 1.9 L6.8 8.1 L0 4.5 L-6.8 8.1 L-4.5 1.9 L-10 -3.1 L-2.9 -3.1 Z"/>
                   <path transform="translate(210,196)" d="M0 -10 L2.9 -3.1 L10 -3.1 L4.5 1.9 L6.8 8.1 L0 4.5 L-6.8 8.1 L-4.5 1.9 L-10 -3.1 L-2.9 -3.1 Z"/>
                 </g>
-                <text x="262" y="120" font-size="14" fill="#2f7df0" font-weight="bold">海豚队 3 行</text>
-                <text x="262" y="184" font-size="14" fill="#e2701d" font-weight="bold">海星队 2 行</text>
                 <g id="turtle">
-                  <ellipse cx="316" cy="214" rx="17" ry="11" fill="#57cc99"/>
-                  <circle cx="335" cy="208" r="6" fill="#57cc99"/>
-                  <circle cx="337" cy="206" r="1.4" fill="#fff"/>
+                  <ellipse cx="300" cy="190" rx="17" ry="11" fill="#57cc99"/>
+                  <circle cx="318" cy="183" r="6" fill="#57cc99"/>
+                  <circle cx="320" cy="181" r="1.4" fill="#fff"/>
                 </g>
                 <g id="turtleQ">
-                  <rect x="254" y="44" width="132" height="46" rx="12" fill="#ffffff" stroke="#4d96ff" stroke-width="3"/>
-                  <text x="320" y="64" text-anchor="middle" font-size="14" fill="#1c4b8f" font-weight="bold">先合起来算？</text>
-                  <text x="320" y="82" text-anchor="middle" font-size="14" fill="#1c4b8f" font-weight="bold">还是分开算再加？</text>
+                  <circle cx="292" cy="148" r="16" fill="#ffffff" stroke="#4d96ff" stroke-width="3"/>
+                  <text x="292" y="156" text-anchor="middle" font-size="22" fill="#1c4b8f" font-weight="bold">？</text>
+                  <rect x="90" y="202" width="220" height="34" rx="17" fill="#ffffff" stroke="#4d96ff" stroke-width="3"/>
+                  <text x="200" y="224" text-anchor="middle" font-size="15" fill="#1c4b8f" font-weight="bold">先合起来算？还是分开算？</text>
                 </g>
               </svg>`,
-              pan: { x: 12, y: -14, scale: 1.45 },
+              pan: { x: 8, y: -10, scale: 1.3 },
               focus: "#starfish",
               narration: "紧接着，海星队也入场了：2 行，每行也是 4 只！小海龟挠挠头：两队一共有多少只？先合起来算，还是分开算再加呢？",
               ms: 5000

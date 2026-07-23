@@ -166,7 +166,7 @@ MW.content[3] = {
                 <circle cx="170" cy="126" r="56" fill="#fff3d6" stroke="#d9a05b" stroke-width="4"/>
                 <path id="half" d="M170 70 A56 56 0 0 1 170 182 L170 126 Z" fill="#2ec4b6" opacity="0.85"/>
                 <line id="cut" x1="170" y1="70" x2="170" y2="182" stroke="#d9a05b" stroke-width="4"/>
-                <text x="170" y="48" text-anchor="middle" font-size="16" fill="#0f766e" font-weight="bold">✂️ 一刀切下，两半一样大</text>
+                <text x="170" y="60" text-anchor="middle" font-size="16" fill="#0f766e" font-weight="bold">✂️ 一刀切下，两半一样大</text>
                 <text x="246" y="132" font-size="17" fill="#0f766e" font-weight="bold">一半</text>
               </svg>`,
               pan: { x: 8, y: -4, scale: 1.4 },
@@ -187,7 +187,7 @@ MW.content[3] = {
                   <text x="296" y="130" text-anchor="middle" font-size="18" fill="#e2574c" font-weight="bold">✗ 写不出</text>
                   <text x="296" y="158" text-anchor="middle" font-size="18" fill="#e2574c" font-weight="bold">「一半」！</text>
                 </g>
-                <text x="138" y="214" text-anchor="middle" font-size="15" fill="#0f766e" font-weight="bold">学过的数，不够用了！</text>
+                <text x="296" y="200" text-anchor="middle" font-size="15" fill="#0f766e" font-weight="bold">学过的数，不够用了！</text>
               </svg>`,
               pan: { x: -10, y: 0, scale: 1.35 },
               focus: "#puzzle",

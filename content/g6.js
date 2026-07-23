@@ -188,8 +188,8 @@ MW.content[6] = {
                   <circle cx="200" cy="110" r="10" fill="#2b2d42"/>
                 </g>
                 <g id="equal">
-                  <rect x="232" y="194" width="156" height="32" rx="16" fill="#ffffff" stroke="#f15bb5" stroke-width="3"/>
-                  <text x="310" y="215" text-anchor="middle" font-size="14" fill="#b03a82" font-weight="bold">每条半径都一样长！</text>
+                  <rect x="240" y="46" width="94" height="28" rx="14" fill="#ffffff" stroke="#f15bb5" stroke-width="3"/>
+                  <text x="287" y="65" text-anchor="middle" font-size="13" fill="#b03a82" font-weight="bold">半径一样长</text>
                 </g>
               </svg>`,
               pan: { x: 0, y: 4, scale: 1.45 },
@@ -214,7 +214,6 @@ MW.content[6] = {
                   <path d="M262 138 q9 -5 14 4" stroke="#b03a82" stroke-width="3" fill="none" stroke-linecap="round"/>
                   <text x="199" y="72" text-anchor="middle" font-size="20" fill="#b03a82" font-weight="bold">咯噔！咯噔！</text>
                 </g>
-                <text x="200" y="228" text-anchor="middle" font-size="15" fill="#b03a82" font-weight="bold">方形轮子？车子一蹦一跳，太颠啦！</text>
               </svg>`,
               pan: { x: 0, y: -6, scale: 1.3 },
               focus: "#bumpy",

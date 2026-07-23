@@ -196,7 +196,7 @@ G.units.push(
                 <text x="100" y="172">x + 3</text>
                 <text x="300" y="172">10 颗</text>
               </g>
-              <text x="200" y="230" font-size="16" fill="#5b2a9d" font-weight="bold" text-anchor="middle">⚖️ 天平稳稳停住，一点儿不歪！</text>
+              <text x="200" y="190" font-size="16" fill="#5b2a9d" font-weight="bold" text-anchor="middle">⚖️ 天平稳稳停住，一点儿不歪！</text>
             </svg>`,
             pan: { x: 0, y: -6, scale: 1.3 },
             focus: "#balance",
@@ -232,12 +232,12 @@ G.units.push(
                 <circle cx="272" cy="108" r="7"/><circle cx="286" cy="102" r="7"/><circle cx="300" cy="108" r="7"/><circle cx="314" cy="102" r="7"/><circle cx="328" cy="108" r="7"/>
               </g>
               <g id="mystery">
-                <rect x="222" y="24" width="154" height="48" rx="12" fill="#ffffff" stroke="#9b5de5" stroke-width="3"/>
-                <text x="299" y="44" text-anchor="middle" font-size="15" fill="#5b2a9d" font-weight="bold">🔒 不许拆开！</text>
-                <text x="299" y="63" text-anchor="middle" font-size="15" fill="#5b2a9d" font-weight="bold">盒里有几颗？</text>
+                <rect x="110" y="12" width="180" height="50" rx="12" fill="#ffffff" stroke="#9b5de5" stroke-width="3"/>
+                <text x="200" y="32" text-anchor="middle" font-size="15" fill="#5b2a9d" font-weight="bold">🔒 不许拆开！</text>
+                <text x="200" y="51" text-anchor="middle" font-size="15" fill="#5b2a9d" font-weight="bold">盒里有几颗？</text>
               </g>
             </svg>`,
-            pan: { x: 16, y: 0, scale: 1.5 },
+            pan: { x: 10, y: 11, scale: 1.35 },
             focus: "#mystery",
             narration: "可是，礼盒不许拆开！里面到底藏着几颗水晶？小萝卜头盯着天平，想啊想……",
             ms: 4600
