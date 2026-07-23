@@ -212,13 +212,24 @@ MW.player = (function () {
       var isThink = MW.util.param("t", null) !== null;
       var backHref = isThink ? "think.html" : "grade.html?g=" + MW.util.param("g", "2");
       var backText = isThink ? "回到思维营" : "回到星球";
+      /* 承上启下卡：从知识图谱推荐下一站 */
+      var nextHtml = "";
+      if (MW.graph) {
+        var ups = MW.graph.next(unit.id).filter(function (n) { return !MW.progress.hasStar(n.id); }).slice(0, 2);
+        if (ups.length) {
+          nextHtml = '<div class="next-up">' + ups.map(function (n) {
+            return '<a class="next-link" href="' + MW.graph.href(n) + '">下一站 · ' + n.t + " ›</a>";
+          }).join("") + "</div>";
+        }
+      }
       card.innerHTML =
         '<div class="quiz-done"><div class="big">' + (isNew ? "⭐" : "🌟") + "</div>" +
         "<h3>" + (isNew ? "恭喜！获得一颗智慧星！" : "复习完成，依然闪亮！") + "</h3>" +
         "<p>" + MW.feedback.say("complete") + "</p>" +
+        nextHtml +
         '<div style="margin-top:22px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap">' +
         '<a class="btn" href="' + backHref + '">' + backText + '</a>' +
-        '<a class="btn ghost" href="museum.html">去数学博物馆</a>' +
+        '<a class="btn ghost" href="map.html">🗺️ 知识地图</a>' +
         "</div></div>";
       nextBtn.disabled = true; prevBtn.disabled = true;
       Array.prototype.forEach.call(dots.children, function (d) { d.className = "scene-dot past"; });

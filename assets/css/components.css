@@ -217,6 +217,15 @@ input[type="range"].slider { width: 240px; accent-color: var(--theme); height: 3
 .quiz-done .big { font-size: 3rem; }
 .quiz-done h3 { font-size: 1.5rem; margin: 8px 0 4px; }
 
+/* 承上启下卡 */
+.next-up { margin-top: 16px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.next-link {
+  display: inline-block; padding: 10px 18px; border-radius: 999px;
+  background: var(--theme-soft); font-weight: 800; font-size: .95rem;
+  transition: transform .18s ease;
+}
+.next-link:hover { transform: translateY(-2px); }
+
 /* ---------- v2：符号表达幕 ---------- */
 .formula-card {
   background: var(--theme-soft); border-radius: var(--r-md);

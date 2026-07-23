@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>知识地图 · 数学奇境</title>
+<meta name="description" content="知识地图——按数与代数、图形与几何、统计与概率、综合与实践四大领域，看清小学数学全部知识的来龙去脉。">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<style>
+.module-head { display:flex; align-items:center; gap:12px; margin:34px 0 16px; }
+.module-head .dot { width:18px; height:18px; border-radius:50%; }
+.module-head h2 { font-size:1.4rem; }
+.module-head p { color:var(--ink-soft); font-size:.9rem; }
+.chains { display:flex; gap:18px; flex-wrap:wrap; align-items:flex-start; }
+.chain { background:#fff; border-radius:var(--r-lg); box-shadow:var(--shadow-sm); padding:16px 14px 16px 0; min-width:230px; flex:0 1 260px; }
+.chain h3 { font-size:.95rem; padding-left:16px; margin-bottom:10px; color:var(--ink-soft); letter-spacing:2px; }
+.node {
+  position:relative; display:block; margin:0 0 10px 16px; padding:10px 12px 10px 22px;
+  background:#f7f7fd; border-radius:14px; transition:all .18s ease;
+}
+.node:hover { transform:translateX(4px); background:var(--mc,#4d96ff); color:#fff; }
+.node::before {
+  content:""; position:absolute; left:0; top:12%; bottom:12%; width:6px; border-radius:3px;
+  background:var(--mc,#4d96ff);
+}
+.node .nt { font-weight:800; font-size:.92rem; line-height:1.4; }
+.node .nm { display:flex; gap:6px; align-items:center; margin-top:4px; font-size:.75rem; }
+.node .gpill { background:#e8e8f4; color:var(--ink-soft); border-radius:999px; padding:1px 8px; font-weight:800; }
+.node:hover .gpill { background:rgba(255,255,255,.25); color:#fff; }
+.node .prev-ok { color:var(--good); font-weight:800; }
+.node:hover .prev-ok { color:#d9ffe4; }
+.node .prev-lack { color:#e0a91f; font-weight:800; }
+.node:hover .prev-lack { color:#fff3c9; }
+.node .star-ico { margin-left:auto; }
+.map-legend { display:flex; gap:18px; flex-wrap:wrap; justify-content:center; color:var(--ink-soft); font-size:.85rem; padding:8px 0 4px; }
+.map-legend b { color:var(--ink); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="topnav">
+    <a class="logo" href="index.html">🪐 数学奇境</a>
+    <span class="spacer"></span>
+    <a class="navlink" href="index.html">🏠 返回宇宙</a>
+    <a class="navlink" href="mistakes.html">📒 错题本</a>
+  </nav>
+
+  <header class="grade-hero rise">
+    <h1>🗺️ 知识地图</h1>
+    <p>同一个家族的知识放在一起学——看清每一课从哪里来、到哪里去</p>
+  </header>
+
+  <div class="map-legend rise">
+    <span><b style="color:#4d96ff">●</b> 数与代数</span>
+    <span><b style="color:#2ec4b6">●</b> 图形与几何</span>
+    <span><b style="color:#f15bb5">●</b> 统计与概率</span>
+    <span><b style="color:#e0a91f">●</b> 综合与实践</span>
+    <span>⭐ = 已完成的课</span>
+  </div>
+
+  <main id="mapRoot" style="padding-bottom:80px"></main>
+</div>
+
+<script src="assets/js/engine/util.js"></script>
+<script src="assets/js/engine/progress.js"></script>
+<script src="content/map.js"></script>
+<script>
+(function () {
+  var MODULES = [
+    { id: "A", name: "数与代数", color: "#4d96ff", desc: "数是怎么来的，怎么算的" },
+    { id: "G", name: "图形与几何", color: "#2ec4b6", desc: "形状、测量与空间" },
+    { id: "S", name: "统计与概率", color: "#f15bb5", desc: "用数据说话" },
+    { id: "P", name: "综合与实践", color: "#e0a91f", desc: "数学用在真问题上" }
+  ];
+  var root = document.getElementById("mapRoot");
+
+  MODULES.forEach(function (mod) {
+    var nodes = MW.graph.nodes.filter(function (n) { return n.m === mod.id; });
+    var chains = {};
+    nodes.forEach(function (n) { (chains[n.c] = chains[n.c] || []).push(n); });
+
+    var head = MW.util.el("div", "module-head rise");
+    head.innerHTML = '<span class="dot" style="background:' + mod.color + '"></span><h2>' + mod.name + '</h2><p>' + mod.desc + "</p>";
+    root.appendChild(head);
+
+    var row = MW.util.el("div", "chains rise");
+    Object.keys(chains).forEach(function (cname) {
+      var chain = MW.util.el("div", "chain");
+      chain.style.setProperty("--mc", mod.color);
+      chain.appendChild(MW.util.el("h3", null, "⛓ " + cname));
+      chains[cname].forEach(function (n) {
+        var a = document.createElement("a");
+        a.className = "node";
+        a.href = MW.graph.href(n);
+        var has = MW.progress.hasStar(n.id);
+        var weak = MW.graph.weakPrev(n.id, function (id) { return MW.progress.hasStar(id); });
+        var status;
+        if (has) status = '<span class="star-ico star">★</span>';
+        else if (weak.length) status = '<span class="prev-lack">建议先学：' + weak[0].t + "</span>";
+        else status = '<span class="prev-ok">地基已牢 ✓</span>';
+        var gradeText = n.g === 0 ? "思维营" : n.g + " 年级";
+        a.innerHTML = '<div class="nt">' + n.t + "</div>" +
+          '<div class="nm"><span class="gpill">' + gradeText + "</span>" + status + "</div>";
+        chain.appendChild(a);
+      });
+      row.appendChild(chain);
+    });
+    root.appendChild(row);
+  });
+})();
+</script>
+</body>
+</html>

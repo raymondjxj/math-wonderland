@@ -18,6 +18,10 @@
 .mistake-card .from { font-size:.82rem; font-weight:800; color:var(--ink-soft); letter-spacing:1px; margin-bottom:6px; }
 .mistake-card.solved { opacity:.55; }
 .mistake-card.solved .from::after { content:" · 已攻克 🎉"; color:var(--good); }
+.weak-tip {
+  background:#fff8dd; border:2px dashed var(--gold); border-radius:12px;
+  padding:8px 14px; font-size:.88rem; margin:8px 0 10px;
+}
 </style>
 </head>
 <body>
@@ -42,6 +46,7 @@
 <script src="assets/js/engine/feedback.js"></script>
 <script src="assets/js/engine/quiz.js"></script>
 <script src="content/encouragement.js"></script>
+<script src="content/map.js"></script>
 <script>
 (function () {
   var NAMES = {
@@ -69,6 +74,16 @@
     ms.forEach(function (m, idx) {
       var c = MW.util.el("div", "mistake-card rise d" + ((idx % 5) + 1));
       c.appendChild(MW.util.el("div", "from", "来自：" + fromName(m.unitId) + (m.level ? " · " + m.level : "")));
+      /* 地基诊断：本课的前置还有没学扎实的 → 推荐先复习 */
+      if (MW.graph) {
+        var weak = MW.graph.weakPrev(m.unitId, function (id) { return MW.progress.hasStar(id); });
+        if (weak.length) {
+          var tip = MW.util.el("div", "weak-tip");
+          tip.innerHTML = "💡 这题的地基可能在前面——建议先复习：" +
+            '<a href="' + MW.graph.href(weak[0]) + '" style="font-weight:900;text-decoration:underline">「' + weak[0].t + "」</a>";
+          c.appendChild(tip);
+        }
+      }
       var box = MW.util.el("div");
       c.appendChild(box);
       list.appendChild(c);
