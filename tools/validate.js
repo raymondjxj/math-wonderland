@@ -17,8 +17,9 @@ if (!files.length) {
     .map((f) => path.join(root, "content", f));
 }
 
-const WIDGETS = { blocks: 1, fraction: 1, grid: 1, angle: 1, circle: 1, guess: 1, binary: 1, coins: 1, sort: 1, sketchpad: 1, vertical: 1 };
+const WIDGETS = { blocks: 1, fraction: 1, grid: 1, angle: 1, circle: 1, guess: 1, binary: 1, coins: 1, sort: 1, sketchpad: 1, vertical: 1, shape: 1 };
 const SCENE_ORDER = ["story", "play", "anim", "symbol", "quiz", "review", "beauty"];
+const SCENE_ORDER_INQUIRY = ["story", "play", "anim", "play", "symbol", "quiz", "review", "beauty"];
 const LABS = { "fractal-tree": 1, fibonacci: 1, kaleidoscope: 1, tessellation: 1, "prime-spiral": 1, "magic-square": 1 };
 const MUSEUM = {};
 ["his-jiesheng","his-babylon","his-egypt","his-suanchou","his-zero","his-arabic",
@@ -49,10 +50,14 @@ for (const file of files) {
     if (u.id !== "g" + g + "u" + (ui + 1)) err(file, uid + " id 应为 g" + g + "u" + (ui + 1));
     for (const k of ["title", "subtitle", "tag"]) if (!u[k]) err(file, uid + " 缺少 " + k);
     if (!u.minutes) err(file, uid + " 缺少 minutes");
-    if (!Array.isArray(u.scenes) || u.scenes.length !== 7) { err(file, uid + " scenes 必须恰好 7 幕（v2），当前 " + (u.scenes ? u.scenes.length : 0)); return; }
+    if (!Array.isArray(u.scenes) || (u.scenes.length !== 7 && u.scenes.length !== 8)) {
+      err(file, uid + " scenes 须为 7 幕（标准课）或 8 幕（探究课），当前 " + (u.scenes ? u.scenes.length : 0)); return;
+    }
+    const ORDER = u.scenes.length === 8 ? SCENE_ORDER_INQUIRY : SCENE_ORDER;
+    if (u.scenes.length === 8 && !u.inquiry) console.warn("  ⚠ " + uid + " 为 8 幕探究课，建议标注 inquiry:true");
     u.scenes.forEach(function (s, si) {
       const sid = uid + " 第" + (si + 1) + "幕";
-      if (s.type !== SCENE_ORDER[si]) err(file, sid + " 类型应为 " + SCENE_ORDER[si] + "，实际 " + s.type);
+      if (s.type !== ORDER[si]) err(file, sid + " 类型应为 " + ORDER[si] + "，实际 " + s.type);
       if (s.type === "story" && (!Array.isArray(s.paragraphs) || !s.paragraphs.length)) err(file, sid + " story 缺 paragraphs");
       if (s.type === "anim") {
         if (!WIDGETS[s.widget]) err(file, sid + " 未知教具 " + s.widget);

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /* 扩展单元文件自检（push 模式）
    用法: node tools/check-ext.js content/g2b.js g2u4 g2u5 g2u6
-   校验该文件 push 的每个单元：7 幕结构、题目质量、温故题、review 一题多解。*/
+   校验该文件 push 的每个单元：7/8 幕结构、题目质量（含 multi/open/build 新题型）、温故题、review 一题多解。*/
 "use strict";
 const fs = require("fs");
 global.window = global;
@@ -13,9 +13,10 @@ if (!file || !expectIds.length) {
   process.exit(2);
 }
 
-const WIDGETS = { blocks: 1, fraction: 1, grid: 1, angle: 1, circle: 1, guess: 1, binary: 1, coins: 1, sort: 1, sketchpad: 1, vertical: 1 };
+const WIDGETS = { blocks: 1, fraction: 1, grid: 1, angle: 1, circle: 1, guess: 1, binary: 1, coins: 1, sort: 1, sketchpad: 1, vertical: 1, shape: 1 };
 const SCENE_ORDER = ["story", "play", "anim", "symbol", "quiz", "review", "beauty"];
-const LEVELS = { "基础": 1, "变式": 1, "挑战": 1, "温故": 1 };
+const SCENE_ORDER_INQUIRY = ["story", "play", "anim", "play", "symbol", "quiz", "review", "beauty"];
+const LEVELS = { "基础": 1, "变式": 1, "挑战": 1, "温故": 1, "开放": 1 };
 const LABS = { "fractal-tree": 1, fibonacci: 1, kaleidoscope: 1, tessellation: 1, "prime-spiral": 1, "magic-square": 1 };
 const MUSEUM = {};
 ["his-jiesheng","his-babylon","his-egypt","his-suanchou","his-zero","his-arabic",
@@ -39,10 +40,11 @@ units.forEach(function (u, i) {
   const uid = u.id || "?";
   if (u.id !== expectIds[i]) err("第 " + (i + 1) + " 个单元 id 应为 " + expectIds[i] + "，实际 " + uid);
   for (const k of ["title", "subtitle", "tag", "minutes"]) if (!u[k]) err(uid + " 缺 " + k);
-  if (!Array.isArray(u.scenes) || u.scenes.length !== 7) { err(uid + " 必须恰好 7 幕"); return; }
+  if (!Array.isArray(u.scenes) || (u.scenes.length !== 7 && u.scenes.length !== 8)) { err(uid + " 须为 7 幕（标准课）或 8 幕（探究课）"); return; }
+  const ORDER = u.scenes.length === 8 ? SCENE_ORDER_INQUIRY : SCENE_ORDER;
   u.scenes.forEach(function (s, si) {
     const sid = uid + " 第" + (si + 1) + "幕";
-    if (s.type !== SCENE_ORDER[si]) err(sid + " 应为 " + SCENE_ORDER[si] + "，实际 " + s.type);
+    if (s.type !== ORDER[si]) err(sid + " 应为 " + ORDER[si] + "，实际 " + s.type);
     if (s.type === "story" && (!s.paragraphs || !s.paragraphs.length)) err(sid + " 缺 paragraphs");
     if (s.type === "anim") {
       if (!WIDGETS[s.widget]) err(sid + " 未知教具 " + s.widget);
@@ -66,7 +68,9 @@ units.forEach(function (u, i) {
       let review = 0, why = 0;
       (s.questions || []).forEach(function (q, j) {
         const qid = sid + " 第" + (j + 1) + "题";
-        if (!q.q || !q.hint || !q.explain) err(qid + " 缺 q/hint/explain");
+        if (!q.q) err(qid + " 缺 q");
+        if (q.type !== "open" && q.type !== "build" && !q.hint) err(qid + " 缺 hint");
+        if (q.type !== "open" && q.type !== "build" && !q.explain) err(qid + " 缺 explain");
         if (q.level != null && !LEVELS[q.level]) err(qid + " level 非法: " + q.level);
         if (q.level === "温故") review++;
         if (/为什么|为何/.test(q.q)) why++;
@@ -77,6 +81,17 @@ units.forEach(function (u, i) {
           if (q.answer == null || q.answer === "") err(qid + " 缺 answer");
         } else if (q.type === "judge") {
           if (typeof q.answer !== "boolean") err(qid + " answer 须 true/false");
+        } else if (q.type === "multi") {
+          if (!Array.isArray(q.options) || q.options.length < 2) err(qid + " 缺 options");
+          if (!Array.isArray(q.answer) || !q.answer.length) err(qid + " multi answer 须为下标数组");
+          else q.answer.forEach(function (x) {
+            if (typeof x !== "number" || x < 0 || x >= q.options.length) err(qid + " multi answer 越界");
+          });
+        } else if (q.type === "open") {
+          if (!q.reference) err(qid + " open 缺 reference（参考想法）");
+        } else if (q.type === "build") {
+          if (!WIDGETS[q.widget]) err(qid + " build 未知教具 " + q.widget);
+          if (!q.config) err(qid + " build 缺 config");
         } else err(qid + " 未知题型 " + q.type);
       });
       if (review === 0) err(sid + " 缺 level:\"温故\" 题");

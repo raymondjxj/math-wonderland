@@ -248,68 +248,93 @@ G.units.push(
     ]
   },
 
-  /* ================= 单元 6：平行四边形和梯形 ================= */
+  /* ================= 单元 6：平行四边形和梯形（8 幕探究样板） ================= */
   {
     id: "g4u6",
     title: "平行四边形和梯形",
-    subtitle: "剪一刀，拼出面积公式",
+    subtitle: "观察 → 猜想 → 验证：剪出面积的秘密",
     tag: "空间",
-    minutes: 18,
+    minutes: 20,
+    inquiry: true,
     scenes: [
       {
         type: "story",
-        title: "海底建筑队的新任务",
+        title: "校园里的四边形",
         art: `<svg viewBox="0 0 400 240" width="400" height="240">
           <rect width="400" height="240" rx="20" fill="#eaf4ff"/>
-          <circle cx="348" cy="38" r="20" fill="#ffd166"/>
-          <path d="M0 210 Q50 198 100 210 T200 210 T300 210 T400 210 V240 H0 Z" fill="#bcd8ff"/>
-          <path d="M0 224 Q50 213 100 224 T200 224 T300 224 T400 224 V240 H0 Z" fill="#4d96ff" opacity=".5"/>
-          <path d="M100 84 L236 84 L196 186 L60 186 Z" fill="#4d96ff" opacity=".75" stroke="#1c4b8f" stroke-width="3"/>
-          <line x1="150" y1="84" x2="150" y2="186" stroke="#ffffff" stroke-width="3" stroke-dasharray="7 6"/>
-          <path d="M150 178 L158 178 L158 186" fill="none" stroke="#ffffff" stroke-width="2.5"/>
-          <text x="128" y="202" font-size="14" fill="#1c4b8f" font-weight="bold">底 6 米</text>
-          <text x="158" y="140" font-size="14" fill="#ffffff" font-weight="bold">高 4 米</text>
-          <path d="M262 150 L366 150 L386 206 L242 206 Z" fill="#8aa7c7" stroke="#1c4b8f" stroke-width="3"/>
-          <text x="314" y="184" font-size="14" fill="#1c4b8f" font-weight="bold" text-anchor="middle">梯形堤坝</text>
-          <text x="160" y="52" font-size="16" fill="#1c4b8f" font-weight="bold" text-anchor="middle">平行四边形花坛，草皮买多少？</text>
+          <circle cx="44" cy="38" r="18" fill="#ffd166"/>
+          <path d="M0 202 Q60 192 120 202 T240 202 T400 202 V240 H0 Z" fill="#bcd8ff"/>
+          <rect x="22" y="92" width="10" height="110" rx="4" fill="#1c4b8f"/>
+          <rect x="152" y="92" width="10" height="110" rx="4" fill="#1c4b8f"/>
+          <g stroke="#2f7df0" stroke-width="4" stroke-linecap="round">
+            <line x1="34" y1="196" x2="63" y2="100"/><line x1="63" y1="196" x2="34" y2="100"/>
+            <line x1="63" y1="196" x2="92" y2="100"/><line x1="92" y1="196" x2="63" y2="100"/>
+            <line x1="92" y1="196" x2="121" y2="100"/><line x1="121" y1="196" x2="92" y2="100"/>
+            <line x1="121" y1="196" x2="150" y2="100"/><line x1="150" y1="196" x2="121" y2="100"/>
+          </g>
+          <line x1="214" y1="66" x2="204" y2="198" stroke="#1c4b8f" stroke-width="5" stroke-linecap="round"/>
+          <line x1="266" y1="66" x2="276" y2="198" stroke="#1c4b8f" stroke-width="5" stroke-linecap="round"/>
+          <g stroke="#4d96ff" stroke-width="4" stroke-linecap="round">
+            <line x1="212" y1="86" x2="268" y2="86"/>
+            <line x1="210" y1="112" x2="270" y2="112"/>
+            <line x1="208" y1="138" x2="272" y2="138"/>
+            <line x1="206" y1="164" x2="274" y2="164"/>
+            <line x1="205" y1="188" x2="275" y2="188"/>
+          </g>
+          <rect x="302" y="116" width="86" height="7" rx="3" fill="#1c4b8f"/>
+          <rect x="302" y="186" width="86" height="7" rx="3" fill="#1c4b8f"/>
+          <g stroke="#2f7df0" stroke-width="4" stroke-linecap="round">
+            <line x1="310" y1="123" x2="326" y2="186"/>
+            <line x1="334" y1="123" x2="350" y2="186"/>
+            <line x1="358" y1="123" x2="374" y2="186"/>
+          </g>
+          <rect x="70" y="12" width="300" height="36" rx="18" fill="#ffffff"/>
+          <text x="220" y="35" font-size="15" fill="#1c4b8f" font-weight="bold" text-anchor="middle">这些形状有什么共同秘密？</text>
+          <text x="92" y="226" font-size="13" fill="#1c4b8f" font-weight="bold" text-anchor="middle">伸缩门</text>
+          <text x="240" y="226" font-size="13" fill="#1c4b8f" font-weight="bold" text-anchor="middle">梯子</text>
+          <text x="345" y="226" font-size="13" fill="#1c4b8f" font-weight="bold" text-anchor="middle">护栏</text>
         </svg>`,
         paragraphs: [
-          "海底建筑队接到新任务：修一座平行四边形的珊瑚花坛，还要在旁边筑一道梯形的小堤坝。",
-          "章鱼队长量了量花坛：底 6 米、高 4 米。小海马抢答：「草皮面积？6 × 4 = 24 平方米！」「等等，」章鱼队长笑了，「平行四边形又不是长方形，也能用 底 × 高 吗？」",
-          "剪刀咔嚓一声——沿高剪开，拼一拼，奇迹出现了……"
+          "放学啦！小海豚蓝蓝游出海洋学校：门口的伸缩门「哗啦哗啦」地合上，园丁海龟叔叔的梯子斜靠在珊瑚墙边，操场边的护栏排得整整齐齐。",
+          "蓝蓝忽然停了下来：伸缩门的格子、梯子的侧面、护栏的花纹——这些四边形看起来都有点「斜」，可又斜得很有规律。",
+          "这些形状有什么共同的秘密？先别急着翻答案——下一站，拿起画笔，画出你的想法！"
         ]
       },
       {
         type: "play",
-        widget: "grid",
-        prompt: "先摸摸底：点击格子，把这块 6 × 4 的长方形草皮铺满，数一数一共多少格？",
-        config: { interactive: true, rows: 4, cols: 6 },
-        successText: "铺满啦！6 × 4 = 24 格，长方形面积 = 长 × 宽。记住这 24 格，待会儿平行四边形要和它比一比！"
+        widget: "sketchpad",
+        prompt: "先不追求「标准答案」！画一个你心中的平行四边形——斜斜的、扁扁的都可以。已为你打开直尺模式，沿着方格画会更稳。画完点「我画好了」。",
+        config: { interactive: true, grid: true, straightEdge: true },
+        successText: "画好了！这是你心中的平行四边形。它到底符不符合呢？先别改——接下来我们仔细观察真正的平行四边形，量一量、拉一拉，再回头看看你的画。"
       },
       {
         type: "anim",
-        widget: "grid",
+        widget: "shape",
         steps: [
-          { caption: "平行四边形花坛：底 6 格，高 4 格。边是斜的，面积怎么算？", state: { rows: 4, cols: 6, filled: 0, showCount: true } },
-          { caption: "沿高剪一刀，把剪下的三角形平移到右边——咔！拼成一个 6 × 4 的长方形。", state: { rows: 4, cols: 6, filled: 24, showCount: true } },
-          { caption: "剪拼前后面积不变：平行四边形面积 = 长方形面积 = 底 × 高 = 6 × 4 = 24 格。", state: { rows: 4, cols: 6, filled: 24, showCount: true } },
-          { caption: "再试一个：底 6 格、高 2 格，剪拼后是 6 × 2 = 12 格。还是 底 × 高！", state: { rows: 2, cols: 6, filled: 12, showCount: true } },
-          { caption: "长方形和平行四边形都有两组对边分别平行。那只有一组对边平行的四边形呢？", state: { rows: 2, cols: 8, filled: 16, showCount: true } },
-          { caption: "把一条横边剪短成 4 格：两条横边一长一短、仍然平行，另外两边斜了——这叫梯形，平行的两边叫上底和下底。", state: { rows: 2, cols: 8, filled: 12, showCount: true } }
+          { caption: "盯紧这个平行四边形，量一量：上下两条边永不相交，左右两条边也永不相交——两组对边分别平行，而且一样长。", state: { mode: "parallelogram", step: 0 } },
+          { caption: "拉一拉、动一动：抓住长方形木框的两个对角轻轻一拉——咔！它就斜成了平行四边形。边的长度没变，形状变斜了。", state: { mode: "parallelogram", step: 0 } },
+          { caption: "现在猜猜看：沿这条粉色的虚线（它叫「高」）剪一刀，把剪下的三角形移到右边——会变成什么图形？记下你的猜想，下一步亲手验证！", state: { mode: "parallelogram", step: 1 } }
         ]
+      },
+      {
+        type: "play",
+        widget: "shape",
+        prompt: "猜想时间结束，动手验证！点「剪一剪，移过去」，看看剪下的三角形移过去之后，拼成了什么图形——和你的猜想一样吗？",
+        config: { interactive: true, mode: "parallelogram" },
+        successText: "拼成了长方形！你的猜想得到了验证：平行四边形沿高剪开、平移拼合，正好变成长方形——面积一点儿没变。这个发现太了不起了！"
       },
       {
         type: "symbol",
         paragraphs: [
-          "把剪拼的发现写成数学的语言：",
-          "沿高剪开、平移、拼合——平行四边形变成长方形，面积一点儿没变。"
+          "观察、猜想、验证都完成了——现在，可以把发现写成数学的语言：",
+          "两组对边分别平行（且相等）的四边形，叫平行四边形。沿高剪开拼成长方形：底变成长，高变成宽，面积不变。"
         ],
         formula: "平行四边形的面积 = 底 × 高",
         keypoints: [
-          "两组对边分别平行的四边形叫平行四边形；长方形、正方形是特殊的平行四边形",
-          "沿高剪开拼成长方形：底变成长，高变成宽，面积 = 底 × 高",
+          "平行四边形：两组对边分别平行且相等；长方形、正方形是特殊的平行四边形",
+          "必须沿「高」（垂直于底的线段）剪开，才能拼出长方形——面积 = 底 × 高",
           "只有一组对边平行的四边形叫梯形；平行的两边叫上底和下底",
-          "平行四边形容易变形——伸缩门、升降架都利用了这一点"
+          "平行四边形容易变形：伸缩门、升降架正是利用了这一点"
         ],
         art: `<svg viewBox="0 0 400 240" width="400" height="240">
           <rect width="400" height="240" rx="20" fill="#eaf4ff"/>
@@ -332,43 +357,42 @@ G.units.push(
       {
         type: "quiz",
         questions: [
-          { type: "choice", level: "基础", q: "平行四边形的面积 = ？", options: ["底 × 高", "底 × 斜边", "底 + 高"], answer: 0,
-            hint: "剪拼成长方形后，长方形的长和宽分别是什么？", explain: "剪拼成长方形：长 = 底，宽 = 高，所以面积 = 底 × 高。" },
+          { type: "choice", level: "基础", q: "经过观察和验证，平行四边形的特征是什么？", options: ["两组对边分别平行且相等", "只有一组对边平行", "四条边一定都相等"], answer: 0,
+            hint: "想想动画里「量一量」的结果", explain: "平行四边形的两组对边分别平行且相等；只有一组对边平行的是梯形；四条边都相等并不是必须的。" },
           { type: "fill", level: "基础", q: "底 8 厘米、高 5 厘米的平行四边形，面积是 ＿＿ 平方厘米。", answer: "40",
             hint: "面积 = 底 × 高", explain: "8 × 5 = 40 平方厘米。" },
-          { type: "choice", level: "基础", q: "下面哪种图形只有一组对边平行？", options: ["梯形", "长方形", "平行四边形"], answer: 0,
-            hint: "长方形和平行四边形都有两组", explain: "只有一组对边平行的四边形叫梯形。" },
-          { type: "choice", level: "变式", q: "为什么平行四边形的面积可以用「底 × 高」来计算？", options: ["沿高剪开能拼成长方形，面积不变，长方形面积 = 长 × 宽", "数学书规定的，记住就行", "因为底和高看起来最长"], answer: 0,
-            hint: "想想方格纸上的剪拼动画", explain: "沿高剪下的三角形平移到另一边，正好拼成长方形。面积没变：底变成长、高变成宽，所以 底 × 高。" },
-          { type: "judge", level: "变式", q: "把平行四边形沿任意一条斜边剪开，都能拼成长方形。", answer: false,
-            hint: "要沿什么线剪，剪出的角才是直角？", explain: "必须沿「高」剪——也就是垂直于底的线，剪出的才是直角，才拼得出长方形。" },
-          { type: "choice", level: "变式", q: "一个平行四边形面积 36 平方厘米，底 9 厘米，高是多少？", options: ["4 厘米", "6 厘米", "27 厘米"], answer: 0,
-            hint: "底 × 高 = 36，9 × 几 = 36？", explain: "36 ÷ 9 = 4 厘米。知道面积和底，用除法求高。" },
-          { type: "choice", level: "挑战", q: "把长方形木框拉成平行四边形，什么变了、什么没变？", options: ["周长不变，面积变小", "面积不变，周长变小", "周长和面积都不变"], answer: 0,
+          { type: "choice", level: "变式", q: "为什么平行四边形的面积可以用「底 × 高」来计算？", options: ["沿高剪下的三角形平移过去正好拼成长方形，面积不变，长方形面积 = 长 × 宽", "因为平行四边形看起来和长方形差不多大", "数学书规定的，记住就行"], answer: 0,
+            hint: "回忆你亲手剪拼的过程", explain: "剪拼前后面积不变：底变成长、高变成宽，所以面积 = 底 × 高。这就是剪拼的道理！" },
+          { type: "judge", level: "变式", q: "把长方形木框拉成平行四边形，周长不变，面积也不变。", answer: false,
             hint: "四条边的长度变了吗？高变了吗？", explain: "边长没变，所以周长不变；但拉斜后高变矮了，底 × 高变小，面积也变小了。" },
-          { type: "fill", level: "挑战", q: "平行四边形花园面积 48 平方米，高 6 米，底是 ＿＿ 米。", answer: "8",
-            hint: "底 × 6 = 48", explain: "48 ÷ 6 = 8 米。面积 ÷ 高 = 底。" },
-          { type: "choice", level: "温故", q: "还记得吗：长方形相邻的两条边组成的是什么角？是多少度？", options: ["直角，90°", "锐角，45°", "平角，180°"], answer: 0,
-            hint: "用书角、桌角想一想", explain: "长方形的 4 个角都是直角，90°。方方正正的长方形，正是特殊的平行四边形。" }
+          { type: "choice", level: "挑战", q: "一块平行四边形菜地的面积是 36 平方米，底 9 米，高是多少米？", options: ["4 米", "6 米", "27 米"], answer: 0,
+            hint: "底 × 高 = 36，9 × 几 = 36？", explain: "36 ÷ 9 = 4 米。知道面积和底，用除法求高。" },
+          { type: "choice", level: "温故", q: "还记得吗：长方形的面积怎样算？", options: ["长 × 宽", "长 + 宽", "（长 + 宽）× 2"], answer: 0,
+            hint: "三年级学的：在方格纸上铺一铺，每行几格、有几行", explain: "长方形面积 = 长 × 宽；（长 + 宽）× 2 算的是周长。平行四边形剪拼成长方形，靠的正是这条老本领！" },
+          { type: "multi", level: "开放", q: "下面哪些图形是平行四边形？（多选，全选对才算对）", options: ["长方形", "正方形", "两组对边分别平行的斜四边形", "梯形"], answer: [0, 1, 2],
+            hint: "梯形只有一组对边平行哦", explain: "只要两组对边分别平行，就是平行四边形——长方形、正方形是特殊的平行四边形；梯形只有一组对边平行，不是。" },
+          { type: "build", level: "开放", q: "用画板画一个平行四边形：直尺模式已打开，借助方格画出两组分别平行的对边。画完点「我画好了」。",
+            widget: "sketchpad", config: { interactive: true, grid: true, straightEdge: true },
+            reference: "一种画法：先沿格线画两条一样长的水平边（上下错开几格），再把左右两对端点分别连起来。画成长方形、正方形也算对——它们是特殊的平行四边形！" }
         ]
       },
       {
         type: "review",
         question: "平行四边形的面积为什么是 底 × 高？",
         ways: [
-          { name: "剪拼法", text: "沿高剪下三角形，平移到右边拼成长方形：长 = 底、宽 = 高，面积不变。" },
-          { name: "数格子", text: "底 6 高 4 的平行四边形，剪拼成 6 × 4 的长方形，方格纸上一数正好 24 格。" },
-          { name: "拉一拉", text: "长方形框拉斜成平行四边形：高变矮、面积变小——说明面积看「高」，不看斜边。" }
+          { name: "剪拼法", text: "沿高剪下三角形，平移到右边拼成长方形：长 = 底、宽 = 高，剪拼前后面积不变，所以面积 = 底 × 高。" },
+          { name: "数方格", text: "把平行四边形摆在方格纸上：左边多出的三角形正好补到右边的缺口，数一数，格子总数正好等于 底 × 高。" },
+          { name: "公式", text: "平行四边形面积 = 底 × 高。注意乘的是「高」（到底边的垂直距离），不是斜边的长度！" }
         ],
-        ask: "用四根吸管做一个长方形框，拉成平行四边形，给爸爸妈妈讲讲：什么没变、什么变了、为什么。"
+        ask: "讲给爸爸妈妈听：怎么把一个平行四边形变成长方形？边说边比划——沿哪里剪、往哪儿移、为什么面积不变。"
       },
       {
         type: "beauty",
-        headline: "出入相补：中国古代的剪拼智慧",
+        headline: "出入相补：中国古人的剪拼智慧",
         paragraphs: [
-          "把图形剪开、移过去、拼起来，面积不变——三国时期的数学家刘徽把这个本领叫做「出入相补原理」。",
-          "用它，刘徽证明了著名的勾股定理：直角三角形两条直角边上的正方形，剪一剪、拼一拼，正好等于斜边上的正方形。",
-          "平行四边形变长方形、两个梯形拼成平行四边形……全是出入相补的魔法。去博物馆看看古人怎样用「剪刀」证明数学！"
+          "把图形剪开、移过去、拼起来，面积不变——你今天用的剪拼法，三国时期的数学家刘徽早就给它起好了名字：「出入相补原理」。",
+          "刘徽用它证明了著名的勾股定理：直角三角形两条直角边上的正方形，剪一剪、拼一拼，正好拼成斜边上的正方形。",
+          "平行四边形变长方形、两个梯形拼成平行四边形……全是出入相补的魔法。去博物馆看看，古人怎样用一把「剪刀」证明数学！"
         ],
         museum: "prf-gougu"
       }

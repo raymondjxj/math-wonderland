@@ -17,6 +17,10 @@ MW.content[3] = { grade: 3, name: "三年级 · 青绿星球", units: [ /* 3 个
 
 设计依据：布鲁纳三重表征（操作→图像→符号，故 play 在 anim 之前）+ 波利亚回顾 + 比约克间隔复习。
 
+**概念密集型单元（几何概念、数概念）推荐使用 8 幕探究模板**（并在单元上加 `inquiry: true`）：
+`story 情境 → play 自由画/自由摆（先产出）→ anim 观察比较 → play 动手验证（剪拼/测量）→ symbol 此时才给结论 → quiz → review → beauty`。
+校验器对 7/8 幕分别按标准/探究模板检查。
+
 ### 1. story 故事导入
 真实情境、制造认知冲突（丹·梅耶三幕式：先让孩子"想知道"）。
 ```js
@@ -79,6 +83,7 @@ MW.content[3] = { grade: 3, name: "三年级 · 青绿星球", units: [ /* 3 个
 | `circle` 圆（仅动画） | `{mode:"roll"\|"sectors", t:0~1, n:8}` | — |
 | `sketchpad` 画板（仅交互） | — | `{interactive:true, grid:true, straightEdge:false}` 先画一画再验证（无标准答案） |
 | `vertical` 竖式动画 | `{op:"add"\|"sub"\|"mul"\|"div", a, b, step}` | `{interactive:true, op, a, b}` 点「下一步」走完竖式 |
+| `shape` 图形剪拼 | `{mode:"parallelogram"\|"triangle"\|"trapezoid", step:0~2}` | `{interactive:true, mode}` 剪拼发现面积公式 |
 | `guess` 二分猜数 | `{interactive:false, min, max, lo, hi, guess, steps, info}`（数轴演示） | `{interactive:true, min:1, max:100}` 机器人二分猜孩子想的数 |
 | `binary` 二进制卡牌 | `{cards:5, bits:[0,1,1,0,1], showValues:true}` | `{interactive:true, cards:5, target:19}` 翻牌凑目标数 |
 | `coins` 抛硬币（仅交互） | — | `{interactive:true, goal:100}` 按钮抛 1/10/100 次，画频率曲线 |
