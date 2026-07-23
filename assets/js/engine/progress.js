@@ -88,16 +88,25 @@ MW.progress = (function () {
     return BADGES.map(function (b) { return { icon: b.icon, name: b.name, cond: b.cond, got: b.test(d) }; });
   }
 
-  /* ---- 错题本 ---- */
+  /* ---- 错题本（带间隔重复调度：当场 → 1 天后 → 3 天后 → 7 天后毕业） ---- */
+  var MISTAKE_STEPS = [0, 86400000, 3 * 86400000, 7 * 86400000];
+
   function addMistake(unitId, q) {
     var d = get();
     for (var i = 0; i < d.mistakes.length; i++) {
-      if (d.mistakes[i].q === q.q) return; // 同题不重复收录
+      if (d.mistakes[i].q === q.q) {
+        // 再次答错：回到第一阶段重新排期
+        d.mistakes[i].stage = 0;
+        d.mistakes[i].due = Date.now();
+        d.mistakes[i].at = Date.now();
+        save(d);
+        return;
+      }
     }
     d.mistakes.unshift({
       unitId: unitId, type: q.type, q: q.q, options: q.options || null,
       answer: q.answer, hint: q.hint || "", explain: q.explain || "",
-      level: q.level || "", at: Date.now()
+      level: q.level || "", at: Date.now(), stage: 0, due: Date.now()
     });
     if (d.mistakes.length > 60) d.mistakes.length = 60;
     save(d);
@@ -107,7 +116,26 @@ MW.progress = (function () {
     d.mistakes = d.mistakes.filter(function (m) { return m.q !== qText; });
     save(d);
   }
+  /* 重做答对：升一级并排期；满级毕业移除 */
+  function graduateMistake(qText) {
+    var d = get();
+    for (var i = 0; i < d.mistakes.length; i++) {
+      if (d.mistakes[i].q === qText) {
+        var m = d.mistakes[i];
+        m.stage = (m.stage || 0) + 1;
+        if (m.stage > MISTAKE_STEPS.length - 1) { d.mistakes.splice(i, 1); }
+        else m.due = Date.now() + MISTAKE_STEPS[m.stage];
+        save(d);
+        return;
+      }
+    }
+  }
   function mistakes() { return get().mistakes; }
+  /* 今天该复习的 */
+  function dueMistakes() {
+    var now = Date.now();
+    return get().mistakes.filter(function (m) { return (m.due || 0) <= now; });
+  }
 
   /* ---- 口算天天练：按日期记录 ---- */
   function markDrill() {
@@ -136,7 +164,8 @@ MW.progress = (function () {
     get: get, addStar: addStar, hasStar: hasStar,
     gradeStars: gradeStars, totalStars: totalStars, thinkStars: thinkStars,
     visitLab: visitLab, labCount: labCount,
-    addMistake: addMistake, removeMistake: removeMistake, mistakes: mistakes,
+    addMistake: addMistake, removeMistake: removeMistake, graduateMistake: graduateMistake,
+    mistakes: mistakes, dueMistakes: dueMistakes,
     markDrill: markDrill, drillToday: drillToday,
     exportCode: exportCode, importCode: importCode,
     quiet: quiet, setQuiet: setQuiet, badges: badges

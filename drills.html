@@ -42,14 +42,31 @@
 <script src="assets/js/engine/progress.js"></script>
 <script src="assets/js/engine/feedback.js"></script>
 <script src="assets/js/engine/quiz.js"></script>
+<script src="assets/js/widgets/vertical.js"></script>
 <script src="content/encouragement.js"></script>
 <script>
 (function () {
   function rnd(a, b) { return a + Math.floor(Math.random() * (b - a + 1)); }
   function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
-  function Q(q, answer, hint) {
-    return { type: "fill", level: "口算", q: q, answer: String(answer), hint: hint || "静下心来，再算一遍", explain: q.replace("？", "") + " = " + answer };
+  function Q(q, answer, hint, vertical) {
+    var o = { type: "fill", level: "口算", q: q, answer: String(answer), hint: hint || "静下心来，再算一遍", explain: q.replace("？", "") + " = " + answer };
+    if (vertical) { o.vertical = vertical; o.level = "笔算"; }
+    return o;
   }
+
+  /* 笔算题（答完自动展示竖式） */
+  var WRITTEN = {
+    2: [function () { var a = rnd(25, 69), b = rnd(15, 29); return Q(a + " + " + b + " = ？", a + b, "满十要进一", { op: "add", a: a, b: b }); },
+        function () { var a = rnd(50, 92), b = rnd(15, 39); return Q(a + " − " + b + " = ？", a - b, "不够减要退位", { op: "sub", a: a, b: b }); }],
+    3: [function () { var a = rnd(12, 24), b = rnd(2, 4); return Q(a + " × " + b + " = ？", a * b, "从个位乘起", { op: "mul", a: a, b: b }); },
+        function () { var b = rnd(2, 4), c = rnd(12, 23); return Q(b * c + " ÷ " + b + " = ？", c, "从高位试商", { op: "div", a: b * c, b: b }); }],
+    4: [function () { var a = rnd(112, 234), b = rnd(11, 19); return Q(a + " × " + b + " = ？", a * b, "第二部分积要左移一位", { op: "mul", a: a, b: b }); },
+        function () { var b = rnd(11, 19), c = rnd(11, 19); return Q(b * c + " ÷ " + b + " = ？", c, "把除数看成整十试商", { op: "div", a: b * c, b: b }); }],
+    5: [function () { var a = rnd(103, 309), b = rnd(12, 25); return Q(a + " × " + b + " = ？", a * b, "对齐数位再相加", { op: "mul", a: a, b: b }); },
+        function () { var b = rnd(12, 24), c = rnd(12, 24); return Q(b * c + " ÷ " + b + " = ？", c, "试商后乘回去验一验", { op: "div", a: b * c, b: b }); }],
+    6: [function () { var a = rnd(115, 345), b = rnd(13, 26); return Q(a + " × " + b + " = ？", a * b, "每一步对哪位要想清", { op: "mul", a: a, b: b }); },
+        function () { var b = rnd(13, 26), c = rnd(13, 26); return Q(b * c + " ÷ " + b + " = ？", c, "商乘除数要等于落下的数", { op: "div", a: b * c, b: b }); }]
+  };
 
   /* 各年级题目工厂：每次调用生成 1 题 */
   var FACTORY = {
@@ -76,11 +93,23 @@
   };
 
   var picks = document.getElementById("gradePicks");
+  var mode = "oral";
   [2, 3, 4, 5, 6].forEach(function (g) {
     var b = MW.util.el("button", "btn", g + " 年级");
-    b.onclick = function () { start(g); };
+    b.onclick = function () { pickMode(g); };
     picks.appendChild(b);
   });
+
+  function pickMode(g) {
+    var home = document.getElementById("home");
+    home.innerHTML = '<h2 style="margin-bottom:14px">' + g + " 年级 · 选模式</h2>" +
+      '<div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:16px">' +
+      '<button class="btn" id="mOral">⚡ 口算（心算快练）</button>' +
+      '<button class="btn ghost" id="mWritten">📐 笔算（带竖式）</button></div>' +
+      '<div><a href="drills.html" style="color:var(--ink-soft);font-size:.9rem">‹ 重选年级</a></div>';
+    document.getElementById("mOral").onclick = function () { mode = "oral"; start(g); };
+    document.getElementById("mWritten").onclick = function () { mode = "written"; start(g); };
+  }
   var today = MW.progress.drillToday();
   document.getElementById("todayInfo").textContent =
     today > 0 ? "今天你已经练了 " + today + " 组，太勤快了！🔥" : "今天还没练过，来一组热热身？";
@@ -91,8 +120,9 @@
     var box = document.getElementById("quizBox");
     box.style.display = "flex";
     var qs = [], used = {};
+    var pool = mode === "written" ? WRITTEN[g] : FACTORY[g];
     while (qs.length < 10) {
-      var q = pick(FACTORY[g])();
+      var q = pick(pool)();
       if (used[q.q]) continue;
       used[q.q] = 1; qs.push(q);
     }

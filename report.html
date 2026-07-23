@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>学习报告 · 数学奇境</title>
+<meta name="description" content="孩子的学习报告：星星进度、能力雷达、错题分布与下一步建议——本地生成，可打印。">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<style>
+.report { max-width: 860px; margin: 0 auto; }
+.report-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding-bottom: 60px; }
+.r-card { background:#fff; border-radius:var(--r-lg); box-shadow:var(--shadow); padding:24px 26px; }
+.r-card h3 { font-size:1.05rem; margin-bottom:12px; color:var(--ink); }
+.r-card.wide { grid-column: 1 / -1; }
+.big-nums { display:flex; gap:26px; flex-wrap:wrap; }
+.big-num { text-align:center; }
+.big-num .n { font-size:2.2rem; font-weight:900; color:var(--gold); }
+.big-num .l { font-size:.85rem; color:var(--ink-soft); font-weight:700; }
+.gbar { margin-bottom:10px; }
+.gbar .gt { display:flex; justify-content:space-between; font-size:.9rem; font-weight:800; margin-bottom:4px; }
+.gbar .track { height:14px; border-radius:999px; background:#eeeef6; overflow:hidden; }
+.gbar .fill { height:100%; border-radius:999px; transition:width .8s ease; }
+.reco { display:grid; gap:10px; }
+.reco a {
+  display:block; padding:12px 16px; border-radius:14px; background:var(--theme-soft);
+  font-weight:800; transition:transform .15s ease;
+}
+.reco a:hover { transform:translateX(4px); }
+.print-btn { margin: 6px 0 22px; }
+@media print {
+  .topnav, .print-btn { display:none !important; }
+  body { background:#fff; }
+  .r-card { box-shadow:none; border:2px solid #eee; break-inside:avoid; }
+}
+@media (max-width:720px) { .report-grid { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap report">
+  <nav class="topnav">
+    <a class="logo" href="index.html">🪐 数学奇境</a>
+    <span class="spacer"></span>
+    <a class="navlink" href="index.html">🏠 返回宇宙</a>
+  </nav>
+
+  <header class="grade-hero rise">
+    <h1>📋 学习报告</h1>
+    <p>生成于 <span id="today"></span> · 数据只存在本机，打印给家长刚刚好</p>
+    <button class="btn print-btn" onclick="window.print()">🖨 打印报告</button>
+  </header>
+
+  <div class="report-grid">
+    <div class="r-card rise">
+      <h3>🌟 总览</h3>
+      <div class="big-nums" id="bigNums"></div>
+    </div>
+    <div class="r-card rise d1">
+      <h3>🧠 能力雷达</h3>
+      <canvas id="radar" width="360" height="280" style="margin:0 auto"></canvas>
+    </div>
+    <div class="r-card rise d2">
+      <h3>🪐 各年级进度</h3>
+      <div id="gradeBars"></div>
+    </div>
+    <div class="r-card rise d3">
+      <h3>📒 错题与坚持</h3>
+      <div id="drillInfo"></div>
+    </div>
+    <div class="r-card wide rise d4">
+      <h3>🎯 下一步建议</h3>
+      <div class="reco" id="reco"></div>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/engine/util.js"></script>
+<script src="assets/js/engine/progress.js"></script>
+<script src="content/map.js"></script>
+<script>
+(function () {
+  document.getElementById("today").textContent = new Date().toLocaleDateString("zh-CN", { year: "numeric", month: "long", day: "numeric" });
+  var p = MW.progress.get();
+  var total = MW.progress.totalStars(), think = MW.progress.thinkStars();
+
+  /* 总览 */
+  var badges = MW.progress.badges().filter(function (b) { return b.got; }).length;
+  var drillDays = Object.keys(p.drills).length;
+  document.getElementById("bigNums").innerHTML =
+    [["课程星", total - think + " / 67"], ["思维星", think + " / 8"], ["徽章", badges + " / 10"], ["练习天数", drillDays + " 天"], ["待复习错题", MW.progress.dueMistakes().length + " 道"]]
+      .map(function (x) { return '<div class="big-num"><div class="n">' + x[1] + '</div><div class="l">' + x[0] + "</div></div>"; }).join("");
+
+  /* 能力雷达：数与代数 / 图形几何 / 统计概率 / 综合实践 / 坚持练习 */
+  var mods = { A: [0, 0], G: [0, 0], S: [0, 0], P: [0, 0] };
+  MW.graph.nodes.forEach(function (n) {
+    mods[n.m][1]++;
+    if (MW.progress.hasStar(n.id)) mods[n.m][0]++;
+  });
+  var dims = [
+    ["数与代数", mods.A[0] / mods.A[1]],
+    ["图形与几何", mods.G[0] / mods.G[1]],
+    ["统计与概率", mods.S[0] / mods.S[1]],
+    ["综合实践", mods.P[0] / mods.P[1]],
+    ["坚持练习", Math.min(1, drillDays / 14)]
+  ];
+  drawRadar(dims);
+
+  function drawRadar(dims) {
+    var cv = document.getElementById("radar"), ctx = cv.getContext("2d");
+    var cx = 180, cy = 148, R = 105, N = dims.length;
+    ctx.clearRect(0, 0, 360, 280);
+    for (var ring = 1; ring <= 4; ring++) {
+      ctx.beginPath();
+      for (var i = 0; i <= N; i++) {
+        var a = -Math.PI / 2 + (i * 2 * Math.PI) / N;
+        var r = (R * ring) / 4;
+        var x = cx + Math.cos(a) * r, y = cy + Math.sin(a) * r;
+        if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      ctx.strokeStyle = "#e8e8f4"; ctx.stroke();
+    }
+    for (var j = 0; j < N; j++) {
+      var a2 = -Math.PI / 2 + (j * 2 * Math.PI) / N;
+      ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(cx + Math.cos(a2) * R, cy + Math.sin(a2) * R);
+      ctx.strokeStyle = "#eeeef6"; ctx.stroke();
+      ctx.fillStyle = "#2b2d42"; ctx.font = "800 13px 'Chalkboard SE','PingFang SC',sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText(dims[j][0], cx + Math.cos(a2) * (R + 26), cy + Math.sin(a2) * (R + 22) + 4);
+    }
+    ctx.beginPath();
+    dims.forEach(function (d, i) {
+      var a3 = -Math.PI / 2 + (i * 2 * Math.PI) / N;
+      var r3 = Math.max(0.04, d[1]) * R;
+      var x3 = cx + Math.cos(a3) * r3, y3 = cy + Math.sin(a3) * r3;
+      if (i === 0) ctx.moveTo(x3, y3); else ctx.lineTo(x3, y3);
+    });
+    ctx.closePath();
+    ctx.fillStyle = "rgba(255,194,51,.35)"; ctx.fill();
+    ctx.strokeStyle = "#e0a91f"; ctx.lineWidth = 2.5; ctx.stroke();
+  }
+
+  /* 各年级进度 */
+  var totals = { 2: 13, 3: 14, 4: 15, 5: 14, 6: 11 };
+  var colors = { 2: "#ff8a3d", 3: "#2ec4b6", 4: "#4d96ff", 5: "#9b5de5", 6: "#f15bb5" };
+  var gb = document.getElementById("gradeBars");
+  [2, 3, 4, 5, 6].forEach(function (g) {
+    var n = MW.progress.gradeStars(g);
+    var bar = MW.util.el("div", "gbar");
+    bar.innerHTML = '<div class="gt"><span>' + g + " 年级</span><span>" + n + " / " + totals[g] + "</span></div>" +
+      '<div class="track"><div class="fill" style="width:0%;background:' + colors[g] + '"></div></div>';
+    gb.appendChild(bar);
+    setTimeout(function () { bar.querySelector(".fill").style.width = (n / totals[g] * 100) + "%"; }, 60);
+  });
+
+  /* 错题与坚持 */
+  var ms = MW.progress.mistakes();
+  var byUnit = {};
+  ms.forEach(function (m) { byUnit[m.unitId] = (byUnit[m.unitId] || 0) + 1; });
+  var hotUnits = Object.keys(byUnit).sort(function (a, b) { return byUnit[b] - byUnit[a]; }).slice(0, 3);
+  var info = document.getElementById("drillInfo");
+  info.innerHTML = "<p>口算练习共 <b>" + drillDays + " 天</b>；错题本还有 <b>" + ms.length + " 道</b>（今日待复习 <b>" + MW.progress.dueMistakes().length + "</b> 道）。</p>" +
+    (hotUnits.length ? "<p style='margin-top:8px'>错题最集中的课：" + hotUnits.map(function (u) {
+      var n = MW.graph.node(u);
+      return "「" + (n ? n.t : u) + "」";
+    }).join("、") + "</p>" : "<p style='margin-top:8px'>没有错题，太稳了！</p>");
+
+  /* 下一步建议：地基已牢且未完成的课，按年级升序取 3 节 */
+  var ready = MW.graph.nodes.filter(function (n) {
+    if (MW.progress.hasStar(n.id)) return false;
+    return MW.graph.weakPrev(n.id, function (id) { return MW.progress.hasStar(id); }).length === 0;
+  }).sort(function (a, b) { return a.g - b.g; }).slice(0, 3);
+  var reco = document.getElementById("reco");
+  if (MW.progress.dueMistakes().length) {
+    var rm = document.createElement("a");
+    rm.href = "mistakes.html";
+    rm.textContent = "📒 先清错题：今天有 " + MW.progress.dueMistakes().length + " 道待复习（间隔重复排期）";
+    reco.appendChild(rm);
+  }
+  ready.forEach(function (n) {
+    var a = document.createElement("a");
+    a.href = MW.graph.href(n);
+    a.textContent = "⭐ 「" + n.t + "」（" + (n.g === 0 ? "思维营" : n.g + " 年级 · " + n.c) + "）";
+    reco.appendChild(a);
+  });
+  if (!ready.length && !MW.progress.dueMistakes().length) {
+    reco.innerHTML = "<p>全部完成！可以挑战复习旧课冲击满分，或去博物馆/实验室自由探索。</p>";
+  }
+})();
+</script>
+</body>
+</html>

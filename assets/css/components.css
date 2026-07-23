@@ -295,6 +295,7 @@ input[type="range"].slider { width: 240px; accent-color: var(--theme); height: 3
 .qtag.lv-温故 { color: #e0a91f; }
 .qtag.lv-开放 { color: #f15bb5; }
 .qtag.lv-口算 { color: var(--theme); }
+.qtag.lv-笔算 { color: #e0a91f; }
 .qtag.lv-std { color: var(--theme); }
 
 /* ---------- v3.2：竖式动画 ---------- */

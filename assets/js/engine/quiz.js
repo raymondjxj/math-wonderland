@@ -58,7 +58,7 @@ MW.quiz = (function () {
       ok.onclick = function () {
         var want = (q.answer || []).slice().sort().join(",");
         var got = Object.keys(picked).filter(function (k) { return picked[k]; }).map(Number).sort(function (a, b) { return a - b; }).join(",");
-        if (want === got) right(grid);
+        if (want === got) right(grid, q);
         else wrong(body, q);
       };
     }
@@ -117,7 +117,7 @@ MW.quiz = (function () {
         b.onclick = function () {
           if (idx === q.answer) {
             b.classList.add("right");
-            right(grid);
+            right(grid, q);
           } else {
             b.classList.add("wrongpick");
             b.disabled = true;
@@ -159,7 +159,7 @@ MW.quiz = (function () {
           var answers = Array.isArray(q.answer) ? q.answer.map(String) : [String(q.answer)];
           good = answers.some(function (a) { return v === a || (parseFloat(v) === parseFloat(a) && v !== ""); });
         }
-        if (good) right(row);
+        if (good) right(row, q);
         else {
           wrong(body, q);
           input.value = ""; input.focus();
@@ -174,7 +174,7 @@ MW.quiz = (function () {
       [["✔ 对", true], ["✘ 错", false]].forEach(function (pair) {
         var b = MW.util.el("button", "opt", pair[0]);
         b.onclick = function () {
-          if (pair[1] === q.answer) { b.classList.add("right"); right(row); }
+          if (pair[1] === q.answer) { b.classList.add("right"); right(row, q); }
           else { b.classList.add("wrongpick"); b.disabled = true; wrong(body, q); }
         };
         row.appendChild(b);
@@ -182,10 +182,15 @@ MW.quiz = (function () {
       body.appendChild(row);
     }
 
-    function right(area) {
+    function right(area, q) {
       MW.feedback.sound("right");
       MW.feedback.praise(container);
-      setTimeout(next, 1400);
+      if (q.vertical) {
+        offerVertical(q, 500);
+        setTimeout(next, 6500);
+      } else {
+        setTimeout(next, 1400);
+      }
       lockAll(area);
     }
 
@@ -197,11 +202,24 @@ MW.quiz = (function () {
         // 第二次错：讲解并温和地进入下一题
         MW.feedback.bubble(container, false,
           "<b>小提示：</b>" + (q.explain || q.hint || "回头看看上面的动画，答案藏在那里。") + "<br>没关系，我们下一题继续！");
-        setTimeout(next, 3200);
+        offerVertical(q, 3200);
+        setTimeout(next, q.vertical ? 6000 : 3200);
         lockAll(bodyEl);
       } else {
         MW.feedback.hint(container, q.hint ? "<b>提示：</b>" + q.hint : "");
       }
+    }
+
+    /* 笔算题：答完后可一键看竖式 */
+    function offerVertical(q, delayMs) {
+      if (!q.vertical || !MW.widgets.vertical) return;
+      setTimeout(function () {
+        if (container.querySelector(".vertical-box")) return;
+        var box = MW.util.el("div", "widget-box");
+        box.style.marginTop = "12px";
+        container.appendChild(box);
+        MW.widgets.vertical.mount(box, q.vertical);
+      }, delayMs || 1400);
     }
 
     function lockAll(scope) {

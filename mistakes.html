@@ -22,6 +22,9 @@
   background:#fff8dd; border:2px dashed var(--gold); border-radius:12px;
   padding:8px 14px; font-size:.88rem; margin:8px 0 10px;
 }
+.section-title { margin: 26px 0 14px; font-size: 1.15rem; }
+.mistake-card.scheduled { opacity: .65; }
+.mistake-card.scheduled .mq { font-weight: 700; margin-top: 4px; }
 </style>
 </head>
 <body>
@@ -63,37 +66,61 @@
 
   function render() {
     var list = document.getElementById("list");
-    var ms = MW.progress.mistakes();
+    var all = MW.progress.mistakes();
+    var now = Date.now();
+    var due = all.filter(function (m) { return (m.due || 0) <= now; });
+    var later = all.filter(function (m) { return (m.due || 0) > now; });
     list.innerHTML = "";
-    if (!ms.length) {
+    if (!all.length) {
       list.innerHTML = '<div class="card" style="text-align:center"><h2>错题本空空的 👏</h2>' +
         '<p style="margin:10px 0 20px">去学一课或者来一组口算吧，做错的题会自动跑进来等你消灭。</p>' +
         '<a class="btn" href="index.html">回到宇宙</a></div>';
       return;
     }
-    ms.forEach(function (m, idx) {
-      var c = MW.util.el("div", "mistake-card rise d" + ((idx % 5) + 1));
-      c.appendChild(MW.util.el("div", "from", "来自：" + fromName(m.unitId) + (m.level ? " · " + m.level : "")));
-      /* 地基诊断：本课的前置还有没学扎实的 → 推荐先复习 */
-      if (MW.graph) {
-        var weak = MW.graph.weakPrev(m.unitId, function (id) { return MW.progress.hasStar(id); });
-        if (weak.length) {
-          var tip = MW.util.el("div", "weak-tip");
-          tip.innerHTML = "💡 这题的地基可能在前面——建议先复习：" +
-            '<a href="' + MW.graph.href(weak[0]) + '" style="font-weight:900;text-decoration:underline">「' + weak[0].t + "」</a>";
-          c.appendChild(tip);
-        }
+
+    if (!due.length) {
+      list.innerHTML = '<div class="card" style="text-align:center;margin-bottom:20px"><h2>今天的复习全部完成 🎉</h2>' +
+        "<p>剩下的错题还没到复习时间，明天再来看看它们吧！</p></div>";
+    } else {
+      list.appendChild(MW.util.el("h2", "section-title", "📌 今日待复习（" + due.length + "）"));
+      due.forEach(function (m, idx) { list.appendChild(mistakeCard(m, idx)); });
+    }
+
+    if (later.length) {
+      list.appendChild(MW.util.el("h2", "section-title", "🗓 已排期（" + later.length + "）"));
+      later.forEach(function (m) {
+        var c = MW.util.el("div", "mistake-card scheduled");
+        var days = Math.ceil((m.due - now) / 86400000);
+        c.appendChild(MW.util.el("div", "from", "来自：" + fromName(m.unitId) + " · " + (days <= 1 ? "明天" : days + " 天后") + "再见"));
+        c.appendChild(MW.util.el("div", "mq", m.q));
+        list.appendChild(c);
+      });
+    }
+  }
+
+  function mistakeCard(m, idx) {
+    var c = MW.util.el("div", "mistake-card rise d" + ((idx % 5) + 1));
+    var stageNames = ["新错题", "第 2 次见面", "第 3 次见面", "最后一次，答对就毕业！"];
+    c.appendChild(MW.util.el("div", "from", "来自：" + fromName(m.unitId) + (m.level ? " · " + m.level : "") + " · " + (stageNames[m.stage || 0] || "")));
+    /* 地基诊断：本课的前置还有没学扎实的 → 推荐先复习 */
+    if (MW.graph) {
+      var weak = MW.graph.weakPrev(m.unitId, function (id) { return MW.progress.hasStar(id); });
+      if (weak.length) {
+        var tip = MW.util.el("div", "weak-tip");
+        tip.innerHTML = "💡 这题的地基可能在前面——建议先复习：" +
+          '<a href="' + MW.graph.href(weak[0]) + '" style="font-weight:900;text-decoration:underline">「' + weak[0].t + "」</a>";
+        c.appendChild(tip);
       }
-      var box = MW.util.el("div");
-      c.appendChild(box);
-      list.appendChild(c);
-      MW.quiz.run(box, [{ type: m.type, q: m.q, options: m.options || undefined, answer: m.answer, hint: m.hint, explain: m.explain }],
-        function () {
-          MW.progress.removeMistake(m.q);
-          c.classList.add("solved");
-          setTimeout(function () { c.remove(); if (!document.querySelector(".mistake-card")) render(); }, 1200);
-        });
-    });
+    }
+    var box = MW.util.el("div");
+    c.appendChild(box);
+    MW.quiz.run(box, [{ type: m.type, q: m.q, options: m.options || undefined, answer: m.answer, hint: m.hint, explain: m.explain }],
+      function () {
+        MW.progress.graduateMistake(m.q);
+        c.classList.add("solved");
+        setTimeout(function () { c.remove(); if (!document.querySelector(".mistake-card:not(.scheduled)")) render(); }, 1200);
+      });
+    return c;
   }
   render();
 })();
