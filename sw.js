@@ -1,5 +1,5 @@
 /* 数学奇境 Service Worker：全站离线（缓存优先，网络兜底更新） */
-var CACHE = "mw-v3.8.3";
+var CACHE = "mw-v3.8.4";
 
 /* 核心页面：安装时预缓存 */
 var CORE = [
