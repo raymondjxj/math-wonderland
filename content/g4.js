@@ -307,8 +307,8 @@ MW.content[4] = {
                   <g transform="translate(210,130)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
                 </g>
                 <g id="count">
-                  <rect x="256" y="96" width="126" height="34" rx="10" fill="#ffffff" stroke="#4d96ff" stroke-width="3"/>
-                  <text x="319" y="119" text-anchor="middle" font-size="16" fill="#1c4b8f" font-weight="bold">3 × 4 = 12 只</text>
+                  <rect x="100" y="150" width="126" height="34" rx="10" fill="#ffffff" stroke="#4d96ff" stroke-width="3"/>
+                  <text x="163" y="173" text-anchor="middle" font-size="16" fill="#1c4b8f" font-weight="bold">3 × 4 = 12 只</text>
                 </g>
               </svg>`,
               pan: { x: 10, y: 4, scale: 1.35 },
