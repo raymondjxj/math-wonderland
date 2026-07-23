@@ -14,6 +14,8 @@ MW.feedback = (function () {
     var old = parent.querySelector(".speech");
     if (old) old.remove();
     var b = MW.util.el("div", "speech" + (good ? " good" : ""));
+    b.setAttribute("role", "status");
+    b.setAttribute("aria-live", "polite");
     b.innerHTML = '<span class="who">' + (good ? "太棒了" : "别急，想一想") + "</span>" + text;
     parent.appendChild(b);
     return b;

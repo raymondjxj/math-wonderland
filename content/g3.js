@@ -134,22 +134,86 @@ MW.content[3] = {
         {
           type: "story",
           title: "一个月饼怎么分",
-          art: `<svg viewBox="0 0 400 240" width="400" height="240">
-            <rect width="400" height="240" rx="20" fill="#e3faf7"/>
-            <circle cx="334" cy="44" r="22" fill="#ffd166"/>
-            <circle cx="180" cy="116" r="64" fill="#fff3d6" stroke="#d9a05b" stroke-width="4"/>
-            <path d="M180 116 L180 52 A64 64 0 0 1 244 116 Z" fill="#2ec4b6" opacity="0.9"/>
-            <line x1="180" y1="52" x2="180" y2="180" stroke="#d9a05b" stroke-width="3"/>
-            <line x1="116" y1="116" x2="244" y2="116" stroke="#d9a05b" stroke-width="3"/>
-            <g fill="#2ec4b6">
-              <circle cx="300" cy="150" r="5"/><circle cx="316" cy="130" r="4"/><circle cx="288" cy="120" r="3"/>
-            </g>
-            <text x="200" y="218" font-size="15" fill="#0f766e" font-weight="bold" text-anchor="middle">4 个小伙伴分 1 个月饼，每人拿多少？</text>
-          </svg>`,
-          paragraphs: [
-            "青绿星球的中秋节到了！小狐狸分分得到一个圆圆的大月饼，想和好伙伴球球一人一半。",
-            "怎么分才公平？一刀下去，两半必须<b>一模一样大</b>。这样的一份是月饼的一半，可是 1、2、3……这些学过的数，谁也写不出「一半」！",
-            "咚咚咚，又来了两位朋友！4 个小伙伴分 1 个月饼，每人该拿多少？数不够用了——别急，今天我们一起认识一位新朋友：<b>分数</b>。"
+          shots: [
+            {
+              art: `<svg viewBox="0 0 400 240" width="400" height="240">
+                <rect width="400" height="240" rx="20" fill="#e3faf7"/>
+                <circle cx="334" cy="44" r="22" fill="#ffd166"/>
+                <circle id="cake" cx="170" cy="126" r="56" fill="#fff3d6" stroke="#d9a05b" stroke-width="4"/>
+                <circle cx="170" cy="126" r="42" fill="none" stroke="#f0c987" stroke-width="2" stroke-dasharray="5 6"/>
+                <g id="friends">
+                  <g transform="translate(288,148)">
+                    <circle r="20" fill="#ff8a3d"/>
+                    <path d="M-13 -11 L-21 -27 L-4 -17 Z" fill="#ff8a3d"/>
+                    <path d="M13 -11 L21 -27 L4 -17 Z" fill="#ff8a3d"/>
+                    <circle cx="-7" cy="-3" r="2.6" fill="#fff"/><circle cx="7" cy="-3" r="2.6" fill="#fff"/>
+                  </g>
+                  <g transform="translate(344,168)">
+                    <circle r="15" fill="#2ec4b6"/>
+                    <circle cx="-5" cy="-2" r="2.2" fill="#fff"/><circle cx="5" cy="-2" r="2.2" fill="#fff"/>
+                  </g>
+                </g>
+                <text x="200" y="34" text-anchor="middle" font-size="17" fill="#0f766e" font-weight="bold">🌕 青绿星球的中秋节</text>
+                <text x="170" y="214" text-anchor="middle" font-size="15" fill="#0f766e" font-weight="bold">分分和球球，一人一半！</text>
+              </svg>`,
+              narration: "青绿星球的中秋节到了！小狐狸分分得到一个圆圆的大月饼，要和好朋友球球一人一半。",
+              ms: 4200
+            },
+            {
+              art: `<svg viewBox="0 0 400 240" width="400" height="240">
+                <rect width="400" height="240" rx="20" fill="#e3faf7"/>
+                <circle cx="334" cy="44" r="22" fill="#ffd166"/>
+                <circle cx="170" cy="126" r="56" fill="#fff3d6" stroke="#d9a05b" stroke-width="4"/>
+                <path id="half" d="M170 70 A56 56 0 0 1 170 182 L170 126 Z" fill="#2ec4b6" opacity="0.85"/>
+                <line id="cut" x1="170" y1="70" x2="170" y2="182" stroke="#d9a05b" stroke-width="4"/>
+                <text x="170" y="48" text-anchor="middle" font-size="16" fill="#0f766e" font-weight="bold">✂️ 一刀切下，两半一样大</text>
+                <text x="246" y="132" font-size="17" fill="#0f766e" font-weight="bold">一半</text>
+              </svg>`,
+              pan: { x: 8, y: -4, scale: 1.4 },
+              focus: "#half",
+              narration: "怎么分才公平？一刀下去，两半必须一模一样大！这样的一份，就是月饼的一半。",
+              ms: 4600
+            },
+            {
+              art: `<svg viewBox="0 0 400 240" width="400" height="240">
+                <rect width="400" height="240" rx="20" fill="#e3faf7"/>
+                <circle cx="334" cy="44" r="22" fill="#ffd166"/>
+                <circle cx="138" cy="126" r="52" fill="#fff3d6" stroke="#d9a05b" stroke-width="4"/>
+                <path d="M138 74 A52 52 0 0 1 138 178 L138 126 Z" fill="#2ec4b6" opacity="0.85"/>
+                <line x1="138" y1="74" x2="138" y2="178" stroke="#d9a05b" stroke-width="4"/>
+                <g id="puzzle">
+                  <rect x="214" y="62" width="164" height="110" rx="14" fill="#ffffff" stroke="#2ec4b6" stroke-width="3"/>
+                  <text x="296" y="100" text-anchor="middle" font-size="18" fill="#0f766e" font-weight="bold">1、2、3……</text>
+                  <text x="296" y="130" text-anchor="middle" font-size="18" fill="#e2574c" font-weight="bold">✗ 写不出</text>
+                  <text x="296" y="158" text-anchor="middle" font-size="18" fill="#e2574c" font-weight="bold">「一半」！</text>
+                </g>
+                <text x="138" y="214" text-anchor="middle" font-size="15" fill="#0f766e" font-weight="bold">学过的数，不够用了！</text>
+              </svg>`,
+              pan: { x: -10, y: 0, scale: 1.35 },
+              focus: "#puzzle",
+              narration: "可是，1、2、3……这些学过的数，谁也写不出「一半」！这该怎么办呢？",
+              ms: 4400
+            },
+            {
+              art: `<svg viewBox="0 0 400 240" width="400" height="240">
+                <rect width="400" height="240" rx="20" fill="#e3faf7"/>
+                <circle cx="334" cy="44" r="22" fill="#ffd166"/>
+                <g id="cake4">
+                  <circle cx="170" cy="118" r="56" fill="#fff3d6" stroke="#d9a05b" stroke-width="4"/>
+                  <path d="M170 118 L170 62 A56 56 0 0 1 226 118 Z" fill="#2ec4b6" opacity="0.9"/>
+                  <line x1="170" y1="62" x2="170" y2="174" stroke="#d9a05b" stroke-width="3"/>
+                  <line x1="114" y1="118" x2="226" y2="118" stroke="#d9a05b" stroke-width="3"/>
+                </g>
+                <g id="four" fill="#2ec4b6">
+                  <circle cx="292" cy="148" r="6"/><circle cx="314" cy="126" r="5"/><circle cx="288" cy="104" r="4"/><circle cx="318" cy="160" r="3.4"/>
+                </g>
+                <text x="296" y="80" text-anchor="middle" font-size="15" fill="#0f766e" font-weight="bold">咚咚咚，又来两位朋友！</text>
+                <text id="hook" x="200" y="216" text-anchor="middle" font-size="16" fill="#0f766e" font-weight="bold">4 人分 1 个，每人拿多少？新朋友要来了！</text>
+              </svg>`,
+              focus: "#hook",
+              narration: "咚咚咚！又来了两位朋友——4 个小伙伴分 1 个月饼，每人该拿多少？数不够用啦，一位新朋友正赶来帮忙！",
+              ms: 5000
+            }
           ]
         },
         {

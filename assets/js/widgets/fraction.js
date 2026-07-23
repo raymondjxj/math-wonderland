@@ -72,6 +72,16 @@ MW.widgets.fraction = (function () {
     var done = false;
     if (cfg.interactive) {
       cv.style.cursor = "pointer";
+      cv.tabIndex = 0;
+      cv.setAttribute("role", "img");
+      cv.setAttribute("aria-label", "分数涂色教具：左右方向键可增减涂色份数");
+      cv.addEventListener("keydown", function (e) {
+        if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+        e.preventDefault();
+        MW.feedback.sound("click");
+        var delta = e.key === "ArrowRight" ? 1 : -1;
+        update({ shaded: Math.max(0, Math.min(cfg.parts, Math.round(cur.shaded) + delta)) });
+      });
       cv.addEventListener("click", function (e) {
         var rect = cv.getBoundingClientRect();
         var x = ((e.clientX - rect.left) / rect.width) * W;

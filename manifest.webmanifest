@@ -1,0 +1,13 @@
+{
+  "name": "数学奇境 Math Wonderland",
+  "short_name": "数学奇境",
+  "description": "让二到六年级孩子在故事、动画和游戏中爱上数学的免费公益学习网站",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#141433",
+  "theme_color": "#141433",
+  "icons": [
+    { "src": "assets/img/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "assets/img/og.png", "sizes": "1200x630", "type": "image/png" }
+  ]
+}

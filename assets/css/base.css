@@ -33,6 +33,14 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
+/* 键盘可达性与触摸优化 */
+:focus-visible {
+  outline: 3px solid var(--theme, #ffc233);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+button { touch-action: manipulation; }
+
 html { font-size: 18px; }
 
 body {

@@ -51,6 +51,14 @@ MW.player = (function () {
       else finish();
     };
 
+    /* 键盘导航：← 上一幕，→ 下一幕（输入框聚焦时不抢按键） */
+    document.addEventListener("keydown", function (e) {
+      var tag = (e.target.tagName || "").toLowerCase();
+      if (tag === "input" || tag === "textarea") return;
+      if (e.key === "ArrowLeft" && !prevBtn.disabled) prevBtn.click();
+      else if (e.key === "ArrowRight" && !nextBtn.disabled) nextBtn.click();
+    });
+
     function render() {
       var s = scenes[idx];
       quizPassed = s.type !== "quiz";
