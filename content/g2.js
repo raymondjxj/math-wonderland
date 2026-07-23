@@ -46,10 +46,10 @@ MW.content[2] = {
                   <circle cx="90" cy="108" r="11"/><circle cx="128" cy="108" r="11"/><circle cx="166" cy="108" r="11"/><circle cx="204" cy="108" r="11"/>
                   <circle cx="90" cy="146" r="11"/><circle cx="128" cy="146" r="11"/><circle cx="166" cy="146" r="11"/><circle cx="204" cy="146" r="11"/>
                 </g>
-                <text x="200" y="215" text-anchor="middle" font-size="20" fill="#b25e14" font-weight="bold">每行 4 棵，有 2 行：4 + 4 = 8</text>
               </svg>`,
-              pan: { x: -12, y: -8, scale: 1.35 },
+              zoom: { ox: 60, oy: 55, scale: 1.3 },
               focus: "#carrots",
+              callout: { text: "每行 4 棵，有 2 行：4 + 4 = 8", pos: "bl" },
               narration: "它们排着整齐的队伍：每行 4 棵，有 2 行。奇奇一棵一棵数：4 加 4 等于 8 棵，真轻松！",
               ms: 4800
             },
@@ -67,7 +67,7 @@ MW.content[2] = {
                   <text x="200" y="59" text-anchor="middle" font-size="19" fill="#fff" font-weight="bold">明天扩大到 100 行！</text>
                 </g>
               </svg>`,
-              pan: { x: 8, y: 12, scale: 1.5 },
+              zoom: { ox: 35, oy: 28, scale: 1.35 },
               focus: "#warning",
               narration: "可是农场主忽然说：明天菜地要扩大到 100 行！100 个 4 相加，要加到什么时候呀？",
               ms: 4800

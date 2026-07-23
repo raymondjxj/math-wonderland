@@ -226,34 +226,51 @@ input[type="range"].slider { width: 240px; accent-color: var(--theme); height: 3
 }
 .next-link:hover { transform: translateY(-2px); }
 
-/* ---------- v3.6：分镜动画 ---------- */
+/* ---------- v3.6：分镜动画（锚点缩放模型） ---------- */
 .comic-viewport {
-  position: relative; width: 100%; aspect-ratio: 16 / 10; max-height: 420px;
+  position: relative; width: 100%; aspect-ratio: 5 / 3; max-height: 460px;
   border-radius: var(--r-md); overflow: hidden; background: var(--cream);
   box-shadow: inset 0 0 0 3px rgba(43, 45, 66, .06);
+  isolation: isolate;
 }
 .comic-inner {
   position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
-  transform-origin: center center;
+  will-change: transform;
 }
-.comic-inner svg { width: 100%; height: 100%; }
-.comic-move { transition: transform 1.1s cubic-bezier(.33, 1, .68, 1); }
+.comic-inner svg { width: 100%; height: 100%; display: block; }
+.comic-move { transition: transform .9s cubic-bezier(.33, 1, .68, 1), transform-origin .9s cubic-bezier(.33, 1, .68, 1); }
 .comic-focus {
   filter: drop-shadow(0 0 8px rgba(255, 194, 51, .95)) drop-shadow(0 0 3px rgba(255, 194, 51, .8));
 }
+/* 悬浮文字层：不随镜头缩放，永不被裁切 */
+.comic-callout {
+  position: absolute; z-index: 2; max-width: 74%;
+  background: rgba(43, 45, 66, .9); color: #fff; font-weight: 800;
+  padding: 10px 16px; border-radius: 14px; font-size: .98rem; line-height: 1.5;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .18); pointer-events: none;
+}
+.comic-callout.tl { top: 12px; left: 12px; }
+.comic-callout.tr { top: 12px; right: 12px; }
+.comic-callout.bl { bottom: 12px; left: 12px; }
+.comic-callout.br { bottom: 12px; right: 12px; }
+.comic-callout.center { top: 50%; left: 50%; transform: translate(-50%, -50%); }
+.comic-callout.fade { animation: capfade .35s ease; }
 .comic-subtitle {
   background: rgba(43, 45, 66, .88); color: #fff; border-radius: var(--r-md);
   padding: 14px 22px; font-size: 1.05rem; font-weight: 700; text-align: center;
   min-height: 56px; display: flex; align-items: center; justify-content: center;
 }
 .comic-subtitle.fade { animation: capfade .4s ease; }
+/* 控制条：三区 Grid，永不错位 */
 .comic-controls {
-  display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap;
+  display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 10px;
 }
-.comic-dots { display: flex; gap: 8px; }
+.comic-ctl-group { display: flex; gap: 8px; align-items: center; }
+.comic-ctl-group.right { justify-content: flex-end; }
+.comic-dots { display: flex; gap: 8px; justify-content: center; flex-wrap: nowrap; }
 .comic-dot {
   width: 14px; height: 14px; border-radius: 50%; background: #e0e0ee;
-  transition: all .25s ease;
+  transition: all .25s ease; flex: 0 0 auto;
 }
 .comic-dot.on { background: var(--theme); transform: scale(1.25); }
 

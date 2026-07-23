@@ -29,19 +29,20 @@ MW.content[3] = { grade: 3, name: "三年级 · 青绿星球", units: [ /* 3 个
 { type:"story", title:"…", paragraphs:["…","…"], art:"<svg…>" }   // art 可选
 ```
 
-**B. 分镜动画版**（推荐，参考 g2u1）：2~5 个镜头，引擎自动播放（推拉镜头+字幕+可选配音）。
+**B. 分镜动画版**（推荐，参考 g2u1）：2~5 个镜头，引擎自动播放（锚点缩放镜头+字幕+可选配音）。
 ```js
 { type:"story", title:"…",
   shots: [
     { art:"<svg viewBox='0 0 400 240'>…</svg>",              // 本镜头画面（内联 SVG，必给）
       narration:"这一句会被念出来（配音开时）",                 // narration 或 caption 至少一个
       caption:"字幕（缺省用 narration）",
-      pan:{ x:-12, y:-8, scale:1.35 },                      // 可选：镜头平移(%)+缩放
+      zoom:{ ox:60, oy:55, scale:1.3 },                     // 可选：锚点缩放（ox/oy=焦点%坐标，scale≤1.4；画面恒铺满不会露白边）
       focus:"#carrots",                                      // 可选：高亮的 SVG 元素选择器
+      callout:{ text:"每行 4 棵，有 2 行", pos:"bl" },       // 可选：悬浮文字（不随镜头缩放，永不被裁；pos: tl/tr/bl/br/center）
       ms:4000 }                                              // 镜头停留毫秒（默认 4200）
   ] }
 ```
-分镜写法：第 1 镜全景建立情境 → 中间镜头推近/高亮关键元素制造冲突 → 末镜留悬念。SVG 给关键元素加 id 以便 focus。
+分镜写法：第 1 镜全景建立情境 → 中间镜头用 zoom 锚定关键元素并用 focus 高亮（SVG 关键元素必须加 id）→ 冲突镜（放大问题）→ 末镜留悬念。**关键文字一律写进 callout，不要烘焙在 SVG 里**（烘焙文字会被镜头裁掉）。
 
 ### 2. play 动手操作（先探索，后讲授）
 ```js

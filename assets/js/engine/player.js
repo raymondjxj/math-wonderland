@@ -106,13 +106,34 @@ MW.player = (function () {
       card.appendChild(body);
     }
 
-    /* ---- 分镜动画（motion comic）：镜头推拉 + 字幕 + 可选配音 ---- */
+    /* ---- 分镜动画（motion comic）：锚点缩放镜头 + 字幕 + 可选配音 ---- */
     var comicStop = null;
+
+    /* 旧格式 pan{x,y,scale}（平移+缩放，会露白边）→ 新模型 zoom{ox,oy,scale}（锚点缩放，恒铺满） */
+    function toZoom(shot) {
+      if (shot.zoom) {
+        return {
+          ox: clampO(shot.zoom.ox == null ? 50 : shot.zoom.ox),
+          oy: clampO(shot.zoom.oy == null ? 50 : shot.zoom.oy),
+          scale: Math.min(1.4, Math.max(1, shot.zoom.scale || 1))
+        };
+      }
+      if (!shot.pan) return null;
+      return {
+        ox: clampO(50 - (shot.pan.x || 0) * 2),
+        oy: clampO(50 - (shot.pan.y || 0) * 2),
+        scale: Math.min(1.35, Math.max(1, shot.pan.scale || 1))
+      };
+    }
+    function clampO(v) { return Math.max(12, Math.min(88, v)); }
 
     function renderComic(s) {
       var viewport = MW.util.el("div", "comic-viewport");
       var inner = MW.util.el("div", "comic-inner");
+      var callout = MW.util.el("div", "comic-callout center");
+      callout.style.display = "none";
       viewport.appendChild(inner);
+      viewport.appendChild(callout);
       card.appendChild(viewport);
       var subtitle = MW.util.el("div", "comic-subtitle");
       card.appendChild(subtitle);
@@ -137,13 +158,15 @@ MW.player = (function () {
         var shot = s.shots[idx];
         inner.classList.remove("comic-move");
         inner.innerHTML = shot.art;
-        if (!reduced && shot.pan) {
+        // 锚点缩放：transform-origin 定在焦点，scale 放大，画面恒铺满视口
+        var z = reduced ? null : toZoom(shot);
+        if (z && z.scale > 1) {
           void inner.offsetWidth;
           inner.classList.add("comic-move");
-          var p = shot.pan;
-          inner.style.transform =
-            "translate(" + (p.x || 0) + "%," + (p.y || 0) + "%) scale(" + (p.scale || 1) + ")";
+          inner.style.transformOrigin = z.ox + "% " + z.oy + "%";
+          inner.style.transform = "scale(" + z.scale + ")";
         } else {
+          inner.style.transformOrigin = "50% 50%";
           inner.style.transform = "none";
         }
         // 高亮元素
@@ -152,6 +175,16 @@ MW.player = (function () {
             var el = inner.querySelector(shot.focus);
             if (el) el.classList.add("comic-focus");
           } catch (e) {}
+        }
+        // 悬浮文字层（不随镜头缩放）
+        if (shot.callout && shot.callout.text) {
+          callout.textContent = shot.callout.text;
+          callout.className = "comic-callout " + (shot.callout.pos || "center");
+          callout.style.display = "";
+          void callout.offsetWidth;
+          callout.classList.add("fade");
+        } else {
+          callout.style.display = "none";
         }
         subtitle.classList.remove("fade"); void subtitle.offsetWidth; subtitle.classList.add("fade");
         subtitle.textContent = shot.caption || shot.narration || "";
@@ -166,10 +199,11 @@ MW.player = (function () {
         }
       }
 
-      // 控制条
+      // 控制条：左箭头 | 镜头点 | 播放+配音（三区 Grid，永不错位）
       var ctr = MW.util.el("div", "comic-controls");
       var dots = s.shots.map(function (_, di) {
         var d = MW.util.el("button", "comic-dot");
+        d.setAttribute("aria-label", "镜头 " + (di + 1));
         d.onclick = function () { playing = false; playBtn.textContent = "▶ 播放"; show(di); };
         return d;
       });
@@ -201,8 +235,11 @@ MW.player = (function () {
         if (!voiceOn && window.speechSynthesis) try { speechSynthesis.cancel(); } catch (e) {}
         else if (voiceOn) speak(s.shots[idx].narration || "");
       };
-      ctr.appendChild(prevB); ctr.appendChild(dotWrap); ctr.appendChild(nextB);
-      ctr.appendChild(playBtn); ctr.appendChild(voiceBtn);
+      var gLeft = MW.util.el("div", "comic-ctl-group");
+      gLeft.appendChild(prevB); gLeft.appendChild(nextB);
+      var gRight = MW.util.el("div", "comic-ctl-group right");
+      gRight.appendChild(playBtn); gRight.appendChild(voiceBtn);
+      ctr.appendChild(gLeft); ctr.appendChild(dotWrap); ctr.appendChild(gRight);
       card.appendChild(ctr);
 
       comicStop = function () {
