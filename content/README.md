@@ -41,12 +41,18 @@ MW.content[3] = { grade: 3, name: "三年级 · 青绿星球", units: [ /* 3 个
 `formula` 会用大字号卡片突出显示；`paragraphs`、`keypoints` 至少要有内容（formula 或 paragraphs 必填）。
 
 ### 5. quiz 分层闯关（6~9 题）
-每题加 `level`：`"基础"`（直接运用）→ `"变式"`（换个角度/逆向）→ `"挑战"`（综合/生活应用）；另有 `"温故"`。
+每题加 `level`：`"基础"`（直接运用）→ `"变式"`（换个角度/逆向）→ `"挑战"`（综合/生活应用）；另有 `"温故"` 与 `"开放"`。
 **间隔复习（比约克）：除 g2u1 外，每课必须 ≥1 道 `level:"温故"` 的题，考本年级或之前学过的旧知识**（题面注明来源，如「还记得吗：」）。
-题型同 v1：choice / fill / judge，每题必须 hint + explain。至少 1 题考"为什么"（关系性理解），不只考"怎么算"。
-```js
-{ type:"choice", level:"变式", q:"…", options:[…], answer:0, hint:"…", explain:"…" }
-```
+**开放性（一线教师建议）：每课建议 ≥1 道 `level:"开放"` 的开放题**（校验器会提示缺失）。
+题型：
+- `choice` 单选：`{ type:"choice", level:"变式", q, options:[…], answer:0, hint, explain }`
+- `fill` 填空（唯一解）：answer 为字符串或字符串数组（多写法兼容）
+- `fill` 多解填空（规则判分）：`{ type:"fill", level:"开放", q:"写出一个比 0.5 大的小数", check:{gt:0.5}, hint, explain }`，规则键：`gt/lt/gte/lte/between:[a,b]/divisorOf/multipleOf`
+- `judge` 判断：answer 为 true/false
+- `multi` 多选说理：`{ type:"multi", q, options:[…], answer:[0,2], hint, explain }`（answer 为正确下标数组，全选对才算对）
+- `open` 开放表达：`{ type:"open", level:"开放", q, placeholder?, reference:"一种参考想法……" }`（无标准答案，孩子写完后展示参考想法；无需 hint/explain）
+- `build` 构造题：`{ type:"build", level:"开放", q, widget:"sketchpad", config:{interactive:true, grid:true}, reference:"参考解法……" }`（孩子用教具做出答案）
+每题（除 open/build 外）必须 hint + explain。至少 1 题考"为什么"（关系性理解），不只考"怎么算"。
 
 ### 6. review 波利亚回顾（一题多解 + 讲给别人听）
 ```js
@@ -71,6 +77,8 @@ MW.content[3] = { grade: 3, name: "三年级 · 青绿星球", units: [ /* 3 个
 | `grid` 方格纸 | `{rows, cols, filled, showCount}` | `{interactive:true, rows, cols}`（铺满成功） |
 | `angle` 角 | `{deg, showArc, showLabel, showProtractor}` | `{interactive:true, deg, target, tolerance, showProtractor}` |
 | `circle` 圆（仅动画） | `{mode:"roll"\|"sectors", t:0~1, n:8}` | — |
+| `sketchpad` 画板（仅交互） | — | `{interactive:true, grid:true, straightEdge:false}` 先画一画再验证（无标准答案） |
+| `vertical` 竖式动画 | `{op:"add"\|"sub"\|"mul"\|"div", a, b, step}` | `{interactive:true, op, a, b}` 点「下一步」走完竖式 |
 | `guess` 二分猜数 | `{interactive:false, min, max, lo, hi, guess, steps, info}`（数轴演示） | `{interactive:true, min:1, max:100}` 机器人二分猜孩子想的数 |
 | `binary` 二进制卡牌 | `{cards:5, bits:[0,1,1,0,1], showValues:true}` | `{interactive:true, cards:5, target:19}` 翻牌凑目标数 |
 | `coins` 抛硬币（仅交互） | — | `{interactive:true, goal:100}` 按钮抛 1/10/100 次，画频率曲线 |

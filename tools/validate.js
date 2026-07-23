@@ -17,7 +17,7 @@ if (!files.length) {
     .map((f) => path.join(root, "content", f));
 }
 
-const WIDGETS = { blocks: 1, fraction: 1, grid: 1, angle: 1, circle: 1, guess: 1, binary: 1, coins: 1, sort: 1 };
+const WIDGETS = { blocks: 1, fraction: 1, grid: 1, angle: 1, circle: 1, guess: 1, binary: 1, coins: 1, sort: 1, sketchpad: 1, vertical: 1 };
 const SCENE_ORDER = ["story", "play", "anim", "symbol", "quiz", "review", "beauty"];
 const LABS = { "fractal-tree": 1, fibonacci: 1, kaleidoscope: 1, tessellation: 1, "prime-spiral": 1, "magic-square": 1 };
 const MUSEUM = {};
@@ -25,7 +25,7 @@ const MUSEUM = {};
  "ppl-gauss","ppl-archimedes","ppl-zu","ppl-euclid","ppl-hua","ppl-turing",
  "prf-gougu","prf-oddsum","prf-square","prf-triangle",
  "mys-collatz","mys-goldbach","mys-twinprime","mys-perfect"].forEach((id) => { MUSEUM[id] = 1; });
-const LEVELS = { "基础": 1, "变式": 1, "挑战": 1, "温故": 1 };
+const LEVELS = { "基础": 1, "变式": 1, "挑战": 1, "温故": 1, "开放": 1 };
 
 let errors = 0;
 function err(file, msg) { errors++; console.error("✗ " + path.basename(file) + ": " + msg); }
@@ -76,28 +76,42 @@ for (const file of files) {
       if (s.type === "quiz") {
         if (!Array.isArray(s.questions) || s.questions.length < 6 || s.questions.length > 9)
           err(file, sid + " quiz 题目数须 6~9，当前 " + (s.questions ? s.questions.length : 0));
-        let review = 0;
+        let review = 0, open = 0;
         (s.questions || []).forEach(function (q, i) {
           const qid = sid + " 第" + (i + 1) + "题";
           if (!q.q) err(file, qid + " 缺 q");
-          if (!q.hint) err(file, qid + " 缺 hint");
-          if (!q.explain) err(file, qid + " 缺 explain");
+          if (q.type !== "open" && q.type !== "build" && !q.hint) err(file, qid + " 缺 hint");
+          if (q.type !== "open" && q.type !== "build" && !q.explain) err(file, qid + " 缺 explain");
           if (q.level != null) {
-            if (!LEVELS[q.level]) err(file, qid + " level 只能是 基础/变式/挑战/温故，实际 " + q.level);
+            if (!LEVELS[q.level]) err(file, qid + " level 只能是 基础/变式/挑战/温故/开放，实际 " + q.level);
             if (q.level === "温故") review++;
+            if (q.level === "开放") open++;
           }
           if (q.type === "choice") {
             if (!Array.isArray(q.options) || q.options.length < 2) err(file, qid + " choice 缺 options");
             else if (typeof q.answer !== "number" || q.answer < 0 || q.answer >= q.options.length)
               err(file, qid + " choice answer 下标越界");
           } else if (q.type === "fill") {
-            if (q.answer == null || q.answer === "") err(file, qid + " fill 缺 answer");
+            if (!q.check && (q.answer == null || q.answer === "")) err(file, qid + " fill 缺 answer 或 check 规则");
           } else if (q.type === "judge") {
             if (typeof q.answer !== "boolean") err(file, qid + " judge answer 须为 true/false");
+          } else if (q.type === "multi") {
+            if (!Array.isArray(q.options) || q.options.length < 2) err(file, qid + " multi 缺 options");
+            if (!Array.isArray(q.answer) || !q.answer.length) err(file, qid + " multi answer 须为下标数组");
+            else q.answer.forEach(function (x) {
+              if (typeof x !== "number" || x < 0 || x >= q.options.length) err(file, qid + " multi answer 下标越界");
+            });
+          } else if (q.type === "open") {
+            if (!q.reference) err(file, qid + " open 建议给 reference（参考想法）");
+          } else if (q.type === "build") {
+            if (!WIDGETS[q.widget]) err(file, qid + " build 未知教具 " + q.widget);
+            if (!q.config) err(file, qid + " build 缺 config");
           } else err(file, qid + " 未知题型 " + q.type);
         });
         // 间隔复习：除二年级第一课外，每课至少 1 道「温故」题
         if (!(g === 2 && ui === 0) && review === 0) err(file, sid + " 至少需要 1 道 level:\"温故\" 的间隔复习题");
+        // 开放性：新写课程建议每课至少 1 道开放题（暂不强制，只提示）
+        if (open === 0) console.warn("  ⚠ " + sid + " 暂无 level:\"开放\" 的开放题（老师建议每课 ≥1 道）");
       }
       if (s.type === "review") {
         if (!Array.isArray(s.ways) || s.ways.length < 2) err(file, sid + " review 至少给 2 种解法（一题多解）");
