@@ -37,6 +37,14 @@
 .map-legend { display:flex; gap:18px; flex-wrap:wrap; justify-content:center; color:var(--ink-soft); font-size:.85rem; padding:8px 0 4px; }
 .map-legend b { color:var(--ink); }
 </style>
+<script>
+/* SW 更新哨兵（内联防缓存）：每次加载强制检查 Service Worker 更新 */
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.getRegistrations().then(function (rs) {
+    rs.forEach(function (r) { r.update().catch(function () {}); });
+  }).catch(function () {});
+}
+</script>
 </head>
 <body>
 <div class="wrap">

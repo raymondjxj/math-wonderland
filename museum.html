@@ -39,6 +39,14 @@
 .museum-body .art { display:flex; justify-content:center; padding:10px 0; }
 .museum-body canvas { margin:0 auto; background:rgba(0,0,0,.25); border-radius:var(--r-md); max-width:100%; }
 </style>
+<script>
+/* SW 更新哨兵（内联防缓存）：每次加载强制检查 Service Worker 更新 */
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.getRegistrations().then(function (rs) {
+    rs.forEach(function (r) { r.update().catch(function () {}); });
+  }).catch(function () {});
+}
+</script>
 </head>
 <body>
 <div class="lab-bg"></div>

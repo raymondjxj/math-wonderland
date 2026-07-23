@@ -14,6 +14,14 @@
 <link rel="stylesheet" href="assets/css/base.css?v=20260724b">
 <link rel="stylesheet" href="assets/css/components.css?v=20260724b">
 <script src="assets/js/pwa.js?v=20260724b"></script>
+<script>
+/* SW 更新哨兵（内联防缓存）：每次加载强制检查 Service Worker 更新 */
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.getRegistrations().then(function (rs) {
+    rs.forEach(function (r) { r.update().catch(function () {}); });
+  }).catch(function () {});
+}
+</script>
 </head>
 <body>
 <div class="wrap">

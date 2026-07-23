@@ -3,6 +3,8 @@
   X-Frame-Options: DENY
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
+/sw.js
+  Cache-Control: no-cache
 /assets/img/*
   Cache-Control: public, max-age=86400
 /assets/js/*

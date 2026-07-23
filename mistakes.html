@@ -27,6 +27,14 @@
 .mistake-card.scheduled { opacity: .65; }
 .mistake-card.scheduled .mq { font-weight: 700; margin-top: 4px; }
 </style>
+<script>
+/* SW 更新哨兵（内联防缓存）：每次加载强制检查 Service Worker 更新 */
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.getRegistrations().then(function (rs) {
+    rs.forEach(function (r) { r.update().catch(function () {}); });
+  }).catch(function () {});
+}
+</script>
 </head>
 <body>
 <div class="wrap">
