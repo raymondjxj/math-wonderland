@@ -41,9 +41,11 @@ MW.widgets.chart = (function () {
         ctx.textAlign = "center";
         ctx.fillText(cfg.title, W / 2, 24);
       }
-      // 坐标轴
-      ctx.strokeStyle = "#c9c9e0"; ctx.lineWidth = 2;
-      ctx.beginPath(); ctx.moveTo(pad.l, pad.t); ctx.lineTo(pad.l, H - pad.b); ctx.lineTo(W - pad.r, H - pad.b); ctx.stroke();
+      // 坐标轴（扇形图不画）
+      if (cfg.mode !== "pie") {
+        ctx.strokeStyle = "#c9c9e0"; ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.moveTo(pad.l, pad.t); ctx.lineTo(pad.l, H - pad.b); ctx.lineTo(W - pad.r, H - pad.b); ctx.stroke();
+      }
 
       if (cfg.mode === "bar") {
         cfg.data.forEach(function (d, i) {
@@ -52,8 +54,7 @@ MW.widgets.chart = (function () {
           var x = pad.l + i * cw + cw * 0.18;
           var y = H - pad.b - bh;
           ctx.fillStyle = i === cfg.highlight ? "#e0a91f" : COLORS[i % COLORS.length];
-          roundTop(x, y, cw * 0.64, bh, 8);
-          ctx.fill();
+          if (bh > 0) { roundTop(x, y, cw * 0.64, bh, 8); ctx.fill(); }
           if (cfg.showValues || cfg.interactive) {
             ctx.fillStyle = "#2b2d42"; ctx.font = "900 16px 'Chalkboard SE','PingFang SC',sans-serif";
             ctx.textAlign = "center";
