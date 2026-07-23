@@ -133,32 +133,129 @@ MW.content[6] = {
         {
           type: "story",
           title: "为什么轮子是圆的",
-          art: `<svg viewBox="0 0 400 240" width="400" height="240">
-            <rect width="400" height="240" rx="20" fill="#fdeef7"/>
-            <circle cx="336" cy="38" r="20" fill="#ffd6ec"/>
-            <path d="M185 232 L200 110 L215 232" stroke="#2b2d42" stroke-width="6" fill="none" stroke-linecap="round"/>
-            <g stroke="#f15bb5" stroke-width="4">
-              <line x1="200" y1="110" x2="200" y2="30"/>
-              <line x1="200" y1="110" x2="257" y2="53"/>
-              <line x1="200" y1="110" x2="280" y2="110"/>
-              <line x1="200" y1="110" x2="257" y2="167"/>
-              <line x1="200" y1="110" x2="200" y2="190"/>
-              <line x1="200" y1="110" x2="143" y2="167"/>
-              <line x1="200" y1="110" x2="120" y2="110"/>
-              <line x1="200" y1="110" x2="143" y2="53"/>
-            </g>
-            <circle cx="200" cy="110" r="80" fill="none" stroke="#f15bb5" stroke-width="5"/>
-            <g fill="#ffc233">
-              <circle cx="200" cy="30" r="9"/><circle cx="257" cy="53" r="9"/><circle cx="280" cy="110" r="9"/><circle cx="257" cy="167" r="9"/>
-              <circle cx="200" cy="190" r="9"/><circle cx="143" cy="167" r="9"/><circle cx="120" cy="110" r="9"/><circle cx="143" cy="53" r="9"/>
-            </g>
-            <circle cx="200" cy="110" r="10" fill="#2b2d42"/>
-            <text x="22" y="228" font-size="16" fill="#b03a82" font-weight="bold">玫瑰星球摩天轮</text>
-          </svg>`,
-          paragraphs: [
-            "玫瑰星球的狂欢节到了！朵朵要去坐全星球最大的摩天轮。轮子转呀转，又稳又圆。",
-            "她忽然想：为什么轮子都是圆的，而不是三角形、正方形的呢？秘密在于——<b>圆心到圆上每一点的距离都相等</b>。圆心稳稳不动，车子就平平稳稳。",
-            "这个完美的图形还藏着两个大秘密：它一圈有多长？它的里面有多大？今天，我们用两个魔法实验亲手揭开它们。"
+          shots: [
+            {
+              art: `<svg viewBox="0 0 400 240" width="400" height="240">
+                <rect width="400" height="240" rx="20" fill="#fdeef7"/>
+                <circle cx="336" cy="38" r="20" fill="#ffd6ec"/>
+                <rect x="0" y="232" width="400" height="8" fill="#f8c9e4"/>
+                <g id="wheel">
+                  <path d="M185 232 L200 110 L215 232" stroke="#2b2d42" stroke-width="6" fill="none" stroke-linecap="round"/>
+                  <g id="spokes" stroke="#f15bb5" stroke-width="4">
+                    <line x1="200" y1="110" x2="200" y2="30"/>
+                    <line x1="200" y1="110" x2="257" y2="53"/>
+                    <line x1="200" y1="110" x2="280" y2="110"/>
+                    <line x1="200" y1="110" x2="257" y2="167"/>
+                    <line x1="200" y1="110" x2="200" y2="190"/>
+                    <line x1="200" y1="110" x2="143" y2="167"/>
+                    <line x1="200" y1="110" x2="120" y2="110"/>
+                    <line x1="200" y1="110" x2="143" y2="53"/>
+                  </g>
+                  <circle cx="200" cy="110" r="80" fill="none" stroke="#f15bb5" stroke-width="5"/>
+                  <g fill="#ffc233">
+                    <circle cx="200" cy="30" r="9"/><circle cx="257" cy="53" r="9"/><circle cx="280" cy="110" r="9"/><circle cx="257" cy="167" r="9"/>
+                    <circle cx="200" cy="190" r="9"/><circle cx="143" cy="167" r="9"/><circle cx="120" cy="110" r="9"/><circle cx="143" cy="53" r="9"/>
+                  </g>
+                  <circle cx="200" cy="110" r="10" fill="#2b2d42"/>
+                </g>
+                <text x="22" y="228" font-size="16" fill="#b03a82" font-weight="bold">🎡 玫瑰星球狂欢节</text>
+              </svg>`,
+              narration: "玫瑰星球的狂欢节到了！朵朵要去坐全星球最大的摩天轮——轮子转呀转，又稳又圆。",
+              ms: 4200
+            },
+            {
+              art: `<svg viewBox="0 0 400 240" width="400" height="240">
+                <rect width="400" height="240" rx="20" fill="#fdeef7"/>
+                <circle cx="336" cy="38" r="20" fill="#ffd6ec"/>
+                <rect x="0" y="232" width="400" height="8" fill="#f8c9e4"/>
+                <g id="wheel">
+                  <path d="M185 232 L200 110 L215 232" stroke="#2b2d42" stroke-width="6" fill="none" stroke-linecap="round"/>
+                  <g id="spokes" stroke="#f15bb5" stroke-width="4">
+                    <line x1="200" y1="110" x2="200" y2="30"/>
+                    <line x1="200" y1="110" x2="257" y2="53"/>
+                    <line x1="200" y1="110" x2="280" y2="110"/>
+                    <line x1="200" y1="110" x2="257" y2="167"/>
+                    <line x1="200" y1="110" x2="200" y2="190"/>
+                    <line x1="200" y1="110" x2="143" y2="167"/>
+                    <line x1="200" y1="110" x2="120" y2="110"/>
+                    <line x1="200" y1="110" x2="143" y2="53"/>
+                  </g>
+                  <circle cx="200" cy="110" r="80" fill="none" stroke="#f15bb5" stroke-width="5"/>
+                  <g fill="#ffc233">
+                    <circle cx="200" cy="30" r="9"/><circle cx="257" cy="53" r="9"/><circle cx="280" cy="110" r="9"/><circle cx="257" cy="167" r="9"/>
+                    <circle cx="200" cy="190" r="9"/><circle cx="143" cy="167" r="9"/><circle cx="120" cy="110" r="9"/><circle cx="143" cy="53" r="9"/>
+                  </g>
+                  <circle cx="200" cy="110" r="10" fill="#2b2d42"/>
+                </g>
+                <g id="equal">
+                  <rect x="232" y="194" width="156" height="32" rx="16" fill="#ffffff" stroke="#f15bb5" stroke-width="3"/>
+                  <text x="310" y="215" text-anchor="middle" font-size="14" fill="#b03a82" font-weight="bold">每条半径都一样长！</text>
+                </g>
+              </svg>`,
+              pan: { x: 0, y: 4, scale: 1.45 },
+              focus: "#spokes",
+              narration: "朵朵盯着轮子发现了秘密：从圆心到轮子边，每条辐条都一样长！圆心稳稳不动，车厢就平平稳稳。",
+              ms: 4800
+            },
+            {
+              art: `<svg viewBox="0 0 400 240" width="400" height="240">
+                <rect width="400" height="240" rx="20" fill="#fdeef7"/>
+                <circle cx="336" cy="38" r="20" fill="#ffd6ec"/>
+                <rect x="0" y="198" width="400" height="42" fill="#f8c9e4"/>
+                <g id="bumpy">
+                  <rect x="168" y="134" width="62" height="62" transform="rotate(28 199 165)" fill="#f15bb5" stroke="#b03a82" stroke-width="4"/>
+                  <circle cx="199" cy="165" r="7" fill="#2b2d42"/>
+                  <g transform="rotate(-8 199 110)">
+                    <rect x="161" y="96" width="76" height="28" rx="10" fill="#ffc233" stroke="#e09f3e" stroke-width="3"/>
+                    <circle cx="184" cy="110" r="3" fill="#2b2d42"/><circle cx="214" cy="110" r="3" fill="#2b2d42"/>
+                  </g>
+                  <path d="M140 150 q-8 -6 -14 2" stroke="#b03a82" stroke-width="3" fill="none" stroke-linecap="round"/>
+                  <path d="M138 172 q-9 -4 -15 4" stroke="#b03a82" stroke-width="3" fill="none" stroke-linecap="round"/>
+                  <path d="M262 138 q9 -5 14 4" stroke="#b03a82" stroke-width="3" fill="none" stroke-linecap="round"/>
+                  <text x="199" y="72" text-anchor="middle" font-size="20" fill="#b03a82" font-weight="bold">咯噔！咯噔！</text>
+                </g>
+                <text x="200" y="228" text-anchor="middle" font-size="15" fill="#b03a82" font-weight="bold">方形轮子？车子一蹦一跳，太颠啦！</text>
+              </svg>`,
+              pan: { x: 0, y: -6, scale: 1.3 },
+              focus: "#bumpy",
+              narration: "要是把轮子换成正方形呢？哎呀——车子一蹦一跳，朵朵的辫子都要颠飞啦！难怪轮子都是圆的！",
+              ms: 4600
+            },
+            {
+              art: `<svg viewBox="0 0 400 240" width="400" height="240">
+                <rect width="400" height="240" rx="20" fill="#fdeef7"/>
+                <circle cx="336" cy="38" r="20" fill="#ffd6ec"/>
+                <g transform="translate(-52,8) scale(0.86)">
+                  <path d="M185 232 L200 110 L215 232" stroke="#2b2d42" stroke-width="6" fill="none" stroke-linecap="round"/>
+                  <g id="spokes" stroke="#f15bb5" stroke-width="4">
+                    <line x1="200" y1="110" x2="200" y2="30"/>
+                    <line x1="200" y1="110" x2="257" y2="53"/>
+                    <line x1="200" y1="110" x2="280" y2="110"/>
+                    <line x1="200" y1="110" x2="257" y2="167"/>
+                    <line x1="200" y1="110" x2="200" y2="190"/>
+                    <line x1="200" y1="110" x2="143" y2="167"/>
+                    <line x1="200" y1="110" x2="120" y2="110"/>
+                    <line x1="200" y1="110" x2="143" y2="53"/>
+                  </g>
+                  <circle cx="200" cy="110" r="80" fill="none" stroke="#f15bb5" stroke-width="5"/>
+                  <g fill="#ffc233">
+                    <circle cx="200" cy="30" r="9"/><circle cx="257" cy="53" r="9"/><circle cx="280" cy="110" r="9"/><circle cx="257" cy="167" r="9"/>
+                    <circle cx="200" cy="190" r="9"/><circle cx="143" cy="167" r="9"/><circle cx="120" cy="110" r="9"/><circle cx="143" cy="53" r="9"/>
+                  </g>
+                  <circle cx="200" cy="110" r="10" fill="#2b2d42"/>
+                </g>
+                <g id="hook">
+                  <rect x="212" y="56" width="164" height="42" rx="12" fill="#ffffff" stroke="#f15bb5" stroke-width="3"/>
+                  <text x="294" y="83" text-anchor="middle" font-size="16" fill="#b03a82" font-weight="bold">🌀 一圈有多长？</text>
+                  <rect x="212" y="112" width="164" height="42" rx="12" fill="#ffffff" stroke="#f15bb5" stroke-width="3"/>
+                  <text x="294" y="139" text-anchor="middle" font-size="16" fill="#b03a82" font-weight="bold">🧩 里面有多大？</text>
+                  <text x="294" y="186" text-anchor="middle" font-size="15" fill="#b03a82" font-weight="bold">用两个魔法实验揭开！</text>
+                </g>
+              </svg>`,
+              focus: "#hook",
+              narration: "这个完美的圆，还藏着两个大秘密：它一圈有多长？里面有多大？今天，我们用两个魔法实验亲手揭开它们！",
+              ms: 5000
+            }
           ]
         },
         {
