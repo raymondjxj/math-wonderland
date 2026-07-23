@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>未来思维营 · 数学奇境</title>
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/components.css">
+</head>
+<body data-grade="0">
+<div class="wrap">
+  <nav class="topnav">
+    <a class="logo" href="index.html">🪐 数学奇境</a>
+    <span class="spacer"></span>
+    <a class="navlink" href="index.html">🏠 返回宇宙</a>
+    <a class="navlink" href="museum.html">🏛️ 博物馆</a>
+    <a class="navlink" href="lab.html">🔬 实验室</a>
+  </nav>
+
+  <header class="grade-hero rise">
+    <h1>🤖 未来思维营</h1>
+    <p>AI 时代的数学头脑：算法、数据、逻辑、模型——像计算机科学家一样思考</p>
+  </header>
+
+  <main class="unit-list" id="lessonList"></main>
+</div>
+
+<script src="assets/js/engine/util.js"></script>
+<script src="assets/js/engine/progress.js"></script>
+<script>
+(function () {
+  var files = ["content/think-a.js", "content/think-b.js"];
+  var left = files.length;
+  files.forEach(function (src) {
+    var s = document.createElement("script");
+    s.src = src;
+    s.onload = s.onerror = function () { if (--left === 0) render(); };
+    document.head.appendChild(s);
+  });
+
+  function render() {
+    var list = document.getElementById("lessonList");
+    var lessons = MW.think || [];
+    if (!lessons.length) {
+      list.innerHTML = '<div class="card" style="text-align:center">课程装载中……</div>';
+      return;
+    }
+    lessons.forEach(function (u, i) {
+      var has = MW.progress.hasStar(u.id);
+      var a = document.createElement("a");
+      a.className = "unit-card rise d" + ((i % 5) + 1);
+      a.href = "lesson.html?t=" + (i + 1);
+      a.innerHTML =
+        '<div class="num">' + (i + 1) + "</div>" +
+        '<div class="info"><h3>' + u.title + "</h3>" +
+        '<div class="sub">' + u.subtitle + "</div>" +
+        '<div class="meta"><span class="pill">' + u.tag + '</span><span class="pill">🎓 ' + u.band +
+        '</span><span class="pill">⏱ 约 ' + u.minutes + ' 分钟</span></div></div>' +
+        '<div class="go"><div class="done-stars"><span class="star' + (has ? "" : " dim") + '">★</span></div>' +
+        '<div class="btn small" style="margin-top:8px">' + (has ? "再学一次" : "开始挑战") + " ›</div></div>";
+      list.appendChild(a);
+    });
+  }
+})();
+</script>
+</body>
+</html>

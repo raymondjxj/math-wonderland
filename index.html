@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>数学奇境 · 让每个孩子爱上数学</title>
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/components.css">
+</head>
+<body>
+<div class="space-bg"></div>
+<div class="stars"></div>
+<div class="stars2"></div>
+
+<div class="wrap">
+  <nav class="topnav">
+    <span class="logo" style="color:#fff">🪐 数学奇境</span>
+    <span class="spacer"></span>
+    <a class="navlink" style="color:#c9c9ee" href="drills.html">⚡ 天天练</a>
+    <a class="navlink" style="color:#c9c9ee" href="mistakes.html">📒 错题本</a>
+    <a class="navlink" style="color:#c9c9ee" href="lab.html">🔬 数学之美实验室</a>
+    <a class="navlink" style="color:#c9c9ee" href="about.html">💡 给家长的话</a>
+    <button class="navlink" id="quietBtn" title="安静模式：关闭音效与礼花"></button>
+  </nav>
+
+  <header class="hero rise">
+    <h1>数 学 奇 境</h1>
+    <p>二年级到六年级 · 在故事、动画和游戏中，发现数学原来这么美</p>
+    <div class="badge-line" id="starLine"></div>
+  </header>
+
+  <main class="universe" id="universe"></main>
+
+  <section class="gateways">
+    <a class="gateway rise d2" href="think.html">
+      <h3>🤖 未来思维营</h3>
+      <p>AI 时代的数学头脑：二分查找、排序算法、二进制、概率、逻辑、建模——8 门思维课。</p>
+    </a>
+    <a class="gateway rise d2" href="museum.html">
+      <h3>🏛️ 数学博物馆</h3>
+      <p>数学史长廊、数学家群星、无字证明画廊、未解之谜——四个展厅，看懂数学是活的。</p>
+    </a>
+    <a class="gateway rise d3" href="lab.html">
+      <h3>🔬 数学之美实验室</h3>
+      <p>分形、黄金螺旋、万花筒、密铺、质数之谜、幻方——六个神奇实验，玩出数学直觉。</p>
+    </a>
+    <a class="gateway rise d3" href="about.html">
+      <h3>💡 给家长和老师的话</h3>
+      <p>这个网站背后的教育理念：布鲁纳、波利亚、蒙台梭利、成长型思维……</p>
+    </a>
+  </section>
+
+  <section class="badgewall rise d3" id="badgewall">
+    <h2>🏅 我的徽章墙</h2>
+    <div class="badge-grid" id="badgeGrid"></div>
+  </section>
+</div>
+
+<script src="assets/js/engine/util.js"></script>
+<script src="assets/js/engine/progress.js"></script>
+<script src="assets/js/engine/feedback.js"></script>
+<script src="content/encouragement.js"></script>
+<script>
+(function () {
+  var GRADES = [
+    { g: 2, name: "二年级", sub: "橙光星球", color: "#ff8a3d", crater: "#e06f28" },
+    { g: 3, name: "三年级", sub: "青绿星球", color: "#2ec4b6", crater: "#1fa398" },
+    { g: 4, name: "四年级", sub: "蔚蓝星球", color: "#4d96ff", crater: "#3578de" },
+    { g: 5, name: "五年级", sub: "紫晶星球", color: "#9b5de5", crater: "#7d43c7" },
+    { g: 6, name: "六年级", sub: "玫瑰星球", color: "#f15bb5", crater: "#d13f97" }
+  ];
+
+  function planetSVG(color, crater) {
+    return '<div class="ball" style="background:' + color + '">' +
+      '<svg viewBox="0 0 148 148" style="position:absolute;inset:0">' +
+      '<circle cx="38" cy="34" r="13" fill="' + crater + '" opacity=".55"/>' +
+      '<circle cx="104" cy="98" r="17" fill="' + crater + '" opacity=".45"/>' +
+      '<circle cx="112" cy="36" r="8" fill="' + crater + '" opacity=".5"/>' +
+      '<circle cx="52" cy="108" r="9" fill="' + crater + '" opacity=".4"/>' +
+      '<circle cx="58" cy="66" r="7" fill="#fff"/>' +
+      '<circle cx="90" cy="66" r="7" fill="#fff"/>' +
+      '<circle cx="59.5" cy="68" r="3.2" fill="#2b2d42"/>' +
+      '<circle cx="91.5" cy="68" r="3.2" fill="#2b2d42"/>' +
+      '<path d="M62 88 Q74 98 86 88" stroke="#2b2d42" stroke-width="4" fill="none" stroke-linecap="round"/>' +
+      "</svg></div>";
+  }
+
+  var uni = document.getElementById("universe");
+  GRADES.forEach(function (gr, i) {
+    var stars = MW.progress.gradeStars(gr.g);
+    var a = document.createElement("a");
+    a.className = "planet rise d" + (i + 1);
+    a.href = "grade.html?g=" + gr.g;
+    var starStr = "";
+    for (var s = 0; s < 8; s++) starStr += '<span class="star' + (s < stars ? "" : " dim") + '">★</span>';
+    a.innerHTML = planetSVG(gr.color, gr.crater) +
+      (gr.g === 5 ? '<div class="ring"></div>' : "") +
+      '<div class="pname">' + gr.name + "</div>" +
+      '<div class="pname" style="font-size:.85rem;color:#b9b9dd">' + gr.sub + "</div>" +
+      '<div class="pstars">' + starStr + "</div>";
+    uni.appendChild(a);
+  });
+
+  // 星星总数
+  var total = MW.progress.totalStars();
+  var thinkN = MW.progress.thinkStars();
+  document.getElementById("starLine").textContent =
+    total > 0 || thinkN > 0
+      ? "✨ 课程星 " + (total - thinkN) + " / 40 · 思维星 " + thinkN + " / 8，继续加油！"
+      : "✨ 选择你的星球，开始收集智慧星吧！（40 颗课程星 + 8 颗思维星）";
+
+  // 徽章墙
+  var grid = document.getElementById("badgeGrid");
+  MW.progress.badges().forEach(function (b) {
+    var d = MW.util.el("div", "badge" + (b.got ? "" : " locked"));
+    d.innerHTML = '<div class="icon">' + b.icon + '</div><div class="bname">' + b.name + '</div><div class="bcond">' + (b.got ? "已获得 🎉" : b.cond) + "</div>";
+    grid.appendChild(d);
+  });
+
+  // 安静模式开关
+  var qb = document.getElementById("quietBtn");
+  function paintQuiet() { qb.textContent = MW.progress.quiet() ? "🔇 安静模式" : "🔊 有声模式"; qb.style.color = "#c9c9ee"; }
+  qb.onclick = function () { MW.progress.setQuiet(!MW.progress.quiet()); paintQuiet(); };
+  paintQuiet();
+})();
+</script>
+</body>
+</html>

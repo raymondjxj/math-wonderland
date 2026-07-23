@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>课程 · 数学奇境</title>
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/components.css">
+</head>
+<body>
+<div class="wrap">
+  <nav class="topnav">
+    <a class="logo" href="index.html">🪐 数学奇境</a>
+    <span class="spacer"></span>
+    <a class="navlink" id="backLink" href="index.html">‹ 返回星球</a>
+    <a class="navlink" href="lab.html">🔬 实验室</a>
+  </nav>
+</div>
+
+<div class="stage" id="stage">
+  <div class="card" style="text-align:center">课程装载中…… 🚀</div>
+</div>
+
+<script src="assets/js/engine/util.js"></script>
+<script src="assets/js/engine/progress.js"></script>
+<script src="assets/js/engine/feedback.js"></script>
+<script src="assets/js/engine/quiz.js"></script>
+<script src="assets/js/engine/player.js"></script>
+<script src="assets/js/widgets/blocks.js"></script>
+<script src="assets/js/widgets/fraction.js"></script>
+<script src="assets/js/widgets/grid.js"></script>
+<script src="assets/js/widgets/angle.js"></script>
+<script src="assets/js/widgets/circle.js"></script>
+<script src="assets/js/widgets/guess.js"></script>
+<script src="assets/js/widgets/binary.js"></script>
+<script src="assets/js/widgets/coins.js"></script>
+<script src="assets/js/widgets/sort.js"></script>
+<script src="content/encouragement.js"></script>
+<script>
+(function () {
+  var think = MW.util.param("t", null);
+  var g = parseInt(MW.util.param("g", "2"), 10);
+  var u = parseInt(MW.util.param("u", "1"), 10);
+
+  /* 思维营课程：lesson.html?t=N */
+  if (think !== null) {
+    document.body.setAttribute("data-grade", "0");
+    document.getElementById("backLink").href = "think.html";
+    loadScripts(["content/think-a.js", "content/think-b.js"], function () {
+      var unit = MW.think && MW.think[parseInt(think, 10) - 1];
+      if (!unit) return oops("think.html");
+      document.title = unit.title + " · 未来思维营";
+      var stage = document.getElementById("stage");
+      stage.innerHTML = "";
+      MW.player.start(stage, unit, {});
+    });
+    return;
+  }
+
+  document.body.setAttribute("data-grade", g);
+  document.getElementById("backLink").href = "grade.html?g=" + g;
+
+  function loadScripts(list, done) {
+    var left = list.length;
+    list.forEach(function (src) {
+      var sc = document.createElement("script");
+      sc.src = src;
+      sc.async = false; /* 动态脚本默认乱序执行；强制按插入顺序，保证 g{N}.js 先于扩展包 */
+      sc.onload = sc.onerror = function () { if (--left === 0) done(); };
+      document.head.appendChild(sc);
+    });
+  }
+
+  loadScripts(["content/g" + g + ".js", "content/g" + g + "b.js", "content/g" + g + "c.js"], function () {
+    var data = MW.content && MW.content[g];
+    var unit = data && data.units[u - 1];
+    if (!unit) return oops();
+    document.title = unit.title + " · 数学奇境";
+    var stage = document.getElementById("stage");
+    stage.innerHTML = "";
+    MW.player.start(stage, unit, {});
+  });
+  function oops(back) {
+    document.getElementById("stage").innerHTML =
+      '<div class="card" style="text-align:center"><h2>找不到这节课 🛸</h2>' +
+      '<p style="margin:10px 0 20px">它可能还在建设中，先回去看看别的吧。</p>' +
+      '<a class="btn" href="' + (back || "grade.html?g=" + g) + '">返回</a></div>';
+  }
+})();
+</script>
+</body>
+</html>

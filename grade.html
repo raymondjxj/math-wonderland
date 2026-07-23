@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>年级星球 · 数学奇境</title>
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/components.css">
+</head>
+<body>
+<div class="wrap">
+  <nav class="topnav">
+    <a class="logo" href="index.html">🪐 数学奇境</a>
+    <span class="spacer"></span>
+    <a class="navlink" href="index.html">🏠 返回宇宙</a>
+    <a class="navlink" href="lab.html">🔬 实验室</a>
+  </nav>
+
+  <header class="grade-hero rise">
+    <h1 id="gname">…</h1>
+    <p id="gsub"></p>
+  </header>
+
+  <main class="unit-list" id="unitList"></main>
+</div>
+
+<script src="assets/js/engine/util.js"></script>
+<script src="assets/js/engine/progress.js"></script>
+<script>
+(function () {
+  var g = parseInt(MW.util.param("g", "2"), 10);
+  document.body.setAttribute("data-grade", g);
+
+  // 依次装载 g{N}.js（基础单元）+ g{N}b.js / g{N}c.js（扩展单元，可缺省）
+  var files = ["content/g" + g + ".js", "content/g" + g + "b.js", "content/g" + g + "c.js"];
+  var left = files.length, baseOk = false;
+  files.forEach(function (src, fi) {
+    var s = document.createElement("script");
+    s.src = src;
+    s.async = false; /* 动态脚本默认乱序执行；强制按插入顺序，保证 g{N}.js 先于扩展包 */
+    s.onload = function () { if (fi === 0) baseOk = true; tick(); };
+    s.onerror = tick;
+    document.head.appendChild(s);
+  });
+  function tick() {
+    if (--left > 0) return;
+    var data = MW.content && MW.content[g];
+    if (!baseOk || !data) return oops();
+    document.getElementById("gname").textContent = data.name;
+    document.getElementById("gsub").textContent = "完成每一课，点亮一颗智慧星 ⭐";
+    document.title = data.name + " · 数学奇境";
+
+    var list = document.getElementById("unitList");
+    data.units.forEach(function (u, i) {
+      var has = MW.progress.hasStar(u.id);
+      var a = document.createElement("a");
+      a.className = "unit-card rise d" + ((i % 5) + 1);
+      a.href = "lesson.html?g=" + g + "&u=" + (i + 1);
+      a.innerHTML =
+        '<div class="num">' + (i + 1) + "</div>" +
+        '<div class="info"><h3>' + u.title + "</h3>" +
+        '<div class="sub">' + u.subtitle + "</div>" +
+        '<div class="meta"><span class="pill">' + u.tag + '</span><span class="pill">⏱ 约 ' + u.minutes + ' 分钟</span></div></div>' +
+        '<div class="go"><div class="done-stars"><span class="star' + (has ? "" : " dim") + '">★</span></div>' +
+        '<div class="btn small" style="margin-top:8px">' + (has ? "再学一次" : "开始探险") + " ›</div></div>";
+      list.appendChild(a);
+    });
+  }
+  function oops() {
+    document.getElementById("gname").textContent = "这颗星球还在建设中 🚧";
+    document.getElementById("gsub").textContent = "先回到宇宙，去别的星球看看吧！";
+  }
+})();
+</script>
+</body>
+</html>

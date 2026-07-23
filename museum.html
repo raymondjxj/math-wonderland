@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>数学博物馆 · 数学奇境</title>
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<style>
+.hall-tabs { display:flex; flex-wrap:wrap; gap:12px; justify-content:center; padding:26px 0; }
+.museum-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:18px; padding-bottom:80px; }
+.museum-card {
+  background:rgba(255,255,255,.07); border:2px solid rgba(255,255,255,.14);
+  border-radius:var(--r-lg); padding:22px 24px; color:#fff; cursor:pointer;
+  transition:all .22s ease; text-align:left;
+}
+.museum-card:hover { background:rgba(255,255,255,.14); transform:translateY(-4px); }
+.museum-card .mi { font-size:1.8rem; }
+.museum-card h3 { margin:8px 0 4px; font-size:1.12rem; }
+.museum-card p { color:#b9b9dd; font-size:.9rem; }
+.museum-card .mtag { display:inline-block; margin-top:10px; font-size:.75rem; font-weight:800; color:var(--gold); border:1px solid rgba(255,194,51,.5); border-radius:999px; padding:2px 10px; }
+.museum-detail { max-width:880px; margin:0 auto 80px; }
+.museum-detail .back { margin-bottom:16px; }
+.museum-body {
+  background:rgba(255,255,255,.06); border:2px solid rgba(255,255,255,.14);
+  border-radius:var(--r-lg); padding:30px 34px; color:#fff;
+}
+.museum-body h2 { color:var(--gold); margin-bottom:4px; }
+.museum-body .sub { color:#b9b9dd; margin-bottom:18px; }
+.museum-body p { color:#dcdcf5; margin-bottom:10px; }
+.museum-body .art { display:flex; justify-content:center; padding:10px 0; }
+.museum-body canvas { margin:0 auto; background:rgba(0,0,0,.25); border-radius:var(--r-md); max-width:100%; }
+</style>
+</head>
+<body>
+<div class="lab-bg"></div>
+<div class="stars"></div>
+
+<div class="wrap">
+  <nav class="topnav">
+    <a class="logo" style="color:#fff" href="index.html">🪐 数学奇境</a>
+    <span class="spacer"></span>
+    <a class="navlink" style="color:#c9c9ee" href="index.html">🏠 返回宇宙</a>
+    <a class="navlink" style="color:#c9c9ee" href="think.html">🤖 思维营</a>
+    <a class="navlink" style="color:#c9c9ee" href="lab.html">🔬 实验室</a>
+  </nav>
+
+  <header class="lab-head rise">
+    <h1>🏛️ 数学博物馆</h1>
+    <p>几千年的故事、最聪明的头脑、没有字的证明、还没人解开的谜——数学是活的。</p>
+  </header>
+
+  <div class="hall-tabs" id="hallTabs"></div>
+  <main id="hallView"></main>
+</div>
+
+<script src="assets/js/engine/util.js"></script>
+<script src="assets/js/engine/progress.js"></script>
+<script src="assets/js/engine/feedback.js"></script>
+<script src="content/encouragement.js"></script>
+<script>
+window.MW = window.MW || {};
+MW.museum = (function () {
+  var items = [];
+  function register(item) { items.push(item); }
+  function all() { return items; }
+  function find(id) {
+    for (var i = 0; i < items.length; i++) if (items[i].id === id) return items[i];
+    return null;
+  }
+  return { register: register, all: all, find: find };
+})();
+</script>
+<script src="assets/js/museum/gauss.js"></script>
+<script src="assets/js/museum/history.js"></script>
+<script src="assets/js/museum/people.js"></script>
+<script src="assets/js/museum/proofs.js"></script>
+<script src="assets/js/museum/mysteries.js"></script>
+<script>
+(function () {
+  var HALLS = [
+    { id: "history", name: "📜 数学史长廊" },
+    { id: "people", name: "🌟 数学家群星" },
+    { id: "proof", name: "🖼️ 无字证明画廊" },
+    { id: "mystery", name: "❓ 未解之谜橱窗" }
+  ];
+  var tabs = document.getElementById("hallTabs");
+  var view = document.getElementById("hallView");
+  var currentHandle = null;
+
+  HALLS.forEach(function (h) {
+    var b = MW.util.el("button", "lab-tab", h.name);
+    b.dataset.hall = h.id;
+    b.onclick = function () { showHall(h.id); };
+    tabs.appendChild(b);
+  });
+
+  function paintTabs(hallId) {
+    Array.prototype.forEach.call(tabs.children, function (t) {
+      t.classList.toggle("on", t.dataset.hall === hallId);
+    });
+  }
+
+  function showHall(hallId) {
+    if (currentHandle && currentHandle.destroy) currentHandle.destroy();
+    currentHandle = null;
+    location.hash = "";
+    paintTabs(hallId);
+    var grid = MW.util.el("div", "museum-grid");
+    MW.museum.all().filter(function (i) { return i.hall === hallId; }).forEach(function (item) {
+      var c = MW.util.el("button", "museum-card");
+      c.innerHTML = '<div class="mi">' + item.icon + "</div><h3>" + item.title + "</h3><p>" + item.sub + "</p>" +
+        '<span class="mtag">' + (item.mount ? "可动手" : "故事卡") + "</span>";
+      c.onclick = function () { showItem(item); };
+      grid.appendChild(c);
+    });
+    view.innerHTML = "";
+    view.appendChild(grid);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function showItem(item) {
+    if (currentHandle && currentHandle.destroy) currentHandle.destroy();
+    currentHandle = null;
+    location.hash = item.id;
+    paintTabs(item.hall);
+    view.innerHTML = "";
+    var det = MW.util.el("div", "museum-detail rise");
+    var back = MW.util.el("button", "btn ghost small back", "‹ 回到展厅");
+    back.onclick = function () { showHall(item.hall); };
+    det.appendChild(back);
+    var body = MW.util.el("div", "museum-body");
+    body.appendChild(MW.util.el("h2", null, item.icon + " " + item.title));
+    body.appendChild(MW.util.el("div", "sub", item.sub));
+    (item.paragraphs || []).forEach(function (p) { body.appendChild(MW.util.el("p", null, p)); });
+    if (item.art) { var a = MW.util.el("div", "art"); a.innerHTML = item.art; body.appendChild(a); }
+    if (item.mount) {
+      var mbox = MW.util.el("div");
+      body.appendChild(mbox);
+      currentHandle = item.mount(mbox) || null;
+    }
+    det.appendChild(body);
+    view.appendChild(det);
+    MW.progress.visitLab(item.id);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  window.addEventListener("hashchange", function () {
+    var id = location.hash.replace("#", "");
+    var item = id && MW.museum.find(id);
+    if (item) showItem(item);
+  });
+
+  var first = location.hash.replace("#", "");
+  var item = first && MW.museum.find(first);
+  if (item) showItem(item);
+  else showHall("history");
+})();
+</script>
+</body>
+</html>

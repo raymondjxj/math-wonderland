@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>数学之美实验室 · 数学奇境</title>
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/components.css">
+</head>
+<body>
+<div class="lab-bg"></div>
+<div class="stars"></div>
+
+<div class="wrap">
+  <nav class="topnav">
+    <a class="logo" style="color:#fff" href="index.html">🪐 数学奇境</a>
+    <span class="spacer"></span>
+    <a class="navlink" style="color:#c9c9ee" href="index.html">🏠 返回宇宙</a>
+  </nav>
+
+  <header class="lab-head rise">
+    <h1>🔬 数学之美实验室</h1>
+    <p>这里没有考试，只有惊奇。动动手，亲眼看看数学有多美。</p>
+  </header>
+
+  <div class="lab-tabs" id="tabs"></div>
+
+  <section class="lab-stage">
+    <div class="lab-title" id="labTitle"></div>
+    <div class="lab-desc" id="labDesc"></div>
+    <div id="labBody"></div>
+    <div class="lab-note" id="labNote"></div>
+  </section>
+</div>
+
+<script src="assets/js/engine/util.js"></script>
+<script src="assets/js/engine/progress.js"></script>
+<script src="assets/js/engine/feedback.js"></script>
+<script src="content/encouragement.js"></script>
+<script>
+/* 实验室注册表：每个展项文件调用 MW.lab.register({...}) */
+window.MW = window.MW || {};
+MW.lab = (function () {
+  var items = [];
+  function register(item) { items.push(item); }
+  function all() { return items; }
+  function find(id) {
+    for (var i = 0; i < items.length; i++) if (items[i].id === id) return items[i];
+    return null;
+  }
+  return { register: register, all: all, find: find };
+})();
+</script>
+<script src="assets/js/lab/fractal-tree.js"></script>
+<script src="assets/js/lab/fibonacci.js"></script>
+<script src="assets/js/lab/kaleidoscope.js"></script>
+<script src="assets/js/lab/tessellation.js"></script>
+<script src="assets/js/lab/prime-spiral.js"></script>
+<script src="assets/js/lab/magic-square.js"></script>
+<script>
+(function () {
+  var tabs = document.getElementById("tabs");
+  var title = document.getElementById("labTitle");
+  var desc = document.getElementById("labDesc");
+  var body = document.getElementById("labBody");
+  var note = document.getElementById("labNote");
+  var current = null;
+
+  function show(id) {
+    var item = MW.lab.find(id) || MW.lab.all()[0];
+    if (!item) { title.textContent = "展项装载中……"; return; }
+    if (current && current.destroy) current.destroy();
+    current = null;
+    location.hash = item.id;
+    title.textContent = item.icon + " " + item.title;
+    desc.textContent = item.desc;
+    note.textContent = item.note || "";
+    body.innerHTML = "";
+    current = item.mount(body) || null;
+    MW.progress.visitLab(item.id);
+
+    Array.prototype.forEach.call(tabs.children, function (t) {
+      t.classList.toggle("on", t.dataset.id === item.id);
+    });
+  }
+
+  MW.lab.all().forEach(function (item) {
+    var b = MW.util.el("button", "lab-tab", item.icon + " " + item.title);
+    b.dataset.id = item.id;
+    b.onclick = function () { show(item.id); };
+    tabs.appendChild(b);
+  });
+
+  window.addEventListener("hashchange", function () {
+    var id = location.hash.replace("#", "");
+    if (id && (!current || tabs.querySelector(".on").dataset.id !== id)) show(id);
+  });
+
+  show(location.hash.replace("#", "") || (MW.lab.all()[0] && MW.lab.all()[0].id));
+})();
+</script>
+</body>
+</html>

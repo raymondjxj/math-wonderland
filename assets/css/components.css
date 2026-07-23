@@ -1,0 +1,303 @@
+/* ============================================================
+   数学奇境 · 组件样式
+   ============================================================ */
+
+/* ---------- 首页：数学宇宙 ---------- */
+.space-bg {
+  position: fixed; inset: 0; z-index: -2;
+  background: radial-gradient(1200px 700px at 70% -10%, #2b2a6b 0%, var(--space) 55%, #0d0d24 100%);
+}
+.stars, .stars2 {
+  position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background-repeat: repeat;
+}
+.stars {
+  background-image:
+    radial-gradient(2px 2px at 20px 30px, #fff 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 130px 80px, #ffe9a8 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 70px 150px, #fff 50%, transparent 51%),
+    radial-gradient(2px 2px at 190px 40px, #bfe3ff 50%, transparent 51%),
+    radial-gradient(1px 1px at 240px 120px, #fff 50%, transparent 51%);
+  background-size: 260px 200px;
+  animation: twinkle 4s ease-in-out infinite alternate;
+}
+.stars2 {
+  background-image:
+    radial-gradient(1.5px 1.5px at 40px 90px, #fff 50%, transparent 51%),
+    radial-gradient(2px 2px at 170px 160px, #ffd2ec 50%, transparent 51%),
+    radial-gradient(1px 1px at 100px 20px, #fff 50%, transparent 51%);
+  background-size: 300px 240px;
+  animation: twinkle 5.5s ease-in-out infinite alternate-reverse;
+}
+@keyframes twinkle { from { opacity: .35; } to { opacity: 1; } }
+
+.hero { text-align: center; color: #fff; padding: 64px 0 26px; }
+.hero h1 { font-size: 2.7rem; letter-spacing: 2px; text-shadow: 0 4px 24px rgba(155, 93, 229, .6); }
+.hero p { color: #c9c9ee; font-size: 1.1rem; margin-top: 10px; }
+.hero .badge-line { margin-top: 14px; font-size: 1rem; color: var(--gold); font-weight: 800; }
+
+/* 星球带 */
+.universe {
+  display: flex; flex-wrap: wrap; justify-content: center;
+  gap: 34px 44px; padding: 40px 0 30px;
+}
+.planet {
+  width: 168px; text-align: center; color: #fff;
+  transition: transform .3s cubic-bezier(.34, 1.56, .64, 1);
+  position: relative;
+}
+.planet:hover { transform: translateY(-10px) scale(1.06); }
+.planet .ball {
+  width: 148px; height: 148px; margin: 0 auto; border-radius: 50%;
+  position: relative; overflow: hidden;
+  box-shadow: inset -14px -16px 0 rgba(0, 0, 0, .18), 0 14px 34px rgba(0, 0, 0, .45);
+  animation: bob 5s ease-in-out infinite;
+}
+.planet:nth-child(2n) .ball { animation-delay: -1.6s; }
+.planet:nth-child(3n) .ball { animation-delay: -3.1s; }
+@keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
+.planet .face { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.planet .pname { margin-top: 12px; font-weight: 900; font-size: 1.12rem; }
+.planet .pstars { font-size: .95rem; margin-top: 2px; letter-spacing: 2px; }
+.planet .ring {
+  position: absolute; width: 190px; height: 54px; left: 50%; top: 58px;
+  transform: translateX(-50%) rotate(-8deg);
+  border: 7px solid rgba(255, 255, 255, .35); border-radius: 50%;
+  pointer-events: none;
+}
+
+/* 首页入口条（实验室 / 关于） */
+.gateways { display: flex; flex-wrap: wrap; gap: 22px; justify-content: center; padding: 12px 0 70px; }
+.gateway {
+  min-width: 300px; flex: 0 1 340px;
+  background: rgba(255, 255, 255, .08);
+  border: 2px solid rgba(255, 255, 255, .18);
+  backdrop-filter: blur(6px);
+  border-radius: var(--r-lg); padding: 24px 26px; color: #fff;
+  transition: all .25s ease;
+}
+.gateway:hover { background: rgba(255, 255, 255, .16); transform: translateY(-4px); }
+.gateway h3 { font-size: 1.25rem; margin-bottom: 6px; }
+.gateway p { color: #c9c9ee; font-size: .95rem; }
+
+/* ---------- 徽章墙 ---------- */
+.badgewall {
+  background: rgba(255, 255, 255, .07);
+  border: 2px dashed rgba(255, 255, 255, .22);
+  border-radius: var(--r-lg); color: #fff;
+  padding: 30px; margin: 0 auto 80px; max-width: 900px;
+}
+.badgewall h2 { text-align: center; margin-bottom: 18px; }
+.badge-grid { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; }
+.badge {
+  width: 150px; padding: 16px 10px; text-align: center;
+  background: rgba(255, 255, 255, .1); border-radius: var(--r-md);
+}
+.badge .icon { font-size: 2rem; }
+.badge .bname { font-weight: 800; margin-top: 6px; font-size: .95rem; }
+.badge .bcond { font-size: .78rem; color: #b9b9dd; margin-top: 2px; }
+.badge.locked { opacity: .38; filter: grayscale(.8); }
+
+/* ---------- 年级页 ---------- */
+.grade-hero { text-align: center; padding: 46px 0 10px; }
+.grade-hero h1 { font-size: 2.1rem; }
+.grade-hero p { color: var(--ink-soft); margin-top: 6px; }
+.unit-list { display: grid; gap: 24px; padding: 34px 0 80px; }
+.unit-card {
+  display: flex; align-items: center; gap: 24px;
+  background: #fff; border-radius: var(--r-lg); box-shadow: var(--shadow);
+  padding: 26px 30px;
+  transition: transform .22s ease, box-shadow .22s ease;
+  border-left: 12px solid var(--theme);
+}
+.unit-card:hover { transform: translateX(6px); box-shadow: 0 16px 40px rgba(43, 45, 66, .18); }
+.unit-card .num {
+  flex: 0 0 74px; height: 74px; border-radius: 50%;
+  background: var(--theme-soft); color: var(--theme);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.7rem; font-weight: 900;
+}
+.unit-card .info { flex: 1; }
+.unit-card .info h3 { font-size: 1.3rem; }
+.unit-card .info .sub { color: var(--ink-soft); font-size: .95rem; margin-top: 2px; }
+.unit-card .meta { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+.unit-card .go { flex: 0 0 auto; }
+.unit-card .done-stars { font-size: 1.1rem; letter-spacing: 2px; }
+
+/* ---------- 课程播放器 ---------- */
+.stage { max-width: 880px; margin: 0 auto; padding: 10px 22px 70px; }
+.scene-progress { display: flex; gap: 10px; justify-content: center; padding: 18px 0 26px; }
+.scene-dot {
+  width: 40px; height: 12px; border-radius: 999px;
+  background: #e4e4ef; transition: all .3s ease;
+}
+.scene-dot.on { background: var(--theme); width: 58px; }
+.scene-dot.past { background: var(--theme-soft); }
+
+.scene-card {
+  background: #fff; border-radius: var(--r-lg); box-shadow: var(--shadow);
+  padding: 38px 42px; min-height: 430px;
+  display: flex; flex-direction: column; gap: 18px;
+}
+.scene-kicker { color: var(--theme); font-weight: 900; letter-spacing: 3px; font-size: .85rem; }
+.scene-card h2 { font-size: 1.65rem; }
+.scene-body { font-size: 1.06rem; color: var(--ink); }
+.scene-body p + p { margin-top: 10px; }
+.scene-art { display: flex; justify-content: center; padding: 8px 0; }
+.scene-art svg { max-height: 260px; }
+.caption-box {
+  background: var(--theme-soft); border-radius: var(--r-md);
+  padding: 16px 22px; font-size: 1.08rem; font-weight: 700;
+  min-height: 74px; display: flex; align-items: center; justify-content: center;
+  text-align: center;
+}
+.caption-box.fade { animation: capfade .4s ease; }
+@keyframes capfade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; } }
+
+.widget-box { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.widget-box canvas, .widget-box svg { border-radius: var(--r-md); }
+.widget-controls { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; align-items: center; }
+.stepper { display: flex; align-items: center; gap: 12px; font-weight: 800; }
+.stepper button {
+  width: 46px; height: 46px; border-radius: 50%;
+  background: var(--theme); color: #fff; font-size: 1.3rem; font-weight: 900;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, .12);
+  transition: transform .15s ease;
+}
+.stepper button:active { transform: scale(.92); }
+.stepper .val { min-width: 60px; text-align: center; font-size: 1.15rem; }
+input[type="range"].slider { width: 240px; accent-color: var(--theme); height: 34px; }
+
+.scene-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 26px; }
+.scene-nav .pos { color: var(--ink-soft); font-weight: 700; font-size: .9rem; }
+
+/* 数学之美拓展卡 */
+.beauty-card {
+  background: linear-gradient(135deg, #2b2a6b, #141433);
+  color: #fff; border-radius: var(--r-md); padding: 24px 28px;
+}
+.beauty-card h3 { color: var(--gold); margin-bottom: 8px; }
+.beauty-card p { color: #d8d8f5; }
+.beauty-card .btn { margin-top: 16px; }
+
+/* ---------- 习题引擎 ---------- */
+.quiz-progress { text-align: center; color: var(--ink-soft); font-weight: 800; letter-spacing: 2px; font-size: .9rem; }
+.quiz-q { font-size: 1.3rem; font-weight: 800; text-align: center; padding: 6px 0 4px; }
+.quiz-q .qtag { display: block; font-size: .8rem; color: var(--theme); letter-spacing: 3px; margin-bottom: 8px; }
+.quiz-options { display: grid; gap: 14px; grid-template-columns: 1fr 1fr; padding: 18px 0 4px; }
+.quiz-options.single { grid-template-columns: 1fr; }
+.opt {
+  background: #f4f4fb; border: 3px solid transparent; border-radius: var(--r-md);
+  padding: 16px 20px; font-size: 1.1rem; font-weight: 800; text-align: center;
+  transition: all .18s ease;
+}
+.opt:hover { border-color: var(--theme); transform: translateY(-2px); }
+.opt.right { background: #e2f9ea; border-color: var(--good); }
+.opt.wrongpick { background: #ffe5e5; border-color: var(--oops); animation: shake .4s ease; }
+@keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-7px); } 75% { transform: translateX(7px); } }
+.quiz-fill { display: flex; gap: 14px; justify-content: center; align-items: center; padding: 18px 0 4px; }
+.quiz-fill input {
+  width: 150px; font-size: 1.5rem; font-weight: 900; text-align: center;
+  padding: 12px; border: 3px solid #d9d9ea; border-radius: var(--r-md);
+  outline: none; transition: border-color .2s ease;
+}
+.quiz-fill input:focus { border-color: var(--theme); }
+.judge-row { display: flex; gap: 20px; justify-content: center; padding: 18px 0 4px; }
+.judge-row .opt { width: 150px; font-size: 1.4rem; }
+
+.speech {
+  position: relative; max-width: 560px; margin: 10px auto 0;
+  background: #fff8dd; border: 3px solid var(--gold);
+  border-radius: var(--r-md); padding: 14px 20px; font-weight: 700;
+  animation: capfade .3s ease;
+}
+.speech.good { background: #e2f9ea; border-color: var(--good); }
+.speech .who { font-size: .78rem; color: var(--ink-soft); letter-spacing: 2px; display: block; margin-bottom: 2px; }
+.quiz-done { text-align: center; padding: 20px 0 6px; }
+.quiz-done .big { font-size: 3rem; }
+.quiz-done h3 { font-size: 1.5rem; margin: 8px 0 4px; }
+
+/* ---------- v2：符号表达幕 ---------- */
+.formula-card {
+  background: var(--theme-soft); border-radius: var(--r-md);
+  padding: 20px 26px; text-align: center;
+  font-size: 1.5rem; font-weight: 900; letter-spacing: 1px;
+  animation: capfade .5s ease;
+}
+.keypoints { list-style: none; display: grid; gap: 10px; }
+.keypoints li {
+  background: #f7f7fd; border-radius: var(--r-sm);
+  padding: 12px 18px 12px 44px; position: relative; font-weight: 700;
+}
+.keypoints li::before {
+  content: "✦"; position: absolute; left: 16px; color: var(--theme);
+}
+
+/* ---------- v2：波利亚回顾幕 ---------- */
+.way-card {
+  background: #f7f7fd; border-radius: var(--r-md); padding: 16px 22px;
+  border-left: 8px solid var(--theme);
+}
+.way-card .way-tag { font-weight: 900; color: var(--theme); font-size: .9rem; letter-spacing: 1px; }
+.way-card p { margin-top: 4px; }
+.ask-card {
+  background: linear-gradient(135deg, #fff8dd, #ffefc2);
+  border: 3px dashed var(--gold); border-radius: var(--r-md);
+  padding: 18px 22px;
+}
+.ask-card .ask-title { font-weight: 900; margin-bottom: 4px; }
+
+/* ---------- v2：题目分层标签 ---------- */
+.qtag { display: block; font-size: .8rem; letter-spacing: 3px; margin-bottom: 8px; }
+.qtag.lv-基础 { color: var(--good); }
+.qtag.lv-变式 { color: #4d96ff; }
+.qtag.lv-挑战 { color: #9b5de5; }
+.qtag.lv-温故 { color: #e0a91f; }
+.qtag.lv-std { color: var(--theme); }
+
+/* 礼花画布 */
+#confetti-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 999; }
+
+/* ---------- 实验室 ---------- */
+.lab-bg { position: fixed; inset: 0; z-index: -2; background: radial-gradient(1000px 600px at 30% 0%, #232357 0%, #101024 60%); }
+.lab-head { color: #fff; text-align: center; padding: 44px 0 6px; }
+.lab-head h1 { font-size: 2.2rem; }
+.lab-head p { color: #b9b9dd; margin-top: 6px; }
+.lab-tabs { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; padding: 26px 0; }
+.lab-tab {
+  padding: 10px 20px; border-radius: 999px; font-weight: 800; font-size: .95rem;
+  background: rgba(255, 255, 255, .09); color: #d8d8f5;
+  border: 2px solid transparent; transition: all .22s ease;
+}
+.lab-tab:hover { background: rgba(255, 255, 255, .18); }
+.lab-tab.on { background: var(--gold); color: var(--ink); border-color: #fff3; }
+.lab-stage {
+  max-width: 940px; margin: 0 auto 80px;
+  background: rgba(255, 255, 255, .06);
+  border: 2px solid rgba(255, 255, 255, .14);
+  border-radius: var(--r-lg); padding: 28px; color: #fff;
+}
+.lab-stage .lab-title { font-size: 1.4rem; color: var(--gold); }
+.lab-stage .lab-desc { color: #c9c9ee; margin: 6px 0 18px; }
+.lab-stage canvas { margin: 0 auto; background: rgba(0, 0, 0, .25); border-radius: var(--r-md); max-width: 100%; }
+.lab-controls { display: flex; flex-wrap: wrap; gap: 18px 26px; justify-content: center; padding: 18px 0 6px; }
+.lab-controls label { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: .95rem; color: #e8e8ff; }
+.lab-controls input[type="range"] { accent-color: var(--gold); width: 150px; }
+.lab-controls .btn { box-shadow: none; }
+.lab-note { text-align: center; color: #a9a9d0; font-size: .9rem; padding-top: 14px; }
+
+/* ---------- 关于页 ---------- */
+.about-hero { text-align: center; padding: 50px 0 20px; }
+.about-hero h1 { font-size: 2.1rem; }
+.about-grid { display: grid; gap: 22px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); padding: 20px 0 80px; }
+.about-card { background: #fff; border-radius: var(--r-lg); box-shadow: var(--shadow); padding: 26px 28px; }
+.about-card h3 { color: var(--theme, var(--gold)); margin-bottom: 8px; }
+.about-card p, .about-card li { color: var(--ink-soft); font-size: .98rem; }
+.about-card ul { padding-left: 20px; margin-top: 6px; }
+
+@media (max-width: 720px) {
+  .hero h1 { font-size: 2rem; }
+  .quiz-options { grid-template-columns: 1fr; }
+  .scene-card { padding: 26px 22px; }
+  .unit-card { flex-direction: column; text-align: center; }
+}

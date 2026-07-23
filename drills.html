@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>口算天天练 · 数学奇境</title>
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/components.css">
+</head>
+<body>
+<div class="wrap">
+  <nav class="topnav">
+    <a class="logo" href="index.html">🪐 数学奇境</a>
+    <span class="spacer"></span>
+    <a class="navlink" href="index.html">🏠 返回宇宙</a>
+    <a class="navlink" href="mistakes.html">📒 错题本</a>
+  </nav>
+
+  <header class="grade-hero rise">
+    <h1>⚡ 口算天天练</h1>
+    <p>每天 10 题，大脑越练越灵。不计时、不排名，只和昨天的自己比。</p>
+  </header>
+
+  <div class="stage" style="padding-top:0">
+    <div class="card rise" id="home" style="text-align:center">
+      <h2 style="margin-bottom:14px">选择你的年级</h2>
+      <div id="gradePicks" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:22px"></div>
+      <div id="todayInfo" style="color:var(--ink-soft);font-weight:700"></div>
+    </div>
+    <div class="scene-card" id="quizBox" style="display:none"></div>
+  </div>
+</div>
+
+<script src="assets/js/engine/util.js"></script>
+<script src="assets/js/engine/progress.js"></script>
+<script src="assets/js/engine/feedback.js"></script>
+<script src="assets/js/engine/quiz.js"></script>
+<script src="content/encouragement.js"></script>
+<script>
+(function () {
+  function rnd(a, b) { return a + Math.floor(Math.random() * (b - a + 1)); }
+  function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+  function Q(q, answer, hint) {
+    return { type: "fill", level: "口算", q: q, answer: String(answer), hint: hint || "静下心来，再算一遍", explain: q.replace("？", "") + " = " + answer };
+  }
+
+  /* 各年级题目工厂：每次调用生成 1 题 */
+  var FACTORY = {
+    2: [function () { var a = rnd(2, 9), b = rnd(2, 9); return Q(a + " × " + b + " = ？", a * b, "想乘法口诀"); },
+        function () { var b = rnd(2, 9), c = rnd(2, 9); return Q(b * c + " ÷ " + b + " = ？", c, "几乘 " + b + " 得 " + b * c + "？"); },
+        function () { var a = rnd(30, 90), b = rnd(10, 29); return Q(a + " − " + b + " = ？", a - b, "先减整十，再减个位"); },
+        function () { var a = rnd(20, 70), b = rnd(15, 29); return Q(a + " + " + b + " = ？", a + b, "先加整十，再加个位"); }],
+    3: [function () { var a = rnd(12, 99), b = rnd(2, 9); return Q(a + " × " + b + " = ？", a * b, "拆成整十和个位分别乘"); },
+        function () { var a = rnd(100, 900), b = rnd(100, 900); return Q(a + " + " + b + " = ？", a + b, "整百整百地加"); },
+        function () { var a = rnd(200, 999), b = rnd(100, a - 50); return Q(a + " − " + b + " = ？", a - b, "不够减要退位"); },
+        function () { var a = pick([20, 30, 40, 50, 60]), b = rnd(2, 9); return Q(a + " × " + b + " = ？", a * b, "先算 " + (a / 10) + " × " + b + "，再添 0"); }],
+    4: [function () { var a = rnd(101, 399), b = rnd(11, 29); return Q(a + " × " + b + " = ？", a * b, "拆 " + b + " 成 10 和几分别乘"); },
+        function () { var b = rnd(11, 29), c = rnd(2, 9); return Q(b * c + " ÷ " + b + " = ？", c, b + " 乘几得 " + b * c + "？"); },
+        function () { var a = rnd(11, 24) * 4; return Q("25 × " + a + " = ？", 25 * a, "25 看见 4 是好朋友：25×4=100"); },
+        function () { var a = rnd(101, 499); return Q(a + " + 99 = ？", a + 99, "加 100 再减 1"); }],
+    5: [function () { var a = rnd(11, 99) / 10, b = rnd(2, 9); return Q(a.toFixed(1) + " × " + b + " = ？", (a * b).toFixed(1), "先当整数乘，再点小数点"); },
+        function () { var b = rnd(2, 9), c = rnd(12, 60) / 10; return Q((b * c).toFixed(1) + " ÷ " + b + " = ？", c.toFixed(1), "商的小数点要和被除数对齐"); },
+        function () { var d = pick([3, 5, 7, 9]), a = rnd(1, d - 2), b = rnd(1, d - a - 1); return Q(a + "/" + d + " + " + b + "/" + d + " = ？（填几分之几）", (a + b) + "/" + d, "同分母，分子相加"); },
+        function () { var a = rnd(12, 60) / 10, b = rnd(11, 40) / 10; return Q(a.toFixed(1) + " + " + b.toFixed(1) + " = ？", (a + b).toFixed(1), "小数点对齐"); }],
+    6: [function () { var a = pick([2, 3, 4, 5]), b = rnd(2, 9); return Q(a + "/" + (a + 1) + " × " + (a + 1) + " = ？", a, "分子分母可以约分"); },
+        function () { var a = rnd(1, 9), b = pick([2, 3, 4, 5, 6]); return Q(a + " ÷ 1/" + b + " = ？", a * b, "除以一个分数 = 乘它的倒数"); },
+        function () { var a = pick([10, 20, 25, 40, 50, 60, 75, 80]); return Q(a + "% = ？（填小数）", a / 100, "百分数 ÷100 就是小数"); },
+        function () { var a = pick([120, 150, 200, 240, 300, 360]), b = pick([10, 20, 25, 50]); return Q(a + " 的 " + b + "% 是 ？", a * b / 100, "先算 " + a + " × " + (b / 100)); }]
+  };
+
+  var picks = document.getElementById("gradePicks");
+  [2, 3, 4, 5, 6].forEach(function (g) {
+    var b = MW.util.el("button", "btn", g + " 年级");
+    b.onclick = function () { start(g); };
+    picks.appendChild(b);
+  });
+  var today = MW.progress.drillToday();
+  document.getElementById("todayInfo").textContent =
+    today > 0 ? "今天你已经练了 " + today + " 组，太勤快了！🔥" : "今天还没练过，来一组热热身？";
+
+  function start(g) {
+    document.body.setAttribute("data-grade", g);
+    document.getElementById("home").style.display = "none";
+    var box = document.getElementById("quizBox");
+    box.style.display = "flex";
+    var qs = [], used = {};
+    while (qs.length < 10) {
+      var q = pick(FACTORY[g])();
+      if (used[q.q]) continue;
+      used[q.q] = 1; qs.push(q);
+    }
+    var t0 = Date.now();
+    MW.quiz.run(box, qs, function () {
+      MW.progress.markDrill();
+      var sec = Math.round((Date.now() - t0) / 1000);
+      var done = MW.util.el("div", "quiz-done");
+      done.innerHTML = "<p style='margin-top:8px;color:var(--ink-soft)'>用时 " + Math.floor(sec / 60) + " 分 " + (sec % 60) + " 秒 · 错题已自动收入 📒 错题本</p>" +
+        '<div style="margin-top:16px;display:flex;gap:14px;justify-content:center">' +
+        '<button class="btn" id="again">再来一组 ⚡</button>' +
+        '<a class="btn ghost" href="mistakes.html">去错题本</a></div>';
+      box.appendChild(done);
+      document.getElementById("again").onclick = function () { location.reload(); };
+    }, { unitId: "drill" });
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>错题本 · 数学奇境</title>
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<style>
+.mistake-card { background:#fff; border-radius:var(--r-lg); box-shadow:var(--shadow); padding:26px 30px; }
+.mistake-card .from { font-size:.82rem; font-weight:800; color:var(--ink-soft); letter-spacing:1px; margin-bottom:6px; }
+.mistake-card.solved { opacity:.55; }
+.mistake-card.solved .from::after { content:" · 已攻克 🎉"; color:var(--good); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="topnav">
+    <a class="logo" href="index.html">🪐 数学奇境</a>
+    <span class="spacer"></span>
+    <a class="navlink" href="index.html">🏠 返回宇宙</a>
+    <a class="navlink" href="drills.html">⚡ 天天练</a>
+  </nav>
+
+  <header class="grade-hero rise">
+    <h1>📒 错题本</h1>
+    <p>答错不丢人——每一道错题都是大脑长大的机会。重做对了，它就毕业啦！</p>
+  </header>
+
+  <main class="unit-list" id="list" style="padding-bottom:80px"></main>
+</div>
+
+<script src="assets/js/engine/util.js"></script>
+<script src="assets/js/engine/progress.js"></script>
+<script src="assets/js/engine/feedback.js"></script>
+<script src="assets/js/engine/quiz.js"></script>
+<script src="content/encouragement.js"></script>
+<script>
+(function () {
+  var NAMES = {
+    drill: "口算天天练",
+    think1: "思维营·二分查找", think2: "思维营·冒泡排序", think3: "思维营·二进制", think4: "思维营·概率",
+    think5: "思维营·逻辑推理", think6: "思维营·鸡兔同笼", think7: "思维营·统筹法", think8: "思维营·密码与质数"
+  };
+  function fromName(unitId) {
+    if (NAMES[unitId]) return NAMES[unitId];
+    var m = /^g(\d)u(\d)$/.exec(unitId);
+    if (m) return m[1] + " 年级 · 第 " + m[2] + " 课";
+    return unitId;
+  }
+
+  function render() {
+    var list = document.getElementById("list");
+    var ms = MW.progress.mistakes();
+    list.innerHTML = "";
+    if (!ms.length) {
+      list.innerHTML = '<div class="card" style="text-align:center"><h2>错题本空空的 👏</h2>' +
+        '<p style="margin:10px 0 20px">去学一课或者来一组口算吧，做错的题会自动跑进来等你消灭。</p>' +
+        '<a class="btn" href="index.html">回到宇宙</a></div>';
+      return;
+    }
+    ms.forEach(function (m, idx) {
+      var c = MW.util.el("div", "mistake-card rise d" + ((idx % 5) + 1));
+      c.appendChild(MW.util.el("div", "from", "来自：" + fromName(m.unitId) + (m.level ? " · " + m.level : "")));
+      var box = MW.util.el("div");
+      c.appendChild(box);
+      list.appendChild(c);
+      MW.quiz.run(box, [{ type: m.type, q: m.q, options: m.options || undefined, answer: m.answer, hint: m.hint, explain: m.explain }],
+        function () {
+          MW.progress.removeMistake(m.q);
+          c.classList.add("solved");
+          setTimeout(function () { c.remove(); if (!document.querySelector(".mistake-card")) render(); }, 1200);
+        });
+    });
+  }
+  render();
+})();
+</script>
+</body>
+</html>
