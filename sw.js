@@ -25,10 +25,32 @@ self.addEventListener("activate", function (e) {
   );
 });
 
-/* 缓存优先；未命中则联网并写入缓存（JS/HTML 内容文件同样缓存，保证二次访问离线可用） */
+/* 缓存策略：
+   - 页面导航与内容文件（html、content/）：网络优先，离线回退缓存（保证更新及时）
+   - 静态资产（css/js/img/engine/widgets）：缓存优先，离线可用 */
 self.addEventListener("fetch", function (e) {
   if (e.request.method !== "GET") return;
   if (e.request.url.indexOf(self.location.origin) !== 0) return;
+  var url = e.request.url;
+  var networkFirst = e.request.mode === "navigate" || url.indexOf("/content/") >= 0;
+
+  if (networkFirst) {
+    e.respondWith(
+      fetch(e.request).then(function (resp) {
+        if (resp && resp.status === 200 && resp.type === "basic") {
+          var clone = resp.clone();
+          caches.open(CACHE).then(function (c) { c.put(e.request, clone); });
+        }
+        return resp;
+      }).catch(function () {
+        return caches.match(e.request, { ignoreSearch: true }).then(function (hit) {
+          return hit || (e.request.mode === "navigate" ? caches.match("index.html") : new Response("", { status: 504 }));
+        });
+      })
+    );
+    return;
+  }
+
   e.respondWith(
     caches.match(e.request, { ignoreSearch: true }).then(function (hit) {
       if (hit) return hit;
@@ -39,8 +61,6 @@ self.addEventListener("fetch", function (e) {
         }
         return resp;
       }).catch(function () {
-        /* 离线且未缓存：页面导航回退首页 */
-        if (e.request.mode === "navigate") return caches.match("index.html");
         return new Response("", { status: 504 });
       });
     })

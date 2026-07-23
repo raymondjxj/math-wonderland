@@ -255,42 +255,154 @@ MW.content[4] = {
         {
           type: "story",
           title: "海洋运动会入场式",
-          art: `<svg viewBox="0 0 400 240" width="400" height="240">
-            <rect width="400" height="240" rx="20" fill="#eaf4ff"/>
-            <rect x="30" y="30" width="220" height="180" rx="14" fill="#ffffff"/>
-            <g>
-              <g transform="translate(66,62)"><ellipse rx="13" ry="8" fill="#4d96ff"/><path d="M-12 0 L-21 -6 L-21 6 Z" fill="#4d96ff"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
-              <g transform="translate(114,62)"><ellipse rx="13" ry="8" fill="#4d96ff"/><path d="M-12 0 L-21 -6 L-21 6 Z" fill="#4d96ff"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
-              <g transform="translate(162,62)"><ellipse rx="13" ry="8" fill="#4d96ff"/><path d="M-12 0 L-21 -6 L-21 6 Z" fill="#4d96ff"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
-              <g transform="translate(210,62)"><ellipse rx="13" ry="8" fill="#4d96ff"/><path d="M-12 0 L-21 -6 L-21 6 Z" fill="#4d96ff"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
-              <g transform="translate(66,96)"><ellipse rx="13" ry="8" fill="#4d96ff"/><path d="M-12 0 L-21 -6 L-21 6 Z" fill="#4d96ff"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
-              <g transform="translate(114,96)"><ellipse rx="13" ry="8" fill="#4d96ff"/><path d="M-12 0 L-21 -6 L-21 6 Z" fill="#4d96ff"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
-              <g transform="translate(162,96)"><ellipse rx="13" ry="8" fill="#4d96ff"/><path d="M-12 0 L-21 -6 L-21 6 Z" fill="#4d96ff"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
-              <g transform="translate(210,96)"><ellipse rx="13" ry="8" fill="#4d96ff"/><path d="M-12 0 L-21 -6 L-21 6 Z" fill="#4d96ff"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
-              <g transform="translate(66,130)"><ellipse rx="13" ry="8" fill="#4d96ff"/><path d="M-12 0 L-21 -6 L-21 6 Z" fill="#4d96ff"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
-              <g transform="translate(114,130)"><ellipse rx="13" ry="8" fill="#4d96ff"/><path d="M-12 0 L-21 -6 L-21 6 Z" fill="#4d96ff"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
-              <g transform="translate(162,130)"><ellipse rx="13" ry="8" fill="#4d96ff"/><path d="M-12 0 L-21 -6 L-21 6 Z" fill="#4d96ff"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
-              <g transform="translate(210,130)"><ellipse rx="13" ry="8" fill="#4d96ff"/><path d="M-12 0 L-21 -6 L-21 6 Z" fill="#4d96ff"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
-            </g>
-            <line x1="44" y1="148" x2="238" y2="148" stroke="#9db8d9" stroke-width="2" stroke-dasharray="6 5"/>
-            <g fill="#ff8a3d">
-              <path transform="translate(66,164)" d="M0 -10 L2.9 -3.1 L10 -3.1 L4.5 1.9 L6.8 8.1 L0 4.5 L-6.8 8.1 L-4.5 1.9 L-10 -3.1 L-2.9 -3.1 Z"/>
-              <path transform="translate(114,164)" d="M0 -10 L2.9 -3.1 L10 -3.1 L4.5 1.9 L6.8 8.1 L0 4.5 L-6.8 8.1 L-4.5 1.9 L-10 -3.1 L-2.9 -3.1 Z"/>
-              <path transform="translate(162,164)" d="M0 -10 L2.9 -3.1 L10 -3.1 L4.5 1.9 L6.8 8.1 L0 4.5 L-6.8 8.1 L-4.5 1.9 L-10 -3.1 L-2.9 -3.1 Z"/>
-              <path transform="translate(210,164)" d="M0 -10 L2.9 -3.1 L10 -3.1 L4.5 1.9 L6.8 8.1 L0 4.5 L-6.8 8.1 L-4.5 1.9 L-10 -3.1 L-2.9 -3.1 Z"/>
-              <path transform="translate(66,196)" d="M0 -10 L2.9 -3.1 L10 -3.1 L4.5 1.9 L6.8 8.1 L0 4.5 L-6.8 8.1 L-4.5 1.9 L-10 -3.1 L-2.9 -3.1 Z"/>
-              <path transform="translate(114,196)" d="M0 -10 L2.9 -3.1 L10 -3.1 L4.5 1.9 L6.8 8.1 L0 4.5 L-6.8 8.1 L-4.5 1.9 L-10 -3.1 L-2.9 -3.1 Z"/>
-              <path transform="translate(162,196)" d="M0 -10 L2.9 -3.1 L10 -3.1 L4.5 1.9 L6.8 8.1 L0 4.5 L-6.8 8.1 L-4.5 1.9 L-10 -3.1 L-2.9 -3.1 Z"/>
-              <path transform="translate(210,196)" d="M0 -10 L2.9 -3.1 L10 -3.1 L4.5 1.9 L6.8 8.1 L0 4.5 L-6.8 8.1 L-4.5 1.9 L-10 -3.1 L-2.9 -3.1 Z"/>
-            </g>
-            <text x="262" y="100" font-size="14" fill="#2f7df0" font-weight="bold">海豚队 3 行</text>
-            <text x="262" y="184" font-size="14" fill="#e2701d" font-weight="bold">海星队 2 行</text>
-            <text x="200" y="230" font-size="16" fill="#1c4b8f" font-weight="bold" text-anchor="middle">两队合起来，一共有几只？</text>
-          </svg>`,
-          paragraphs: [
-            "蔚蓝星球要开海洋运动会啦！入场式上，海豚队先游了进来：3 行队伍，每行 4 只，神气极了。",
-            "紧接着，海星队也入场了：2 行队伍，每行也是 4 只。两支队伍排在一起，变成一个大方阵。",
-            "裁判小海龟要统计一共有多少名运动员。是先合起来再算，还是分开算再加起来？算一算你会发现：两种算法的答案一模一样！这里面藏着一条重要的运算定律。"
+          shots: [
+            {
+              art: `<svg viewBox="0 0 400 240" width="400" height="240">
+                <rect width="400" height="240" rx="20" fill="#eaf4ff"/>
+                <rect x="30" y="30" width="220" height="180" rx="14" fill="#ffffff"/>
+                <g id="banner">
+                  <rect x="86" y="10" width="228" height="32" rx="16" fill="#4d96ff"/>
+                  <text x="200" y="32" text-anchor="middle" font-size="17" fill="#ffffff" font-weight="bold">🌊 海洋运动会入场式</text>
+                </g>
+                <g id="dolphins" fill="#4d96ff">
+                  <g transform="translate(66,62)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
+                  <g transform="translate(114,62)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
+                  <g transform="translate(162,62)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
+                  <g transform="translate(210,62)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
+                  <g transform="translate(66,96)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
+                  <g transform="translate(114,96)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
+                  <g transform="translate(162,96)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
+                  <g transform="translate(210,96)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
+                  <g transform="translate(66,130)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
+                  <g transform="translate(114,130)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
+                  <g transform="translate(162,130)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
+                  <g transform="translate(210,130)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
+                </g>
+                <text x="262" y="104" font-size="14" fill="#2f7df0" font-weight="bold">海豚队入场</text>
+                <text x="262" y="124" font-size="14" fill="#2f7df0" font-weight="bold">3 行 · 每行 4 只</text>
+              </svg>`,
+              narration: "蔚蓝星球要开海洋运动会啦！听，音乐响了——海豚队先游了进来：3 行队伍，每行 4 只，神气极了！",
+              ms: 4600
+            },
+            {
+              art: `<svg viewBox="0 0 400 240" width="400" height="240">
+                <rect width="400" height="240" rx="20" fill="#eaf4ff"/>
+                <rect x="30" y="30" width="220" height="180" rx="14" fill="#ffffff"/>
+                <g id="banner">
+                  <rect x="86" y="10" width="228" height="32" rx="16" fill="#4d96ff"/>
+                  <text x="200" y="32" text-anchor="middle" font-size="17" fill="#ffffff" font-weight="bold">🌊 海洋运动会入场式</text>
+                </g>
+                <g id="dolphins" fill="#4d96ff">
+                  <g transform="translate(66,62)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
+                  <g transform="translate(114,62)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
+                  <g transform="translate(162,62)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
+                  <g transform="translate(210,62)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
+                  <g transform="translate(66,96)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
+                  <g transform="translate(114,96)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
+                  <g transform="translate(162,96)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
+                  <g transform="translate(210,96)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
+                  <g transform="translate(66,130)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
+                  <g transform="translate(114,130)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
+                  <g transform="translate(162,130)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
+                  <g transform="translate(210,130)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
+                </g>
+                <g id="count">
+                  <rect x="256" y="96" width="126" height="34" rx="10" fill="#ffffff" stroke="#4d96ff" stroke-width="3"/>
+                  <text x="319" y="119" text-anchor="middle" font-size="16" fill="#1c4b8f" font-weight="bold">3 × 4 = 12 只</text>
+                </g>
+              </svg>`,
+              pan: { x: 10, y: 4, scale: 1.35 },
+              focus: "#dolphins",
+              narration: "3 乘 4，海豚队一共 12 只。裁判小海龟拿起笔，认真地记了下来。",
+              ms: 4200
+            },
+            {
+              art: `<svg viewBox="0 0 400 240" width="400" height="240">
+                <rect width="400" height="240" rx="20" fill="#eaf4ff"/>
+                <rect x="30" y="30" width="220" height="180" rx="14" fill="#ffffff"/>
+                <g id="dolphins" fill="#4d96ff">
+                  <g transform="translate(66,62)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
+                  <g transform="translate(114,62)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
+                  <g transform="translate(162,62)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
+                  <g transform="translate(210,62)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
+                  <g transform="translate(66,96)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
+                  <g transform="translate(114,96)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
+                  <g transform="translate(162,96)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
+                  <g transform="translate(210,96)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
+                  <g transform="translate(66,130)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
+                  <g transform="translate(114,130)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
+                  <g transform="translate(162,130)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
+                  <g transform="translate(210,130)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
+                </g>
+                <line x1="44" y1="148" x2="238" y2="148" stroke="#9db8d9" stroke-width="2" stroke-dasharray="6 5"/>
+                <g id="starfish" fill="#ff8a3d">
+                  <path transform="translate(66,164)" d="M0 -10 L2.9 -3.1 L10 -3.1 L4.5 1.9 L6.8 8.1 L0 4.5 L-6.8 8.1 L-4.5 1.9 L-10 -3.1 L-2.9 -3.1 Z"/>
+                  <path transform="translate(114,164)" d="M0 -10 L2.9 -3.1 L10 -3.1 L4.5 1.9 L6.8 8.1 L0 4.5 L-6.8 8.1 L-4.5 1.9 L-10 -3.1 L-2.9 -3.1 Z"/>
+                  <path transform="translate(162,164)" d="M0 -10 L2.9 -3.1 L10 -3.1 L4.5 1.9 L6.8 8.1 L0 4.5 L-6.8 8.1 L-4.5 1.9 L-10 -3.1 L-2.9 -3.1 Z"/>
+                  <path transform="translate(210,164)" d="M0 -10 L2.9 -3.1 L10 -3.1 L4.5 1.9 L6.8 8.1 L0 4.5 L-6.8 8.1 L-4.5 1.9 L-10 -3.1 L-2.9 -3.1 Z"/>
+                  <path transform="translate(66,196)" d="M0 -10 L2.9 -3.1 L10 -3.1 L4.5 1.9 L6.8 8.1 L0 4.5 L-6.8 8.1 L-4.5 1.9 L-10 -3.1 L-2.9 -3.1 Z"/>
+                  <path transform="translate(114,196)" d="M0 -10 L2.9 -3.1 L10 -3.1 L4.5 1.9 L6.8 8.1 L0 4.5 L-6.8 8.1 L-4.5 1.9 L-10 -3.1 L-2.9 -3.1 Z"/>
+                  <path transform="translate(162,196)" d="M0 -10 L2.9 -3.1 L10 -3.1 L4.5 1.9 L6.8 8.1 L0 4.5 L-6.8 8.1 L-4.5 1.9 L-10 -3.1 L-2.9 -3.1 Z"/>
+                  <path transform="translate(210,196)" d="M0 -10 L2.9 -3.1 L10 -3.1 L4.5 1.9 L6.8 8.1 L0 4.5 L-6.8 8.1 L-4.5 1.9 L-10 -3.1 L-2.9 -3.1 Z"/>
+                </g>
+                <text x="262" y="120" font-size="14" fill="#2f7df0" font-weight="bold">海豚队 3 行</text>
+                <text x="262" y="184" font-size="14" fill="#e2701d" font-weight="bold">海星队 2 行</text>
+                <g id="turtle">
+                  <ellipse cx="316" cy="214" rx="17" ry="11" fill="#57cc99"/>
+                  <circle cx="335" cy="208" r="6" fill="#57cc99"/>
+                  <circle cx="337" cy="206" r="1.4" fill="#fff"/>
+                </g>
+                <g id="turtleQ">
+                  <rect x="254" y="44" width="132" height="46" rx="12" fill="#ffffff" stroke="#4d96ff" stroke-width="3"/>
+                  <text x="320" y="64" text-anchor="middle" font-size="14" fill="#1c4b8f" font-weight="bold">先合起来算？</text>
+                  <text x="320" y="82" text-anchor="middle" font-size="14" fill="#1c4b8f" font-weight="bold">还是分开算再加？</text>
+                </g>
+              </svg>`,
+              pan: { x: 12, y: -14, scale: 1.45 },
+              focus: "#starfish",
+              narration: "紧接着，海星队也入场了：2 行，每行也是 4 只！小海龟挠挠头：两队一共有多少只？先合起来算，还是分开算再加呢？",
+              ms: 5000
+            },
+            {
+              art: `<svg viewBox="0 0 400 240" width="400" height="240">
+                <rect width="400" height="240" rx="20" fill="#eaf4ff"/>
+                <rect x="30" y="30" width="220" height="180" rx="14" fill="#ffffff"/>
+                <g id="dolphins" fill="#4d96ff">
+                  <g transform="translate(66,62)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
+                  <g transform="translate(114,62)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
+                  <g transform="translate(162,62)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
+                  <g transform="translate(210,62)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
+                  <g transform="translate(66,96)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
+                  <g transform="translate(114,96)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
+                  <g transform="translate(162,96)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
+                  <g transform="translate(210,96)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
+                  <g transform="translate(66,130)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
+                  <g transform="translate(114,130)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
+                  <g transform="translate(162,130)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
+                  <g transform="translate(210,130)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
+                </g>
+                <line x1="44" y1="148" x2="238" y2="148" stroke="#9db8d9" stroke-width="2" stroke-dasharray="6 5"/>
+                <g id="starfish" fill="#ff8a3d">
+                  <path transform="translate(66,164)" d="M0 -10 L2.9 -3.1 L10 -3.1 L4.5 1.9 L6.8 8.1 L0 4.5 L-6.8 8.1 L-4.5 1.9 L-10 -3.1 L-2.9 -3.1 Z"/>
+                  <path transform="translate(114,164)" d="M0 -10 L2.9 -3.1 L10 -3.1 L4.5 1.9 L6.8 8.1 L0 4.5 L-6.8 8.1 L-4.5 1.9 L-10 -3.1 L-2.9 -3.1 Z"/>
+                  <path transform="translate(162,164)" d="M0 -10 L2.9 -3.1 L10 -3.1 L4.5 1.9 L6.8 8.1 L0 4.5 L-6.8 8.1 L-4.5 1.9 L-10 -3.1 L-2.9 -3.1 Z"/>
+                  <path transform="translate(210,164)" d="M0 -10 L2.9 -3.1 L10 -3.1 L4.5 1.9 L6.8 8.1 L0 4.5 L-6.8 8.1 L-4.5 1.9 L-10 -3.1 L-2.9 -3.1 Z"/>
+                  <path transform="translate(66,196)" d="M0 -10 L2.9 -3.1 L10 -3.1 L4.5 1.9 L6.8 8.1 L0 4.5 L-6.8 8.1 L-4.5 1.9 L-10 -3.1 L-2.9 -3.1 Z"/>
+                  <path transform="translate(114,196)" d="M0 -10 L2.9 -3.1 L10 -3.1 L4.5 1.9 L6.8 8.1 L0 4.5 L-6.8 8.1 L-4.5 1.9 L-10 -3.1 L-2.9 -3.1 Z"/>
+                  <path transform="translate(162,196)" d="M0 -10 L2.9 -3.1 L10 -3.1 L4.5 1.9 L6.8 8.1 L0 4.5 L-6.8 8.1 L-4.5 1.9 L-10 -3.1 L-2.9 -3.1 Z"/>
+                  <path transform="translate(210,196)" d="M0 -10 L2.9 -3.1 L10 -3.1 L4.5 1.9 L6.8 8.1 L0 4.5 L-6.8 8.1 L-4.5 1.9 L-10 -3.1 L-2.9 -3.1 Z"/>
+                </g>
+                <text x="262" y="100" font-size="14" fill="#2f7df0" font-weight="bold">海豚队 3 行</text>
+                <text x="262" y="184" font-size="14" fill="#e2701d" font-weight="bold">海星队 2 行</text>
+                <g id="hook">
+                  <rect x="34" y="206" width="332" height="30" rx="15" fill="#1c4b8f"/>
+                  <text x="200" y="226" text-anchor="middle" font-size="15" fill="#ffffff" font-weight="bold">5 × 4 和 3 × 4 ＋ 2 × 4，会一样多吗？</text>
+                </g>
+              </svg>`,
+              focus: "#hook",
+              narration: "把队伍合起来，是 5 个 4；分开算，是 3 个 4 加 2 个 4。两种算法的答案，会一模一样吗？这里面藏着一条重要的运算定律！",
+              ms: 5000
+            }
           ]
         },
         {

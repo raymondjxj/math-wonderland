@@ -139,38 +139,154 @@ G.units.push(
       {
         type: "story",
         title: "不许拆开的神秘礼盒",
-        art: `<svg viewBox="0 0 400 240" width="400" height="240">
-          <rect width="400" height="240" rx="20" fill="#f3edff"/>
-          <circle cx="46" cy="40" r="18" fill="#c8b6ff"/>
-          <rect x="172" y="196" width="56" height="12" rx="6" fill="#7c3aed"/>
-          <rect x="196" y="80" width="8" height="118" fill="#7c3aed"/>
-          <rect x="62" y="70" width="276" height="9" rx="4" fill="#9b5de5"/>
-          <circle cx="200" cy="74" r="7" fill="#7c3aed"/>
-          <g stroke="#7c3aed" stroke-width="2">
-            <line x1="100" y1="79" x2="60" y2="120"/><line x1="100" y1="79" x2="140" y2="120"/>
-            <line x1="300" y1="79" x2="260" y2="120"/><line x1="300" y1="79" x2="340" y2="120"/>
-          </g>
-          <path d="M60 120 Q100 154 140 120 Z" fill="#e9dcff" stroke="#9b5de5" stroke-width="3"/>
-          <path d="M260 120 Q300 154 340 120 Z" fill="#e9dcff" stroke="#9b5de5" stroke-width="3"/>
-          <rect x="70" y="92" width="28" height="26" rx="5" fill="#9b5de5"/>
-          <line x1="84" y1="92" x2="84" y2="118" stroke="#ffc233" stroke-width="3"/>
-          <text x="84" y="110" font-size="14" fill="#ffffff" font-weight="bold" text-anchor="middle">x</text>
-          <g fill="#ffc233">
-            <circle cx="112" cy="106" r="6.5"/><circle cx="126" cy="110" r="6.5"/><circle cx="119" cy="94" r="6.5"/>
-          </g>
-          <g fill="#9b5de5">
-            <circle cx="272" cy="108" r="7"/><circle cx="286" cy="102" r="7"/><circle cx="300" cy="108" r="7"/><circle cx="314" cy="102" r="7"/><circle cx="328" cy="108" r="7"/>
-          </g>
-          <g font-size="15" font-weight="bold" fill="#5b2a9d" text-anchor="middle">
-            <text x="100" y="172">x + 3</text>
-            <text x="300" y="172">10 颗</text>
-          </g>
-          <text x="200" y="230" font-size="16" fill="#5b2a9d" font-weight="bold" text-anchor="middle">⚖️ 天平平衡：礼盒里藏着几颗水晶？</text>
-        </svg>`,
-        paragraphs: [
-          "紫晶星球的水晶市场上，有一架古老的魔法天平。摊主把一个不许拆开的神秘礼盒和 3 颗水晶放上左盘，右盘放上 10 颗水晶——天平稳稳停住，一点儿不歪！",
-          "礼盒里到底有几颗？小萝卜头盯着天平想办法：不能拆盒子，那就从两边同时拿走 3 颗水晶试试——天平还会平吗？",
-          "当然还平！两边剩下的一样多：礼盒正好是 7 颗。<b>「两边同时动，天平不歪」，就是解方程的金钥匙。</b>"
+        shots: [
+          {
+            art: `<svg viewBox="0 0 400 240" width="400" height="240">
+              <rect width="400" height="240" rx="20" fill="#f3edff"/>
+              <circle cx="46" cy="40" r="18" fill="#c8b6ff"/>
+              <g id="balance">
+                <rect x="172" y="196" width="56" height="12" rx="6" fill="#7c3aed"/>
+                <rect x="196" y="80" width="8" height="118" fill="#7c3aed"/>
+                <rect x="62" y="70" width="276" height="9" rx="4" fill="#9b5de5"/>
+                <circle cx="200" cy="74" r="7" fill="#7c3aed"/>
+                <g stroke="#7c3aed" stroke-width="2">
+                  <line x1="100" y1="79" x2="60" y2="120"/><line x1="100" y1="79" x2="140" y2="120"/>
+                  <line x1="300" y1="79" x2="260" y2="120"/><line x1="300" y1="79" x2="340" y2="120"/>
+                </g>
+                <path d="M60 120 Q100 154 140 120 Z" fill="#e9dcff" stroke="#9b5de5" stroke-width="3"/>
+                <path d="M260 120 Q300 154 340 120 Z" fill="#e9dcff" stroke="#9b5de5" stroke-width="3"/>
+              </g>
+              <g fill="#ffc233">
+                <circle cx="330" cy="46" r="5"/><circle cx="350" cy="66" r="4"/><circle cx="316" cy="70" r="3.4"/>
+              </g>
+              <text x="200" y="34" text-anchor="middle" font-size="17" fill="#5b2a9d" font-weight="bold">💎 紫晶星球 · 水晶市场</text>
+              <text x="200" y="228" text-anchor="middle" font-size="15" fill="#5b2a9d" font-weight="bold">古老的魔法天平，专破难题！</text>
+            </svg>`,
+            narration: "紫晶星球的水晶市场上，有一架古老的魔法天平。今天，它要帮我们破一桩谜案！",
+            ms: 4000
+          },
+          {
+            art: `<svg viewBox="0 0 400 240" width="400" height="240">
+              <rect width="400" height="240" rx="20" fill="#f3edff"/>
+              <circle cx="46" cy="40" r="18" fill="#c8b6ff"/>
+              <g id="balance">
+                <rect x="172" y="196" width="56" height="12" rx="6" fill="#7c3aed"/>
+                <rect x="196" y="80" width="8" height="118" fill="#7c3aed"/>
+                <rect x="62" y="70" width="276" height="9" rx="4" fill="#9b5de5"/>
+                <circle cx="200" cy="74" r="7" fill="#7c3aed"/>
+                <g stroke="#7c3aed" stroke-width="2">
+                  <line x1="100" y1="79" x2="60" y2="120"/><line x1="100" y1="79" x2="140" y2="120"/>
+                  <line x1="300" y1="79" x2="260" y2="120"/><line x1="300" y1="79" x2="340" y2="120"/>
+                </g>
+                <path d="M60 120 Q100 154 140 120 Z" fill="#e9dcff" stroke="#9b5de5" stroke-width="3"/>
+                <path d="M260 120 Q300 154 340 120 Z" fill="#e9dcff" stroke="#9b5de5" stroke-width="3"/>
+              </g>
+              <g id="gift">
+                <rect x="70" y="92" width="28" height="26" rx="5" fill="#9b5de5"/>
+                <line x1="84" y1="92" x2="84" y2="118" stroke="#ffc233" stroke-width="3"/>
+                <text x="84" y="110" font-size="14" fill="#ffffff" font-weight="bold" text-anchor="middle">x</text>
+              </g>
+              <g id="left3" fill="#ffc233">
+                <circle cx="112" cy="106" r="6.5"/><circle cx="126" cy="110" r="6.5"/><circle cx="119" cy="94" r="6.5"/>
+              </g>
+              <g id="right10" fill="#9b5de5">
+                <circle cx="272" cy="108" r="7"/><circle cx="286" cy="102" r="7"/><circle cx="300" cy="108" r="7"/><circle cx="314" cy="102" r="7"/><circle cx="328" cy="108" r="7"/>
+              </g>
+              <g font-size="15" font-weight="bold" fill="#5b2a9d" text-anchor="middle">
+                <text x="100" y="172">x + 3</text>
+                <text x="300" y="172">10 颗</text>
+              </g>
+              <text x="200" y="230" font-size="16" fill="#5b2a9d" font-weight="bold" text-anchor="middle">⚖️ 天平稳稳停住，一点儿不歪！</text>
+            </svg>`,
+            pan: { x: 0, y: -6, scale: 1.3 },
+            focus: "#balance",
+            narration: "摊主把神秘礼盒和 3 颗水晶放上左盘，右盘放上 10 颗水晶——天平稳稳停住，一点儿不歪！两边正好相等。",
+            ms: 5000
+          },
+          {
+            art: `<svg viewBox="0 0 400 240" width="400" height="240">
+              <rect width="400" height="240" rx="20" fill="#f3edff"/>
+              <circle cx="46" cy="40" r="18" fill="#c8b6ff"/>
+              <g id="balance">
+                <rect x="172" y="196" width="56" height="12" rx="6" fill="#7c3aed"/>
+                <rect x="196" y="80" width="8" height="118" fill="#7c3aed"/>
+                <rect x="62" y="70" width="276" height="9" rx="4" fill="#9b5de5"/>
+                <circle cx="200" cy="74" r="7" fill="#7c3aed"/>
+                <g stroke="#7c3aed" stroke-width="2">
+                  <line x1="100" y1="79" x2="60" y2="120"/><line x1="100" y1="79" x2="140" y2="120"/>
+                  <line x1="300" y1="79" x2="260" y2="120"/><line x1="300" y1="79" x2="340" y2="120"/>
+                </g>
+                <path d="M60 120 Q100 154 140 120 Z" fill="#e9dcff" stroke="#9b5de5" stroke-width="3"/>
+                <path d="M260 120 Q300 154 340 120 Z" fill="#e9dcff" stroke="#9b5de5" stroke-width="3"/>
+              </g>
+              <g id="gift">
+                <rect x="70" y="92" width="28" height="26" rx="5" fill="#9b5de5"/>
+                <line x1="84" y1="92" x2="84" y2="118" stroke="#ffc233" stroke-width="3"/>
+                <text x="84" y="110" font-size="14" fill="#ffffff" font-weight="bold" text-anchor="middle">x</text>
+                <text x="84" y="66" font-size="26" fill="#e2574c" font-weight="bold" text-anchor="middle">?</text>
+              </g>
+              <g fill="#ffc233">
+                <circle cx="112" cy="106" r="6.5"/><circle cx="126" cy="110" r="6.5"/><circle cx="119" cy="94" r="6.5"/>
+              </g>
+              <g fill="#9b5de5">
+                <circle cx="272" cy="108" r="7"/><circle cx="286" cy="102" r="7"/><circle cx="300" cy="108" r="7"/><circle cx="314" cy="102" r="7"/><circle cx="328" cy="108" r="7"/>
+              </g>
+              <g id="mystery">
+                <rect x="222" y="24" width="154" height="48" rx="12" fill="#ffffff" stroke="#9b5de5" stroke-width="3"/>
+                <text x="299" y="44" text-anchor="middle" font-size="15" fill="#5b2a9d" font-weight="bold">🔒 不许拆开！</text>
+                <text x="299" y="63" text-anchor="middle" font-size="15" fill="#5b2a9d" font-weight="bold">盒里有几颗？</text>
+              </g>
+            </svg>`,
+            pan: { x: 16, y: 0, scale: 1.5 },
+            focus: "#mystery",
+            narration: "可是，礼盒不许拆开！里面到底藏着几颗水晶？小萝卜头盯着天平，想啊想……",
+            ms: 4600
+          },
+          {
+            art: `<svg viewBox="0 0 400 240" width="400" height="240">
+              <rect width="400" height="240" rx="20" fill="#f3edff"/>
+              <circle cx="46" cy="40" r="18" fill="#c8b6ff"/>
+              <g id="balance">
+                <rect x="172" y="196" width="56" height="12" rx="6" fill="#7c3aed"/>
+                <rect x="196" y="80" width="8" height="118" fill="#7c3aed"/>
+                <rect x="62" y="70" width="276" height="9" rx="4" fill="#9b5de5"/>
+                <circle cx="200" cy="74" r="7" fill="#7c3aed"/>
+                <g stroke="#7c3aed" stroke-width="2">
+                  <line x1="100" y1="79" x2="60" y2="120"/><line x1="100" y1="79" x2="140" y2="120"/>
+                  <line x1="300" y1="79" x2="260" y2="120"/><line x1="300" y1="79" x2="340" y2="120"/>
+                </g>
+                <path d="M60 120 Q100 154 140 120 Z" fill="#e9dcff" stroke="#9b5de5" stroke-width="3"/>
+                <path d="M260 120 Q300 154 340 120 Z" fill="#e9dcff" stroke="#9b5de5" stroke-width="3"/>
+              </g>
+              <g id="gift">
+                <rect x="70" y="92" width="28" height="26" rx="5" fill="#9b5de5"/>
+                <line x1="84" y1="92" x2="84" y2="118" stroke="#ffc233" stroke-width="3"/>
+                <text x="84" y="110" font-size="14" fill="#ffffff" font-weight="bold" text-anchor="middle">x</text>
+              </g>
+              <g id="left3" fill="#ffc233" opacity="0.35">
+                <circle cx="112" cy="106" r="6.5"/><circle cx="126" cy="110" r="6.5"/><circle cx="119" cy="94" r="6.5"/>
+              </g>
+              <ellipse cx="119" cy="103" rx="26" ry="18" fill="none" stroke="#e2574c" stroke-width="2.5" stroke-dasharray="5 4"/>
+              <g fill="#9b5de5">
+                <circle cx="314" cy="102" r="7"/><circle cx="328" cy="108" r="7"/>
+              </g>
+              <g fill="#9b5de5" opacity="0.35">
+                <circle cx="272" cy="108" r="7"/><circle cx="286" cy="102" r="7"/><circle cx="300" cy="108" r="7"/>
+              </g>
+              <ellipse cx="286" cy="105" rx="26" ry="16" fill="none" stroke="#e2574c" stroke-width="2.5" stroke-dasharray="5 4"/>
+              <g font-size="16" font-weight="bold" fill="#e2574c" text-anchor="middle">
+                <text x="126" y="66">−3</text>
+                <text x="290" y="66">−3</text>
+              </g>
+              <g id="hook">
+                <rect x="46" y="204" width="308" height="30" rx="15" fill="#5b2a9d"/>
+                <text x="200" y="224" text-anchor="middle" font-size="15" fill="#ffffff" font-weight="bold">两边同时拿走 3 颗，天平还会平吗？</text>
+              </g>
+            </svg>`,
+            focus: "#hook",
+            narration: "有办法啦！从两边同时拿走 3 颗水晶——天平还会平吗？礼盒的秘密，马上就要揭晓！",
+            ms: 4800
+          }
         ]
       },
       {
