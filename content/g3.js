@@ -139,6 +139,7 @@ MW.content[3] = {
               art: `<svg viewBox="0 0 400 240" width="400" height="240">
                 <rect width="400" height="240" rx="20" fill="#e3faf7"/>
                 <circle cx="334" cy="44" r="22" fill="#ffd166"/>
+                <ellipse cx="170" cy="186" rx="74" ry="12" fill="#ffffff"/>
                 <circle id="cake" cx="170" cy="126" r="56" fill="#fff3d6" stroke="#d9a05b" stroke-width="4"/>
                 <circle cx="170" cy="126" r="42" fill="none" stroke="#f0c987" stroke-width="2" stroke-dasharray="5 6"/>
                 <g id="friends">
@@ -153,65 +154,82 @@ MW.content[3] = {
                     <circle cx="-5" cy="-2" r="2.2" fill="#fff"/><circle cx="5" cy="-2" r="2.2" fill="#fff"/>
                   </g>
                 </g>
-                <text x="200" y="34" text-anchor="middle" font-size="17" fill="#0f766e" font-weight="bold">🌕 青绿星球的中秋节</text>
-                <text x="170" y="214" text-anchor="middle" font-size="15" fill="#0f766e" font-weight="bold">分分和球球，一人一半！</text>
               </svg>`,
-              narration: "青绿星球的中秋节到了！小狐狸分分得到一个圆圆的大月饼，要和好朋友球球一人一半。",
-              ms: 4200
+              callout: { text: "中秋节，分月饼！", pos: "tl" },
+              narration: "青绿星球的中秋节到了！分分和球球要分一个圆圆的大月饼，一人一半。",
+              ms: 4000
             },
             {
               art: `<svg viewBox="0 0 400 240" width="400" height="240">
                 <rect width="400" height="240" rx="20" fill="#e3faf7"/>
                 <circle cx="334" cy="44" r="22" fill="#ffd166"/>
+                <ellipse cx="170" cy="186" rx="74" ry="12" fill="#ffffff"/>
                 <circle cx="170" cy="126" r="56" fill="#fff3d6" stroke="#d9a05b" stroke-width="4"/>
-                <path id="half" d="M170 70 A56 56 0 0 1 170 182 L170 126 Z" fill="#2ec4b6" opacity="0.85"/>
+                <path id="half" d="M170 70 A56 56 0 0 1 170 182 L170 126 Z" fill="#2ec4b6" opacity=".85"/>
                 <line id="cut" x1="170" y1="70" x2="170" y2="182" stroke="#d9a05b" stroke-width="4"/>
-                <text x="170" y="60" text-anchor="middle" font-size="16" fill="#0f766e" font-weight="bold">✂️ 一刀切下，两半一样大</text>
-                <text x="246" y="132" font-size="17" fill="#0f766e" font-weight="bold">一半</text>
+                <text x="152" y="60" font-size="20">✂️</text>
               </svg>`,
-              pan: { x: 8, y: -4, scale: 1.4 },
+              zoom: { ox: 43, oy: 53, scale: 1.3 },
               focus: "#half",
-              narration: "怎么分才公平？一刀下去，两半必须一模一样大！这样的一份，就是月饼的一半。",
+              callout: { text: "一刀切下，两半一样大！", pos: "tr" },
+              narration: "怎么分才公平？一刀下去，两半必须一模一样大！这样的一份，就是它的一半。",
               ms: 4600
             },
             {
               art: `<svg viewBox="0 0 400 240" width="400" height="240">
                 <rect width="400" height="240" rx="20" fill="#e3faf7"/>
                 <circle cx="334" cy="44" r="22" fill="#ffd166"/>
+                <ellipse cx="138" cy="182" rx="66" ry="11" fill="#ffffff"/>
                 <circle cx="138" cy="126" r="52" fill="#fff3d6" stroke="#d9a05b" stroke-width="4"/>
-                <path d="M138 74 A52 52 0 0 1 138 178 L138 126 Z" fill="#2ec4b6" opacity="0.85"/>
+                <path d="M138 74 A52 52 0 0 1 138 178 L138 126 Z" fill="#2ec4b6" opacity=".85"/>
                 <line x1="138" y1="74" x2="138" y2="178" stroke="#d9a05b" stroke-width="4"/>
                 <g id="puzzle">
                   <rect x="214" y="62" width="164" height="110" rx="14" fill="#ffffff" stroke="#2ec4b6" stroke-width="3"/>
-                  <text x="296" y="100" text-anchor="middle" font-size="18" fill="#0f766e" font-weight="bold">1、2、3……</text>
-                  <text x="296" y="130" text-anchor="middle" font-size="18" fill="#e2574c" font-weight="bold">✗ 写不出</text>
-                  <text x="296" y="158" text-anchor="middle" font-size="18" fill="#e2574c" font-weight="bold">「一半」！</text>
+                  <text x="296" y="140" text-anchor="middle" font-size="42">❓</text>
                 </g>
-                <text x="296" y="200" text-anchor="middle" font-size="15" fill="#0f766e" font-weight="bold">学过的数，不够用了！</text>
               </svg>`,
-              pan: { x: -10, y: 0, scale: 1.35 },
+              zoom: { ox: 74, oy: 49, scale: 1.25 },
               focus: "#puzzle",
-              narration: "可是，1、2、3……这些学过的数，谁也写不出「一半」！这该怎么办呢？",
+              callout: { text: "学过的数，写不出「一半」！", pos: "bl" },
+              narration: "可是，1、2、3……学过的这些数，谁也写不出「一半」！怎么办呀？",
               ms: 4400
             },
             {
               art: `<svg viewBox="0 0 400 240" width="400" height="240">
                 <rect width="400" height="240" rx="20" fill="#e3faf7"/>
                 <circle cx="334" cy="44" r="22" fill="#ffd166"/>
+                <ellipse cx="170" cy="180" rx="72" ry="11" fill="#ffffff"/>
                 <g id="cake4">
                   <circle cx="170" cy="118" r="56" fill="#fff3d6" stroke="#d9a05b" stroke-width="4"/>
-                  <path d="M170 118 L170 62 A56 56 0 0 1 226 118 Z" fill="#2ec4b6" opacity="0.9"/>
+                  <path d="M170 118 L170 62 A56 56 0 0 1 226 118 Z" fill="#2ec4b6" opacity=".9"/>
                   <line x1="170" y1="62" x2="170" y2="174" stroke="#d9a05b" stroke-width="3"/>
                   <line x1="114" y1="118" x2="226" y2="118" stroke="#d9a05b" stroke-width="3"/>
                 </g>
-                <g id="four" fill="#2ec4b6">
-                  <circle cx="292" cy="148" r="6"/><circle cx="314" cy="126" r="5"/><circle cx="288" cy="104" r="4"/><circle cx="318" cy="160" r="3.4"/>
+                <g id="friends4">
+                  <g transform="translate(290,88)">
+                    <circle r="15" fill="#ff8a3d"/>
+                    <path d="M-10 -8 L-16 -21 L-3 -13 Z" fill="#ff8a3d"/>
+                    <path d="M10 -8 L16 -21 L3 -13 Z" fill="#ff8a3d"/>
+                    <circle cx="-5" cy="-2" r="2.2" fill="#fff"/><circle cx="5" cy="-2" r="2.2" fill="#fff"/>
+                  </g>
+                  <g transform="translate(338,112)">
+                    <circle r="12" fill="#2ec4b6"/>
+                    <circle cx="-4" cy="-2" r="2" fill="#fff"/><circle cx="4" cy="-2" r="2" fill="#fff"/>
+                  </g>
+                  <g transform="translate(292,160)">
+                    <circle r="14" fill="#ffd166"/>
+                    <circle cx="-5" cy="-2" r="2.2" fill="#fff"/><circle cx="5" cy="-2" r="2.2" fill="#fff"/>
+                  </g>
+                  <g transform="translate(338,188)">
+                    <circle r="12" fill="#159e92"/>
+                    <circle cx="-4" cy="-2" r="2" fill="#fff"/><circle cx="4" cy="-2" r="2" fill="#fff"/>
+                  </g>
                 </g>
-                <text x="296" y="80" text-anchor="middle" font-size="15" fill="#0f766e" font-weight="bold">咚咚咚，又来两位朋友！</text>
-                <text id="hook" x="200" y="216" text-anchor="middle" font-size="16" fill="#0f766e" font-weight="bold">4 人分 1 个，每人拿多少？新朋友要来了！</text>
               </svg>`,
-              focus: "#hook",
-              narration: "咚咚咚！又来了两位朋友——4 个小伙伴分 1 个月饼，每人该拿多少？数不够用啦，一位新朋友正赶来帮忙！",
+              zoom: { ox: 43, oy: 49, scale: 1.2 },
+              focus: "#cake4",
+              callout: { text: "4 人分 1 个，每人拿多少？", pos: "tr" },
+              narration: "咚咚咚！又来了两位朋友——4 个小伙伴分 1 个月饼，每人该拿多少？",
               ms: 5000
             }
           ]

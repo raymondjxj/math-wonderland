@@ -158,9 +158,10 @@ MW.content[6] = {
                   </g>
                   <circle cx="200" cy="110" r="10" fill="#2b2d42"/>
                 </g>
-                <text x="22" y="228" font-size="16" fill="#b03a82" font-weight="bold">🎡 玫瑰星球狂欢节</text>
+                <text x="22" y="222" font-size="14" fill="#b03a82" font-weight="bold">🎡 狂欢节</text>
               </svg>`,
-              narration: "玫瑰星球的狂欢节到了！朵朵要去坐全星球最大的摩天轮——轮子转呀转，又稳又圆。",
+              callout: { text: "狂欢节，去坐摩天轮！", pos: "tl" },
+              narration: "玫瑰星球的狂欢节到了！朵朵要去坐全星球最大的摩天轮——转呀转，又稳又圆。",
               ms: 4200
             },
             {
@@ -187,14 +188,11 @@ MW.content[6] = {
                   </g>
                   <circle cx="200" cy="110" r="10" fill="#2b2d42"/>
                 </g>
-                <g id="equal">
-                  <rect x="240" y="46" width="94" height="28" rx="14" fill="#ffffff" stroke="#f15bb5" stroke-width="3"/>
-                  <text x="287" y="65" text-anchor="middle" font-size="13" fill="#b03a82" font-weight="bold">半径一样长</text>
-                </g>
               </svg>`,
-              pan: { x: 0, y: 4, scale: 1.45 },
+              zoom: { ox: 50, oy: 46, scale: 1.25 },
               focus: "#spokes",
-              narration: "朵朵盯着轮子发现了秘密：从圆心到轮子边，每条辐条都一样长！圆心稳稳不动，车厢就平平稳稳。",
+              callout: { text: "圆心到轮边，条条一样长！", pos: "tl" },
+              narration: "朵朵发现了秘密：从圆心到轮子边，每条辐条都一样长！圆心稳稳不动，车厢平平稳稳。",
               ms: 4800
             },
             {
@@ -212,19 +210,20 @@ MW.content[6] = {
                   <path d="M140 150 q-8 -6 -14 2" stroke="#b03a82" stroke-width="3" fill="none" stroke-linecap="round"/>
                   <path d="M138 172 q-9 -4 -15 4" stroke="#b03a82" stroke-width="3" fill="none" stroke-linecap="round"/>
                   <path d="M262 138 q9 -5 14 4" stroke="#b03a82" stroke-width="3" fill="none" stroke-linecap="round"/>
-                  <text x="199" y="72" text-anchor="middle" font-size="20" fill="#b03a82" font-weight="bold">咯噔！咯噔！</text>
                 </g>
               </svg>`,
-              pan: { x: 0, y: -6, scale: 1.3 },
+              zoom: { ox: 50, oy: 58, scale: 1.3 },
               focus: "#bumpy",
-              narration: "要是把轮子换成正方形呢？哎呀——车子一蹦一跳，朵朵的辫子都要颠飞啦！难怪轮子都是圆的！",
+              callout: { text: "方轮子咯噔咯噔，颠得不行！", pos: "tl" },
+              narration: "要是把轮子换成正方形呢？哎呀——车子一蹦一跳，朵朵的辫子都要颠飞啦！",
               ms: 4600
             },
             {
               art: `<svg viewBox="0 0 400 240" width="400" height="240">
                 <rect width="400" height="240" rx="20" fill="#fdeef7"/>
                 <circle cx="336" cy="38" r="20" fill="#ffd6ec"/>
-                <g transform="translate(-52,8) scale(0.86)">
+                <rect x="0" y="232" width="400" height="8" fill="#f8c9e4"/>
+                <g id="wheel">
                   <path d="M185 232 L200 110 L215 232" stroke="#2b2d42" stroke-width="6" fill="none" stroke-linecap="round"/>
                   <g id="spokes" stroke="#f15bb5" stroke-width="4">
                     <line x1="200" y1="110" x2="200" y2="30"/>
@@ -243,16 +242,15 @@ MW.content[6] = {
                   </g>
                   <circle cx="200" cy="110" r="10" fill="#2b2d42"/>
                 </g>
-                <g id="hook">
-                  <rect x="212" y="56" width="164" height="42" rx="12" fill="#ffffff" stroke="#f15bb5" stroke-width="3"/>
-                  <text x="294" y="83" text-anchor="middle" font-size="16" fill="#b03a82" font-weight="bold">🌀 一圈有多长？</text>
-                  <rect x="212" y="112" width="164" height="42" rx="12" fill="#ffffff" stroke="#f15bb5" stroke-width="3"/>
-                  <text x="294" y="139" text-anchor="middle" font-size="16" fill="#b03a82" font-weight="bold">🧩 里面有多大？</text>
-                  <text x="294" y="186" text-anchor="middle" font-size="15" fill="#b03a82" font-weight="bold">用两个魔法实验揭开！</text>
+                <g id="sparkle" fill="#ffc233">
+                  <path transform="translate(104,58)" d="M0 -9 L2.6 -2.6 L9 0 L2.6 2.6 L0 9 L-2.6 2.6 L-9 0 L-2.6 -2.6 Z"/>
+                  <path transform="translate(304,76)" d="M0 -9 L2.6 -2.6 L9 0 L2.6 2.6 L0 9 L-2.6 2.6 L-9 0 L-2.6 -2.6 Z"/>
+                  <path transform="translate(322,164)" d="M0 -7 L2 -2 L7 0 L2 2 L0 7 L-2 2 L-7 0 L-2 -2 Z"/>
                 </g>
               </svg>`,
-              focus: "#hook",
-              narration: "这个完美的圆，还藏着两个大秘密：它一圈有多长？里面有多大？今天，我们用两个魔法实验亲手揭开它们！",
+              focus: "#wheel",
+              callout: { text: "一圈有多长？里面有多大？", pos: "br" },
+              narration: "这个圆还藏着两个大秘密：它一圈有多长？里面有多大？用两个魔法实验来揭开！",
               ms: 5000
             }
           ]

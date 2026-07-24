@@ -262,7 +262,7 @@ MW.content[4] = {
                 <rect x="30" y="30" width="220" height="180" rx="14" fill="#ffffff"/>
                 <g id="banner">
                   <rect x="86" y="18" width="228" height="32" rx="16" fill="#4d96ff"/>
-                  <text x="200" y="40" text-anchor="middle" font-size="17" fill="#ffffff" font-weight="bold">🌊 海洋运动会入场式</text>
+                  <text x="200" y="40" text-anchor="middle" font-size="17" fill="#ffffff" font-weight="bold">🌊 海洋运动会</text>
                 </g>
                 <g id="dolphins" fill="#4d96ff">
                   <g transform="translate(66,62)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
@@ -278,20 +278,18 @@ MW.content[4] = {
                   <g transform="translate(162,130)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
                   <g transform="translate(210,130)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
                 </g>
-                <text x="262" y="104" font-size="14" fill="#2f7df0" font-weight="bold">海豚队入场</text>
-                <text x="262" y="124" font-size="14" fill="#2f7df0" font-weight="bold">3 行 · 每行 4 只</text>
+                <g fill="#bcd8ff">
+                  <circle cx="284" cy="82" r="4"/><circle cx="312" cy="116" r="3"/><circle cx="292" cy="152" r="5"/><circle cx="326" cy="70" r="3.4"/>
+                </g>
               </svg>`,
-              narration: "蔚蓝星球要开海洋运动会啦！听，音乐响了——海豚队先游了进来：3 行队伍，每行 4 只，神气极了！",
-              ms: 4600
+              callout: { text: "运动会开幕啦！", pos: "br" },
+              narration: "蔚蓝星球要开海洋运动会啦！听，音乐响了——海豚队最先游进会场！",
+              ms: 4200
             },
             {
               art: `<svg viewBox="0 0 400 240" width="400" height="240">
                 <rect width="400" height="240" rx="20" fill="#eaf4ff"/>
                 <rect x="30" y="30" width="220" height="180" rx="14" fill="#ffffff"/>
-                <g id="banner">
-                  <rect x="86" y="18" width="228" height="32" rx="16" fill="#4d96ff"/>
-                  <text x="200" y="40" text-anchor="middle" font-size="17" fill="#ffffff" font-weight="bold">🌊 海洋运动会入场式</text>
-                </g>
                 <g id="dolphins" fill="#4d96ff">
                   <g transform="translate(66,62)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
                   <g transform="translate(114,62)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
@@ -306,15 +304,15 @@ MW.content[4] = {
                   <g transform="translate(162,130)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
                   <g transform="translate(210,130)"><ellipse rx="13" ry="8"/><path d="M-12 0 L-21 -6 L-21 6 Z"/><circle cx="6" cy="-2" r="1.6" fill="#fff"/></g>
                 </g>
-                <g id="count">
-                  <rect x="100" y="150" width="126" height="34" rx="10" fill="#ffffff" stroke="#4d96ff" stroke-width="3"/>
-                  <text x="163" y="173" text-anchor="middle" font-size="16" fill="#1c4b8f" font-weight="bold">3 × 4 = 12 只</text>
+                <g fill="#bcd8ff">
+                  <circle cx="284" cy="82" r="4"/><circle cx="312" cy="116" r="3"/><circle cx="292" cy="152" r="5"/>
                 </g>
               </svg>`,
-              pan: { x: 10, y: 4, scale: 1.35 },
+              zoom: { ox: 34, oy: 40, scale: 1.3 },
               focus: "#dolphins",
-              narration: "3 乘 4，海豚队一共 12 只。裁判小海龟拿起笔，认真地记了下来。",
-              ms: 4200
+              callout: { text: "3 行 4 列：3 × 4 = 12 只", pos: "bl" },
+              narration: "海豚队排着整齐的队伍：3 行，每行 4 只。3 乘 4，一共 12 只！",
+              ms: 4400
             },
             {
               art: `<svg viewBox="0 0 400 240" width="400" height="240">
@@ -349,18 +347,15 @@ MW.content[4] = {
                   <ellipse cx="300" cy="190" rx="17" ry="11" fill="#57cc99"/>
                   <circle cx="318" cy="183" r="6" fill="#57cc99"/>
                   <circle cx="320" cy="181" r="1.4" fill="#fff"/>
-                </g>
-                <g id="turtleQ">
                   <circle cx="292" cy="148" r="16" fill="#ffffff" stroke="#4d96ff" stroke-width="3"/>
-                  <text x="292" y="156" text-anchor="middle" font-size="22" fill="#1c4b8f" font-weight="bold">？</text>
-                  <rect x="90" y="202" width="220" height="34" rx="17" fill="#ffffff" stroke="#4d96ff" stroke-width="3"/>
-                  <text x="200" y="224" text-anchor="middle" font-size="15" fill="#1c4b8f" font-weight="bold">先合起来算？还是分开算？</text>
+                  <text x="292" y="155" text-anchor="middle" font-size="16">❓</text>
                 </g>
               </svg>`,
-              pan: { x: 8, y: -10, scale: 1.3 },
+              zoom: { ox: 40, oy: 75, scale: 1.2 },
               focus: "#starfish",
-              narration: "紧接着，海星队也入场了：2 行，每行也是 4 只！小海龟挠挠头：两队一共有多少只？先合起来算，还是分开算再加呢？",
-              ms: 5000
+              callout: { text: "两队一共有多少只？", pos: "tr" },
+              narration: "海星队紧跟着入场：2 行，每行也是 4 只！裁判小海龟挠挠头：两队一共有多少只？",
+              ms: 4800
             },
             {
               art: `<svg viewBox="0 0 400 240" width="400" height="240">
@@ -391,16 +386,18 @@ MW.content[4] = {
                   <path transform="translate(162,196)" d="M0 -10 L2.9 -3.1 L10 -3.1 L4.5 1.9 L6.8 8.1 L0 4.5 L-6.8 8.1 L-4.5 1.9 L-10 -3.1 L-2.9 -3.1 Z"/>
                   <path transform="translate(210,196)" d="M0 -10 L2.9 -3.1 L10 -3.1 L4.5 1.9 L6.8 8.1 L0 4.5 L-6.8 8.1 L-4.5 1.9 L-10 -3.1 L-2.9 -3.1 Z"/>
                 </g>
-                <text x="262" y="100" font-size="14" fill="#2f7df0" font-weight="bold">海豚队 3 行</text>
-                <text x="262" y="184" font-size="14" fill="#e2701d" font-weight="bold">海星队 2 行</text>
-                <g id="hook">
-                  <rect x="34" y="206" width="332" height="30" rx="15" fill="#1c4b8f"/>
-                  <text x="200" y="226" text-anchor="middle" font-size="15" fill="#ffffff" font-weight="bold">5 × 4 和 3 × 4 ＋ 2 × 4，会一样多吗？</text>
+                <g id="turtle">
+                  <ellipse cx="300" cy="190" rx="17" ry="11" fill="#57cc99"/>
+                  <circle cx="318" cy="183" r="6" fill="#57cc99"/>
+                  <circle cx="320" cy="181" r="1.4" fill="#fff"/>
+                  <circle cx="292" cy="148" r="16" fill="#ffffff" stroke="#4d96ff" stroke-width="3"/>
+                  <text x="292" y="155" text-anchor="middle" font-size="16">❓</text>
                 </g>
               </svg>`,
-              focus: "#hook",
-              narration: "把队伍合起来，是 5 个 4；分开算，是 3 个 4 加 2 个 4。两种算法的答案，会一模一样吗？这里面藏着一条重要的运算定律！",
-              ms: 5000
+              focus: "#turtle",
+              callout: { text: "合着算和分开算，一样多吗？", pos: "tl" },
+              narration: "把队伍合起来，是 5 个 4；分开算，是 3 个 4 加 2 个 4。两种算法，会一样多吗？",
+              ms: 5200
             }
           ]
         },

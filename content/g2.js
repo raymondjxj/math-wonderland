@@ -26,14 +26,23 @@ MW.content[2] = {
             {
               art: `<svg viewBox="0 0 400 240" width="400" height="240">
                 <rect width="400" height="240" rx="20" fill="#fff3e2"/>
-                <circle id="sun" cx="335" cy="42" r="24" fill="#ffc233"/>
+                <circle cx="335" cy="42" r="24" fill="#ffc233"/>
                 <rect x="55" y="80" width="210" height="110" rx="12" fill="#8bd450"/>
                 <g id="carrots" fill="#ff8a3d">
                   <circle cx="90" cy="108" r="11"/><circle cx="128" cy="108" r="11"/><circle cx="166" cy="108" r="11"/><circle cx="204" cy="108" r="11"/>
                   <circle cx="90" cy="146" r="11"/><circle cx="128" cy="146" r="11"/><circle cx="166" cy="146" r="11"/><circle cx="204" cy="146" r="11"/>
                 </g>
-                <text x="285" y="215" font-size="17" fill="#b25e14" font-weight="bold">🥕 橙光农场</text>
+                <g id="farmer">
+                  <circle cx="316" cy="138" r="14" fill="#ffe3c2"/>
+                  <ellipse cx="316" cy="127" rx="22" ry="7" fill="#ffc233"/>
+                  <path d="M301 127 Q316 104 331 127 Z" fill="#ffc233"/>
+                  <circle cx="311" cy="136" r="2.2" fill="#2b2d42"/><circle cx="321" cy="136" r="2.2" fill="#2b2d42"/>
+                  <path d="M310 145 Q316 150 322 145" stroke="#2b2d42" stroke-width="2" fill="none" stroke-linecap="round"/>
+                  <rect x="300" y="154" width="32" height="30" rx="12" fill="#ff8a3d"/>
+                </g>
+                <text x="282" y="222" font-size="14" fill="#b25e14" font-weight="bold">🥕 橙光农场</text>
               </svg>`,
+              callout: { text: "太空农场大丰收！", pos: "tl" },
               narration: "橙光星球上，小农夫奇奇的太空胡萝卜大丰收啦！",
               ms: 3600
             },
@@ -47,11 +56,11 @@ MW.content[2] = {
                   <circle cx="90" cy="146" r="11"/><circle cx="128" cy="146" r="11"/><circle cx="166" cy="146" r="11"/><circle cx="204" cy="146" r="11"/>
                 </g>
               </svg>`,
-              zoom: { ox: 60, oy: 55, scale: 1.3 },
+              zoom: { ox: 37, oy: 53, scale: 1.3 },
               focus: "#carrots",
               callout: { text: "每行 4 棵，有 2 行：4 + 4 = 8", pos: "bl" },
-              narration: "它们排着整齐的队伍：每行 4 棵，有 2 行。奇奇一棵一棵数：4 加 4 等于 8 棵，真轻松！",
-              ms: 4800
+              narration: "它们排着整齐的队伍：每行 4 棵，有 2 行。4 加 4，一共 8 棵，真轻松！",
+              ms: 4600
             },
             {
               art: `<svg viewBox="0 0 400 240" width="400" height="240">
@@ -64,12 +73,14 @@ MW.content[2] = {
                 </g>
                 <g id="warning">
                   <rect x="105" y="30" width="190" height="44" rx="12" fill="#ff6b6b"/>
-                  <text x="200" y="59" text-anchor="middle" font-size="19" fill="#fff" font-weight="bold">明天扩大到 100 行！</text>
+                  <rect x="196" y="40" width="8" height="17" rx="4" fill="#ffffff"/>
+                  <circle cx="200" cy="63" r="4.5" fill="#ffffff"/>
                 </g>
               </svg>`,
-              zoom: { ox: 35, oy: 28, scale: 1.35 },
+              zoom: { ox: 50, oy: 22, scale: 1.3 },
               focus: "#warning",
-              narration: "可是农场主忽然说：明天菜地要扩大到 100 行！100 个 4 相加，要加到什么时候呀？",
+              callout: { text: "⚠️ 明天扩大到 100 行！", pos: "br" },
+              narration: "农场主忽然说：明天菜地要扩大到 100 行！一棵一棵数，要数到什么时候呀？",
               ms: 4800
             },
             {
@@ -77,15 +88,30 @@ MW.content[2] = {
                 <rect width="400" height="240" rx="20" fill="#fff3e2"/>
                 <circle cx="335" cy="42" r="24" fill="#ffc233"/>
                 <rect x="55" y="80" width="210" height="110" rx="12" fill="#8bd450"/>
-                <g fill="#ff8a3d">
+                <g id="carrots" fill="#ff8a3d">
                   <circle cx="90" cy="108" r="11"/><circle cx="128" cy="108" r="11"/><circle cx="166" cy="108" r="11"/><circle cx="204" cy="108" r="11"/>
                   <circle cx="90" cy="146" r="11"/><circle cx="128" cy="146" r="11"/><circle cx="166" cy="146" r="11"/><circle cx="204" cy="146" r="11"/>
                 </g>
-                <text id="hook" x="200" y="215" text-anchor="middle" font-size="19" fill="#b25e14" font-weight="bold">一定有个更快的办法……</text>
+                <g id="farmer">
+                  <circle cx="316" cy="138" r="14" fill="#ffe3c2"/>
+                  <ellipse cx="316" cy="127" rx="22" ry="7" fill="#ffc233"/>
+                  <path d="M301 127 Q316 104 331 127 Z" fill="#ffc233"/>
+                  <circle cx="311" cy="136" r="2.2" fill="#2b2d42"/><circle cx="321" cy="136" r="2.2" fill="#2b2d42"/>
+                  <path d="M310 145 Q316 150 322 145" stroke="#2b2d42" stroke-width="2" fill="none" stroke-linecap="round"/>
+                  <rect x="300" y="154" width="32" height="30" rx="12" fill="#ff8a3d"/>
+                </g>
+                <g id="idea">
+                  <circle cx="334" cy="114" r="4" fill="#ffffff"/>
+                  <circle cx="342" cy="102" r="6" fill="#ffffff"/>
+                  <circle cx="352" cy="84" r="16" fill="#ffffff" stroke="#ffc233" stroke-width="3"/>
+                  <text x="352" y="90" text-anchor="middle" font-size="16">💡</text>
+                </g>
               </svg>`,
-              focus: "#hook",
-              narration: "一定有个更快的办法！一起去找找吧！",
-              ms: 3400
+              zoom: { ox: 80, oy: 48, scale: 1.25 },
+              focus: "#idea",
+              callout: { text: "一定有更快的办法！", pos: "bl" },
+              narration: "别发愁！数学里藏着数数的快办法，一起去把它找出来！",
+              ms: 3800
             }
           ]
         },
